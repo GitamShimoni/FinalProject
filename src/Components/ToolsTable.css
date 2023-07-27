@@ -1,0 +1,34 @@
+.project-table {
+  width: 65vw;
+  min-height: 10vw;
+  margin: auto;
+  margin-top: 5vw;
+  border-radius: 7px;
+  box-shadow: 3px 3px 4px 3px rgba(112, 112, 112, 0.75);
+  display: flex;
+  flex-direction: column;
+}
+.project-tr {
+  text-align: center;
+  font-size: 1.8vw;
+  font-weight: bolder;
+  background: radial-gradient(
+    circle,
+    rgba(46, 124, 238, 1) 0%,
+    rgba(82, 115, 222, 1) 100%
+  );
+  color: white;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#project-topleft-td {
+  border-top-left-radius: 7px;
+}
+#project-topright-td {
+  border-top-right-radius: 7px;
+}
+.project-toprow-tr {
+  width: 23%;
+}

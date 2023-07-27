@@ -1,0 +1,85 @@
+.project-table-row {
+  display: flex;
+  align-items: center;
+}
+.tool-tr-zugi {
+  background: radial-gradient(
+    circle,
+    rgb(230, 230, 230) 0%,
+    rgb(226, 226, 226) 100%
+  );
+  text-align: center;
+  height: 40px;
+  width: 65vw;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.tool-tr-notzugi {
+  background: radial-gradient(
+    circle,
+    rgb(214, 214, 214) 0%,
+    rgb(209, 209, 209) 100%
+  );
+  text-align: center;
+  height: 40px;
+  width: 65vw;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.tool-tr-zugi-taken {
+  background: radial-gradient(
+    circle,
+    rgb(255, 170, 72) 0%,
+    rgb(253, 149, 51) 100%
+  );
+  color: white;
+  text-align: center;
+  height: 40px;
+  width: 65vw;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.tool-tr-notzugi-taken {
+  background: radial-gradient(
+    circle,
+    rgb(255, 164, 60) 0%,
+    rgb(255, 144, 39) 100%
+  );
+  color: white;
+  text-align: center;
+  height: 40px;
+  width: 65vw;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.tool-table-part {
+  width: 25%;
+  border-left: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tool-table-toolpart {
+  width: 25%;
+  border-left: 1px solid black;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.tool-table-leftpart {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
