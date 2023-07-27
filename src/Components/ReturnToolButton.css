@@ -1,0 +1,28 @@
+.returnTool-button-container {
+  display: flex;
+  align-items: center;
+}
+.return-tool-button {
+  border-radius: 15px;
+  margin-left: 5px;
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(214, 214, 214, 0.75);
+}
+.return-tool-button:hover {
+  background-color: rgb(214, 214, 214);
+}
+.return-tool-accept-button {
+  border-radius: 15px;
+  margin-left: 5px;
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(214, 214, 214, 0.75);
+  transition: 0.2s;
+}
+.return-tool-accept-button:hover {
+  background-color: rgb(255, 74, 74);
+  color: white;
+}
