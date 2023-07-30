@@ -5,7 +5,7 @@ import "./ToolsTable.css";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
-const ToolsTable = () => {
+const ProductOrdersTable = () => {
   const { tools, setTools } = useContext(ProjectContext);
   // const [tools, setTools] = useState([]);
   useEffect(() => {
@@ -24,13 +24,13 @@ const ToolsTable = () => {
         <div
           className="project-toprow-tr"
           id="project-topleft-td"
-        >{`תאריך`}</div>
-        <div className="project-toprow-tr">{`חתום`}</div>
-        <div className="project-toprow-tr">{`נלקח ע"י`}</div>
+        >{`סטאטוס`}</div>
+        <div className="project-toprow-tr">{`תאריך הזמנה`}</div>
+        <div className="project-toprow-tr">{`כמות מוזמנת`}</div>
         <div
           className="project-toprow-tr"
           id="project-topright-td"
-        >{`כלי`}</div>
+        >{`מוצר`}</div>
       </div>
       {tools?.map((tool, index) => {
         return <Tool key={index} tool={tool} index={index} />;
@@ -39,4 +39,4 @@ const ToolsTable = () => {
   );
 };
 
-export default ToolsTable;
+export default ProductOrdersTable;
