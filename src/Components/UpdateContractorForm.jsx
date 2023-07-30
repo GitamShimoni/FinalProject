@@ -30,58 +30,58 @@ const UpdateContractorForm = () => {
   return (
     <div className="update-contractor-holder">
       <h1 className="update-contractor-header">הוסף שירות</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="update-contracor-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="update-contractor-input-holder">
-          <label htmlFor="section">מספר סעיף</label>
+          <label className="update-contractor-input-label" htmlFor="section">מספר סעיף</label>
           <Controller
             name="section"
             control={control}
             defaultValue=""
             rules={{ required: "נדרש מספר סעיף" }}
             render={({ field }) => (
-              <input {...field} type="text" placeholder="מספר סעיף" />
+              <input className="update-contractor-input" {...field} type="text" placeholder="מספר סעיף" />
             )}
           />
-          {errors.section && <span>{errors.section.message}</span>}
+          {errors.section && <span className="update-contractor-span">{errors.section.message}</span>}
         </div>
         <div className="update-contractor-input-holder">
-          <label htmlFor="sectionName">שם הסעיף</label>
+          <label className="update-contractor-input-label" htmlFor="sectionName">שם הסעיף</label>
           <Controller
             name="sectionName"
             control={control}
             defaultValue=""
             rules={{ required: "נדרש שם סעיף" }}
             render={({ field }) => (
-              <input {...field} type="text" placeholder="שם הסעיף" />
+              <input className="update-contractor-input" {...field} type="text" placeholder="שם הסעיף" />
             )}
           />
-          {errors.sectionName && <span>{errors.sectionName.message}</span>}
+          {errors.sectionName && <span className="update-contractor-span">{errors.sectionName.message}</span>}
         </div>
         <div className="update-contractor-input-holder">
-          <label htmlFor="unit">כח אדם</label>
+          <label className="update-contractor-input-label" htmlFor="unit">כח אדם</label>
           <Controller
             name="unit"
             control={control}
             defaultValue=""
             rules={{ required: "נדרש מספר כח אדם" }}
             render={({ field }) => (
-              <input {...field} type="text" placeholder="כח אדם" />
+              <input className="update-contractor-input" {...field} type="text" placeholder="כח אדם" />
             )}
           />
-          {errors.unit && <span>{errors.unit.message}</span>}
+          {errors.unit && <span className="update-contractor-span">{errors.unit.message}</span>}
         </div>
         <div className="update-contractor-input-holder">
-          <label htmlFor="price">מחיר</label>
+          <label className="update-contractor-input-label" htmlFor="price">מחיר</label>
           <Controller
             name="price"
             control={control}
             defaultValue=""
             rules={{ required: "נדרש מחיר" }}
             render={({ field }) => (
-              <input {...field} type="text" placeholder="מחיר" />
+              <input className="update-contractor-input" {...field} type="text" placeholder="מחיר" />
             )}
           />
-          {errors.price && <span>{errors.price.message}</span>}
+          {errors.price && <span className="update-contractor-span">{errors.price.message}</span>}
         </div>
         <button id="update-contractor-button" type="submit">Submit</button>
       </form>
