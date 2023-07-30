@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import "./AddContractorForm.css";
+import { Link } from "react-router-dom";
+import UpdateContractorForm from "./UpdateContractorForm";
 
 const AddContractorForm = () => {
   const {
@@ -94,6 +96,9 @@ const AddContractorForm = () => {
         <button id="createContractor-button" type="submit">
           הוסף קבלן
         </button>
+        <Link to={"/updateContractor"}>
+          <button id="createContractor-button">הוסף שירות קבלן</button>
+        </Link>
       </form>
     </div>
   );

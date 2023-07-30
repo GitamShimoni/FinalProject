@@ -5,6 +5,7 @@ import ToolsTable from "./Components/ToolsTable";
 import AddContractorForm from "./Components/AddContractorForm";
 import "./App.css";
 import { ProjectProvider } from "./Contexts/ProjectContext";
+import UpdateContractorForm from "./Components/UpdateContractorForm";
 // import { UserProvider } from "./Contexts/UserContext";
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/inventory" element={<ToolsTable />} />
             <Route path="/orders" element={<Layout />} />
             <Route path="/constructors" element={<AddContractorForm />} />
+            <Route path="/updateContractor" element={<UpdateContractorForm />} />
             <Route path="/endoftheday" element={<Layout />} />
           </Route>
           <Route path="/login" element={<Layout />} />
