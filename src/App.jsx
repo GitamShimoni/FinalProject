@@ -11,6 +11,7 @@ import AddContractorForm from "./Components/AddContractorForm";
 
 import "./App.css";
 import { ProjectProvider } from "./Contexts/ProjectContext";
+import UpdateContractorForm from "./Components/UpdateContractorForm";
 // import { UserProvider } from "./Contexts/UserContext";
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/inventory" element={<InventoryTable />} />
             <Route path="/orders" element={<ProductOrdersTable />} />
             <Route path="/constructors" element={<AddContractorForm />} />
+            <Route path="/updateContractor" element={<UpdateContractorForm />} />
             <Route path="/endoftheday" element={<Layout />} />
           </Route>
           <Route path="/login" element={<Login />} />
