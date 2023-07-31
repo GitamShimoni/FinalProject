@@ -1,0 +1,33 @@
+.project-orders-toprow-tr {
+  width: 18%;
+}
+.project-orders-table {
+  width: 80vw;
+  margin: auto;
+  margin-top: 5vw;
+  border-radius: 7px;
+  box-shadow: 3px 3px 4px 3px rgba(112, 112, 112, 0.75);
+  display: flex;
+  flex-direction: column;
+}
+.project-orders-tr {
+  text-align: center;
+  font-size: 1.8vw;
+  font-weight: bolder;
+  background: radial-gradient(
+    circle,
+    rgba(46, 124, 238, 1) 0%,
+    rgba(82, 115, 222, 1) 100%
+  );
+  color: white;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#project-orders-topleft-td {
+  border-top-left-radius: 7px;
+}
+#project-orders-topright-td {
+  border-top-right-radius: 7px;
+}

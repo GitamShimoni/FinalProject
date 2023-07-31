@@ -1,39 +1,45 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Tool from "./Tool";
-import "./ToolsTable.css";
+import ProductOrder from "./ProductOrder";
+import "./ProductOrdersTable.css";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
 const ProductOrdersTable = () => {
-  const { tools, setTools } = useContext(ProjectContext);
+  const { productOrders, setProductOrders, orders, setOrders } =
+    useContext(ProjectContext);
   // const [tools, setTools] = useState([]);
   useEffect(() => {
-    const inventoryId = "64bfb6686d6efc963d2855ec";
+    const ordersId = "64c6496edd068b2c46962f28";
     axios
-      .post(`${Host}/tools/getAllTools`, {
-        inventoryId,
+      .post(`${Host}/productOrder/getAllProductOrders`, {
+        ordersId,
       })
-      .then(({ data }) => setTools(data))
+      .then(({ data }) => setOrders([data]))
       .catch((err) => console.log(err));
+    console.log(orders);
   }, []);
-  console.log(tools);
+  useEffect(() => {
+    setProductOrders(orders[0]?.productOrders);
+  }, [orders]);
+  console.log(productOrders, "This is the product orders");
   return (
-    <div className="project-table">
-      <div className="project-tr">
+    <div className="project-orders-table">
+      <div className="project-orders-tr">
+        <div className="project-orders-toprow-tr">{`ספק`}</div>
         <div
-          className="project-toprow-tr"
-          id="project-topleft-td"
+          className="project-orders-toprow-tr"
+          id="project-orders-topleft-td"
         >{`סטאטוס`}</div>
-        <div className="project-toprow-tr">{`תאריך הזמנה`}</div>
-        <div className="project-toprow-tr">{`כמות מוזמנת`}</div>
+        <div className="project-orders-toprow-tr">{`תאריך הזמנה`}</div>
+        <div className="project-orders-toprow-tr">{`כמות מוזמנת`}</div>
         <div
-          className="project-toprow-tr"
-          id="project-topright-td"
+          className="project-orders-toprow-tr"
+          id="project-orders-topright-td"
         >{`מוצר`}</div>
       </div>
-      {tools?.map((tool, index) => {
-        return <Tool key={index} tool={tool} index={index} />;
+      {productOrders?.map((order, index) => {
+        return <ProductOrder key={index} order={order} index={index} />;
       })}
     </div>
   );
