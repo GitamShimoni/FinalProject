@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -15,6 +15,12 @@
   }
   .contractor-input-holder{
     display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 15px;
+  }
+  .add-contractor-services-holder {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin: 15px;
@@ -26,11 +32,25 @@
   }
   
   .add-contractor-input-label {
+    display: flex;
+
     font-weight: bold;
     margin-bottom: 5px;
   }
+  .add-contractor-label-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-contractor-input-container{
+    display: flex;
+    flex-direction: row-reverse;
+  }
   
-  .add-contracor-input {
+
+  .add-contractor-input {
+
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
