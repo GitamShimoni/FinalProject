@@ -33,6 +33,7 @@
   
   .add-contractor-input-label {
     display: flex;
+
     font-weight: bold;
     margin-bottom: 5px;
   }
@@ -47,7 +48,9 @@
     flex-direction: row-reverse;
   }
   
+
   .add-contractor-input {
+
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
