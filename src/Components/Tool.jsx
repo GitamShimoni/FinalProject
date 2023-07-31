@@ -17,26 +17,31 @@ const Tool = ({ tool, index }) => {
   }
 
   const handleUpdateTool = async () => {
-    try {
-      await axios
-        .patch("http://localhost:5000/tools/updateToolTaken", {
-          toolId: tool._id,
-          toolName: tool.toolName,
-          takenBy: signedName,
-          signed: signedButton,
-        })
-        .then(({ data }) => {
-          console.log(data, "This is the updated tool");
-          const newArr = [...tools];
-          newArr[index] = data;
-          setLoanButton(false);
-          setTools(newArr);
-        });
-      console.log(tools, "This is the tools from tool");
-    } catch (err) {
-      console.log(err);
+    if (signedName != "") {
+      try {
+        await axios
+          .patch("http://localhost:5000/tools/updateToolTaken", {
+            toolId: tool._id,
+            toolName: tool.toolName,
+            takenBy: signedName,
+            signed: signedButton,
+          })
+          .then(({ data }) => {
+            console.log(data, "This is the updated tool");
+            const newArr = [...tools];
+            newArr[index] = data;
+            setLoanButton(false);
+            setTools(newArr);
+          });
+        console.log(tools, "This is the tools from tool");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      alert("לא ניתן להלוות כלי ללא מילוי שם");
     }
   };
+
   const handleDeleteTool = async () => {
     if (confirm("האם אתה בטוח רוצה למחוק? אין דרך לשחזר.")) {
       console.log(tool._id, "This is the tool id");
@@ -75,7 +80,7 @@ const Tool = ({ tool, index }) => {
               onClick={() => handleUpdateTool()}
               className="tool-addloan-submit-button"
             >
-              הוסף
+              אישור
             </button>
           )}
         </div>
@@ -111,7 +116,7 @@ const Tool = ({ tool, index }) => {
                 onClick={() => setLoanButton(!loanButton)}
                 className="add-tool-loan-button"
               >
-                {loanButton ? "הסתר חתימה" : "הוסף חתימה"}
+                {loanButton ? "ביטול" : "הוסף חתימה"}
               </button>
             </>
           )}
