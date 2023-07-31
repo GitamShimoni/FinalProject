@@ -1,5 +1,8 @@
-.project-table {
-  width: 65vw;
+.project-orders-toprow-tr {
+  width: 18%;
+}
+.project-orders-table {
+  width: 80vw;
   margin: auto;
   margin-top: 5vw;
   border-radius: 7px;
@@ -7,7 +10,7 @@
   display: flex;
   flex-direction: column;
 }
-.project-tr {
+.project-orders-tr {
   text-align: center;
   font-size: 1.8vw;
   font-weight: bolder;
@@ -17,17 +20,14 @@
     rgba(82, 115, 222, 1) 100%
   );
   color: white;
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-#project-topleft-td {
+#project-orders-topleft-td {
   border-top-left-radius: 7px;
 }
-#project-topright-td {
+#project-orders-topright-td {
   border-top-right-radius: 7px;
-}
-.project-toprow-tr {
-  width: 23%;
 }

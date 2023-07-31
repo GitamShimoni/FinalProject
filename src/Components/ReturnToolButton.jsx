@@ -1,15 +1,24 @@
 import { useState } from "react";
 import "./ReturnToolButton.css";
 import axios from "axios";
-const ReturnToolButton = ({ toolId, toolName }) => {
+import { useContext } from "react";
+import { ProjectContext } from "../Contexts/ProjectContext";
+const ReturnToolButton = ({ toolId, toolName, index }) => {
+  const { tools, setTools } = useContext(ProjectContext);
   const [clicked, setClicked] = useState(false);
   const handleReturnTool = async () => {
     try {
-      await axios.put("http://localhost:5000/tools/updateTool", {
-        toolId: toolId,
-        toolName: toolName,
-      });
-      console.log("Success!");
+      await axios
+        .put("http://localhost:5000/tools/updateTool", {
+          toolId: toolId,
+          toolName: toolName,
+        })
+        .then(({ data }) => {
+          console.log(data, "This is the data from the return");
+          const newArr = [...tools];
+          newArr[index] = data;
+          setTools(newArr);
+        });
     } catch (err) {
       console.log(err);
     }
