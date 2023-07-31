@@ -1,0 +1,65 @@
+.project-productorder-table-row {
+  display: flex;
+  align-items: center;
+  width: 80vw; /* Set the width of the table */
+  margin: auto; /* Center the table horizontally */
+}
+
+.productorder-tr-zugi {
+  background: radial-gradient(
+    circle,
+    rgb(232, 232, 232) 0%,
+    rgb(219, 219, 219) 100%
+  );
+  text-align: center;
+  height: 50px;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex: 1; /* Allow the table row to take the available width equally */
+}
+.productorder-tr-notzugi {
+  background: radial-gradient(
+    circle,
+    rgb(214, 214, 214) 0%,
+    rgb(202, 202, 202) 100%
+  );
+  text-align: center;
+  height: 50px;
+  font-size: 1.6vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex: 1; /* Allow the table row to take the available width equally */
+}
+
+.productorder-table-part,
+.productorder-table-toolpart {
+  flex: 1; /* Allow the table cells to take the available width equally */
+  border-left: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px; /* Add some padding for better appearance */
+}
+.productorder-table-leftpart {
+  flex: 1; /* Allow the table cells to take the available width equally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px; /* Add some padding for better appearance */
+}
+
+/* Additional style for the button */
+.productorder-addloan-submit-button {
+  border-radius: 5px;
+  border: 0;
+  padding: 5px;
+  width: 70px;
+  font-size: 1vw;
+  cursor: pointer;
+  transition: 0.6s;
+  background-color: rgb(30, 133, 192);
+  color: white;
+}

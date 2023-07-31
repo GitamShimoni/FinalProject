@@ -14,6 +14,7 @@ const ReturnToolButton = ({ toolId, toolName, index }) => {
           toolName: toolName,
         })
         .then(({ data }) => {
+          console.log(data, "This is the data from the return");
           const newArr = [...tools];
           newArr[index] = data;
           setTools(newArr);
