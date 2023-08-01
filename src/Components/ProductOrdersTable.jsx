@@ -9,6 +9,8 @@ const ProductOrdersTable = () => {
   const { productOrders, setProductOrders, orders, setOrders } =
     useContext(ProjectContext);
   // const [tools, setTools] = useState([]);
+
+  //SHOULD ADD SORTING FILTER THAT SORTS THE ORDERS FROM PENDING TO NOT PENDING
   useEffect(() => {
     const ordersId = "64c6496edd068b2c46962f28";
     axios
