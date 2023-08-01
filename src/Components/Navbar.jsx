@@ -18,11 +18,13 @@ const Navbar = () => {
       <Link to={"/constructors"}>
         <h2 className="navbar-header">קבלנים</h2>
       </Link>
-      <img
-        id="navbar-logo"
-        src="https://img.freepik.com/free-icon/pie-chart_318-372376.jpg"
-        alt="Navbar icon"
-      />
+      <Link to={"/projects"}>
+        <img
+          id="navbar-logo"
+          src="https://img.freepik.com/free-icon/pie-chart_318-372376.jpg"
+          alt="Navbar icon"
+        />
+      </Link>
     </div>
   );
 };

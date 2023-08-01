@@ -4,6 +4,9 @@ import "./Tool.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Host from "../utils/routes";
+
+
 const Tool = ({ tool, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
   const [loanButton, setLoanButton] = useState(false);
@@ -20,7 +23,7 @@ const Tool = ({ tool, index }) => {
     if (signedName != "") {
       try {
         await axios
-          .patch("http://localhost:5000/tools/updateToolTaken", {
+          .patch(`${Host}/tools/updateToolTaken`, {
             toolId: tool._id,
             toolName: tool.toolName,
             takenBy: signedName,

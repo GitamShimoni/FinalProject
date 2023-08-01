@@ -8,7 +8,12 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
+.contractor-name-holder{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px;
+}
 .create-contractor-header {
   text-align: center;
   margin-bottom: 20px;
@@ -17,7 +22,7 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  margin: 15px;
+  margin: 10px;
 }
 .add-contractor-services-holder {
   display: flex;
@@ -27,7 +32,7 @@
   box-shadow: 3px 4px 13px 0px rgb(204 181 181 / 75%);
   padding: 20px;
   border-radius: 10px;
-  margin: 50px;
+  margin: 30px;
 }
 .add-contracor-form {
   display: flex;
@@ -64,7 +69,7 @@
   margin-top: 1px;
 }
 
-#createContractor-button {
+#addService-button {
   border-radius: 5px;
   border: 0;
   padding: 5px;
@@ -77,6 +82,38 @@
   background-color: rgb(30, 133, 192);
   color: white;
 }
-#createContractor-button:hover {
+#addService-button:hover {
   background-color: rgb(21, 94, 136);
+}
+#deleteContractor-button {
+  border-radius: 5px;
+  border: 0;
+  padding: 5px;
+  height: 8vh;
+  width: 20vw;
+  font-size: 1vw;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.6s;
+  background-color: rgb(224, 64, 96);
+  color: white;
+}
+#deleteContractor-button:hover {
+  background-color: rgb(209, 20, 20);
+}
+#createContractor-button {
+  border-radius: 5px;
+  border: 0;
+  padding: 5px;
+  height: 8vh;
+  width: 20vw;
+  font-size: 1vw;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.6s;
+  background-color: rgb(30, 192, 30);
+  color: white;
+}
+#createContractor-button:hover {
+  background-color: rgb(82, 98, 10);
 }

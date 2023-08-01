@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./ProductOrder.css";
 import axios from "axios";
+import Host from "../utils/routes";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 const ProductOrder = ({ order, index }) => {
@@ -9,7 +10,7 @@ const ProductOrder = ({ order, index }) => {
   const handleUpdateTool = async () => {
     try {
       await axios
-        .patch("http://localhost:5000/tools/updateToolTaken", {
+        .patch(`${Host}/tools/updateToolTaken`, {
           toolId: tool._id,
           toolName: tool.toolName,
           takenBy: signedName,

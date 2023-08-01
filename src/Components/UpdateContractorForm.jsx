@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
+import Host from "../utils/routes";
 import './UpdateContractorForm.css'
 
 const UpdateContractorForm = () => {
@@ -15,7 +16,7 @@ const UpdateContractorForm = () => {
       console.log("Data being sent to the server:", data);
 
       const response = await axios.post(
-        "http://localhost:5000/contractor/add",
+        `${Host}/contractor/add`,
         data
       );
       console.log("Server Response:", response.data);
