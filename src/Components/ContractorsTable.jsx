@@ -1,37 +1,57 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useContext } from "react";
-import { ProjectContext } from "../Contexts/ProjectContext";
+import "./ContractorsTable.css";
 import Host from "../utils/routes";
-const ContractorsTable = () => {
-  const { contractors, setContractors } = useContext(ProjectContext);
-  // const [contractors, setContractors] = useState([]);
+import ContractorRow from "./ContractorRow";
+import AddServiceBtn from "./AddServiceBtn";
+
+function ContractorsTable({ contractor }) {
+  const [contractorState, setContractorState] = useState(contractor);
+  const [servicesArr, setServicesArr] = useState([]);
+
   useEffect(() => {
-    const projectId = "64bfb6686d6efc963d2855f2";
     axios
-      .post(`${Host}/contractors/getAllcontractors`, {
-        projectId,
+      .post(`${Host}/contractor/getAllServices`, {
+        contractorId: contractorState._id,
       })
-      .then(({ data }) => setContractors(data))
+      .then(({ data }) => {
+        setServicesArr(data);
+      })
       .catch((err) => console.log(err));
   }, []);
-  console.log(contractors);
+
   return (
     <div className="project-table">
-      <div className="project-tr">
-        <div
-          className="project-toprow-tr"
-          id="project-topleft-td"
-        >{`תאריך`}</div>
-        <div className="project-toprow-tr">{`חתום`}</div>
-        <div className="project-toprow-tr">{`נלקח ע"י`}</div>
-        <div
-          className="project-toprow-tr"
-          id="project-topright-td"
-        >{`כלי`}</div>
+      <div className="contractor-table-name">
+        <h2>{contractorState.name}</h2>
+      </div>
+      <div className="contractor-tr">
+        <div className="contractor-row-info-div">{`מחיר`}</div>
+        <div className="contractor-row-info-div">
+          <h3>יחידה</h3>
+        </div>
+        <div className="contractor-row-info-div">
+          <h3>מס' סעיף</h3>
+        </div>
+        <div className="contractor-row-info-div service-name-table-title">
+          <h3>שם השירות</h3>
+        </div>
+      </div>
+      {servicesArr?.map((service, index) => {
+        return (
+          <ContractorRow
+            key={index}
+            index={index}
+            service={service}
+            setServicesArr={setServicesArr}
+          />
+        );
+      })}
+      <div className="contractTable-add-service-btn">
+        <AddServiceBtn />
       </div>
     </div>
   );
-};
+}
 
 export default ContractorsTable;

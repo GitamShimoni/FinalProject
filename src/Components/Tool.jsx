@@ -4,6 +4,7 @@ import "./Tool.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+
 const Tool = ({ tool, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
   const [loanButton, setLoanButton] = useState(false);
