@@ -1,0 +1,34 @@
+.contractor-tr {
+  text-align: center;
+  font-weight: bolder;
+  background: radial-gradient(
+    circle,
+    rgba(46, 124, 238, 1) 0%,
+    rgba(82, 115, 222, 1) 100%
+  );
+  color: white;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contractor-table-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 5px;
+    font-weight: bold;
+  
+}
+
+.service-name-table-title{
+  margin-right: 27px;
+}
+
+.contractTable-add-service-btn{
+  display: flex;
+  justify-content: center;
+}

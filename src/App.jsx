@@ -12,6 +12,7 @@ import AddContractorForm from "./Components/AddContractorForm";
 import "./App.css";
 import { ProjectProvider } from "./Contexts/ProjectContext";
 import UpdateContractorForm from "./Components/UpdateContractorForm";
+import ContractorPage from "./Components/ContractorPage";
 // import { UserProvider } from "./Contexts/UserContext";
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/inventory" element={<InventoryTable />} />
             <Route path="/orders" element={<ProductOrdersTable />} />
-            <Route path="/constructors" element={<AddContractorForm />} />
+            <Route path="/constructors" element={<ContractorPage />} />
             <Route path="/updateContractor" element={<UpdateContractorForm />} />
             <Route path="/endoftheday" element={<Layout />} />
           </Route>

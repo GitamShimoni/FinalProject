@@ -40,7 +40,6 @@ const AddContractorForm = () => {
     <div className="add-contractor-holder">
       <h1 className="create-contractor-header">הוסף קבלן</h1>
       <form className="add-contracor-form" onSubmit={handleSubmit(onSubmit)}>
-
         <div className="contractor-input-holder">
           <label className="add-contractor-input-label" htmlFor="name">
             שם הקבלן
@@ -54,7 +53,6 @@ const AddContractorForm = () => {
           {errors.name && (
             <span className="add-contractor-span">{errors.name.message}</span>
           )}
-
         </div>
         <h2>שירותים</h2>
         {fields.map((service, index) => (
