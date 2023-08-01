@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
+import Host from "../utils/routes";
+import "../utils/routes";
 import "./AddContractorForm.css";
 import { Link } from "react-router-dom";
 import UpdateContractorForm from "./UpdateContractorForm";
@@ -17,22 +19,19 @@ const AddContractorForm = () => {
     name: "services",
   });
 
-  const projectId = "64bfb6686d6efc963d2855f2";
+  const projectId = localStorage.getItem("selectedProjectId");
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/contractor/create",
-        data,
-        {
-          headers: {
-            projectid: projectId,
-          },
-        }
-      );
+      const response = await axios.post(`${Host}/contractor/create`, data, {
+        headers: {
+          projectid: projectId,
+        },
+      });
       console.log(response.data);
     } catch (error) {
-      console.log("error saving contractor", error.response.data);
+      console.log("Error object:", error);
+      console.log("Error response data:", error.response?.data);
     }
   };
 
@@ -41,18 +40,20 @@ const AddContractorForm = () => {
       <h1 className="create-contractor-header">הוסף קבלן</h1>
       <form className="add-contracor-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="contractor-input-holder">
-          <label className="add-contractor-input-label" htmlFor="name">
-            שם הקבלן
-          </label>
-          <input
-            className="add-contractor-input"
-            {...register("name", { required: "נדרש שם קבלן" })}
-            type="text"
-            placeholder="שם הקבלן"
-          />
-          {errors.name && (
-            <span className="add-contractor-span">{errors.name.message}</span>
-          )}
+          <div className="contractor-name-holder">
+            <label className="add-contractor-input-label" htmlFor="name">
+              שם הקבלן
+            </label>
+            <input
+              className="add-contractor-input"
+              {...register("name", { required: "נדרש שם קבלן" })}
+              type="text"
+              placeholder="שם הקבלן"
+            />
+            {errors.name && (
+              <span className="add-contractor-span">{errors.name.message}</span>
+            )}
+          </div>
         </div>
         <h2>שירותים</h2>
         {fields.map((service, index) => (
@@ -148,7 +149,7 @@ const AddContractorForm = () => {
               </div>
             </div>
             <button
-              id="createContractor-button"
+              id="deleteContractor-button"
               type="button"
               onClick={() => remove(index)}
             >
@@ -157,7 +158,7 @@ const AddContractorForm = () => {
           </div>
         ))}
         <button
-          id="createContractor-button"
+          id="addService-button"
           type="button"
           onClick={() => append()}
         >

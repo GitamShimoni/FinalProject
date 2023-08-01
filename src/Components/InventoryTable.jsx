@@ -1,40 +1,48 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Tool from "./Tool";
-import "./ToolsTable.css";
-import { useContext } from "react";
-import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
+
 const InventoryTable = () => {
-  const { tools, setTools } = useContext(ProjectContext);
-  // const [tools, setTools] = useState([]);
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const inventoryId = "64bfb6686d6efc963d2855ec";
-    axios
-      .post(`${Host}/tools/getAllTools`, {
-        inventoryId,
-      })
-      .then(({ data }) => setTools(data))
-      .catch((err) => console.log(err));
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.post(`${Host}/product/getAll`,{
+          inventoryId,
+        });
+        setProducts(response.data);
+      } catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
   }, []);
-  console.log(tools);
+
+  console.log(products);
+
   return (
     <div className="project-table">
       <div className="project-tr">
-        <div
-          className="project-toprow-tr"
-          id="project-topleft-td"
-        >{`כמות מינימאלית`}</div>
-        <div className="project-toprow-tr">{`כמות`}</div>
-        <div className="project-toprow-tr">{`יחידת מידה`}</div>
-        <div
-          className="project-toprow-tr"
-          id="project-topright-td"
-        >{`מוצר`}</div>
+        <div className="project-toprow-tr" id="project-topleft-td">
+          כמות מינימאלית
+        </div>
+        <div className="project-toprow-tr">כמות</div>
+        <div className="project-toprow-tr">יחידת מידה</div>
+        <div className="project-toprow-tr" id="project-topright-td">
+          מוצר
+        </div>
       </div>
-      {tools?.map((tool, index) => {
-        return <Tool key={index} tool={tool} index={index} />;
-      })}
+      {products.map((product, index) => (
+        <div key={index} className="product-row">
+          <div className="product-info">{product.minQuantity}</div>
+          <div className="product-info">{product.quantity}</div>
+          <div className="product-info">{product.unit}</div>
+          <div className="product-info">{product.name}</div>
+        </div>
+      ))}
     </div>
   );
 };

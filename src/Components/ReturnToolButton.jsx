@@ -3,13 +3,16 @@ import "./ReturnToolButton.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import '../utils/routes'
+
+
 const ReturnToolButton = ({ toolId, toolName, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
   const [clicked, setClicked] = useState(false);
   const handleReturnTool = async () => {
     try {
       await axios
-        .put("http://localhost:5000/tools/updateTool", {
+        .put(`${Host}tools/updateTool`, {
           toolId: toolId,
           toolName: toolName,
         })
