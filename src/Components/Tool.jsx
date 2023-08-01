@@ -77,7 +77,7 @@ const Tool = ({ tool, index }) => {
             >
               הוסף
             </button>
-          )}
+          )}                                                                                                                                                                                                                                                                                                                                                                     
         </div>
         <div className="tool-table-part">
           {tool?.signed == true ? `כן` : tool?.signed == undefined ? "" : "לא"}

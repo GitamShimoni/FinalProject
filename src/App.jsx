@@ -5,6 +5,7 @@ import ToolsPage from "./Components/ToolsPage";
 import InventoryTable from "./Components/InventoryTable";
 import ProductOrdersTable from "./Components/ProductOrdersTable";
 import Login from "./Components/Login";
+import EndDay from "./Components/EndDay";
 
 import ToolsTable from "./Components/ToolsTable";
 import AddContractorForm from "./Components/AddContractorForm";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/inventory" element={<InventoryTable />} />
             <Route path="/orders" element={<ProductOrdersTable />} />
             <Route path="/constructors" element={<AddContractorForm />} />
+            <Route path="/endDay" element={<EndDay />} />
             <Route path="/endoftheday" element={<Layout />} />
           </Route>
           <Route path="/login" element={<Login />} />

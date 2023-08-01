@@ -28,7 +28,7 @@ const Login = () => {
           window.location.href = '/homepage';
       }catch (err) {
         if (err.response && err.response.status === 401) {
-          alert('Invalid email or password. Please try again.');
+          alert('Invalid user or password. Please try again.');
         } else {
           console.log(err);
         }
