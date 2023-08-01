@@ -9,10 +9,18 @@ const Tool = ({ tool, index }) => {
   const [loanButton, setLoanButton] = useState(false);
   const [signedButton, setSignedButton] = useState(false);
   const [signedName, setSignedName] = useState("");
+
   function formatDate(dateString) {
-    const dateSegments = dateString.split("T");
-    const datePart = dateSegments[0].split("-").reverse().join(".");
-    const timePart = dateSegments[1].split(":").slice(0, 2).join(":");
+    const dateObj = new Date(dateString);
+    const datePart = dateObj.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const timePart = dateObj.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     return `${datePart} - ${timePart}`;
   }
 
