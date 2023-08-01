@@ -63,3 +63,17 @@
   background-color: rgb(30, 133, 192);
   color: white;
 }
+.productorder-option-arrived {
+  box-shadow: 0px 0px 3px 2px rgb(67, 144, 26);
+}
+.productorder-option-pending {
+  box-shadow: 0px 0px 3px 2px rgb(68, 116, 155);
+}
+.productorder-option-declined {
+  box-shadow: 0px 0px 3px 2px rgb(228, 90, 44);
+}
+.productorder-table-arrived-header {
+  font-size: 1.7vw;
+  color: rgb(104, 163, 15);
+  padding: 10px;
+}

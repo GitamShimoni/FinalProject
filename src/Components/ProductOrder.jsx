@@ -1,33 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ProductOrder.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Host from "../utils/routes";
 const ProductOrder = ({ order, index }) => {
-  const { orders, setOrders } = useContext(ProjectContext);
+  const { productOrders, setProductOrders } = useContext(ProjectContext);
+  const [changeStatus, setChangeStatus] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
 
-  const handleUpdateTool = async () => {
-    try {
-      await axios
-        .patch("http://localhost:5000/tools/updateToolTaken", {
-          toolId: tool._id,
-          toolName: tool.toolName,
-          takenBy: signedName,
-          signed: signedButton,
-        })
-        .then(({ data }) => {
-          console.log(data, "This is the updated tool");
-          const newArr = [...tools];
-          newArr[index] = data;
-          setLoanButton(false);
-          setTools(newArr);
-        });
-      console.log(order, "This is the tools from tool");
-    } catch (err) {
-      console.log(err);
+  const handleUpdateOrderStatus = async () => {
+    if (changeStatus == "arrived") {
+      if (
+        confirm("האם לשנות את הסטטוס ל-`הגיע`? אין אפשרות לשנות זאת בחזרה.")
+      ) {
+        try {
+          await axios
+            .patch(`${Host}/productOrder/updateProductOrder`, {
+              productOrderId: order._id,
+              changeStatus,
+            })
+            .then(({ data }) => {
+              setOrderStatus(changeStatus);
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    } else {
+      //NEED TO ADD A POP UP THAT ALERTS ACCEPTED OR DECLINED
+      try {
+        await axios
+          .patch(`${Host}/productOrder/updateProductOrder`, {
+            productOrderId: order._id,
+            changeStatus,
+          })
+          .then(({ data }) => {
+            setOrderStatus(changeStatus);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
-
+  useEffect(() => {
+    setOrderStatus(order?.status);
+  }, [order]);
   return (
     <div className="project-productorder-table-row">
       <div
@@ -38,7 +56,51 @@ const ProductOrder = ({ order, index }) => {
         <div className="productorder-table-leftpart">{`צריך להזין ספק`}</div>
 
         <div className="productorder-table-part">
-          {order?.status == "pending" ? "ממתין" : "הגיע"}
+          {orderStatus != "arrived" && (
+            <button
+              onClick={() => handleUpdateOrderStatus()}
+              className="productorder-table-option-button"
+            >
+              הגדר
+            </button>
+          )}
+          {orderStatus != "arrived" ? (
+            <select
+              onChange={(e) => setChangeStatus(e.target.value)}
+              className={`productorder-table-select ${
+                orderStatus === "pending"
+                  ? "productorder-option-pending"
+                  : orderStatus === "arrived"
+                  ? "productorder-option-arrived"
+                  : "productorder-option-declined"
+              }`}
+              name=""
+              id=""
+            >
+              <option disabled selected hidden value="">
+                {orderStatus == "pending"
+                  ? "ממתין"
+                  : orderStatus == "arrived"
+                  ? "הגיע"
+                  : "נדחה"}
+              </option>
+              <option
+                className="productorder-table-option"
+                value="arrived"
+              >{`הגיע`}</option>
+              <option
+                className="productorder-table-option"
+                value="pending"
+              >{`ממתין`}</option>
+              <option
+                className="productorder-table-option"
+                value="declined"
+              >{`בוטל`}</option>
+            </select>
+          ) : (
+            <h2 className="productorder-table-arrived-header">{"הגיע"}</h2>
+          )}
+          {/* {order?.status == "pending" ? "ממתין" : "הגיע"} */}
         </div>
         <div className="productorder-table-part">{`${
           order?.dateOfOrder != undefined ? formatDate(order?.dateOfOrder) : ""
@@ -53,8 +115,15 @@ const ProductOrder = ({ order, index }) => {
 export default ProductOrder;
 
 function formatDate(dateString) {
-  const dateSegments = dateString.split("T");
-  const datePart = dateSegments[0].split("-").reverse().join(".");
-  const timePart = dateSegments[1].split(":").slice(0, 2).join(":");
+  const dateObj = new Date(dateString);
+  const datePart = dateObj.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const timePart = dateObj.toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return `${datePart} - ${timePart}`;
 }
