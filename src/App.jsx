@@ -5,7 +5,7 @@ import ToolsPage from "./Components/ToolsPage";
 import InventoryTable from "./Components/InventoryTable";
 import ProductOrdersTable from "./Components/ProductOrdersTable";
 import Login from "./Components/Login";
-import SignUp from "./Components/SignUp";
+
 
 import ToolsTable from "./Components/ToolsTable";
 import AddContractorForm from "./Components/AddContractorForm";
