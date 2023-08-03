@@ -14,17 +14,17 @@ function ContractorRow({ service, index, setServicesArr}) {
     >
      
       <div className="contractor-row-info-div border-left">
-        <div className="contractor-row-service-name-title"><h3>{service.sectionName}</h3></div>
-        <div className="delete-service-btn"><DeleteServiceButton serviceId={service._id} setServicesArr={setServicesArr}/></div>
+        <div className="contractor-row-service-name-title"><h3>{service?.sectionName}</h3></div>
+        <div className="delete-service-btn"><DeleteServiceButton serviceId={service?._id} setServicesArr={setServicesArr}/></div>
       </div>
       <div className="contractor-row-info-div border-left">
-        <h3>{service.section}</h3>
+        <h3>{service?.section}</h3>
       </div>
       <div className="contractor-row-info-div border-left">
-        <h3>{service.unit}</h3>
+        <h3>{service?.unit}</h3>
       </div>
       <div className="contractor-row-info-div ">
-        <h3>{service.price.toLocaleString("en-US")} ₪</h3>
+        <h3>{service?.price?.toLocaleString("en-US")} ₪</h3>
       </div>
     </div>
   );

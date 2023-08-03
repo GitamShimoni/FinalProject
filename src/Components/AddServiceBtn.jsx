@@ -1,9 +1,9 @@
 import React from 'react';
 import './AddServiceBtn.css';
 
-const AddServiceBtn = () => {
+const AddServiceBtn = ({setAddNewService}) => {
   return (
-    <button className="AddServiceBtn__button" type="button">
+    <button className="AddServiceBtn__button" type="button" onClick={()=>setAddNewService(true)}>
       <span className="AddServiceBtn__text">הוסף שירות</span>
       <span className="AddServiceBtn__icon">
         <svg

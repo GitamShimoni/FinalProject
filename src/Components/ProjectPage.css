@@ -57,3 +57,50 @@
   margin: 5px 0;
   text-align: center;
 }
+.user-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .user-square {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: .2s;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/33/33356.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
+  .user-square:hover{
+      transform: scale(1.1);
+  }
+  
+  .user-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  
+  .user-name:hover {
+      color: black;
+      scale: 1.2;
+  }
+  .user-info {
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: center;
+  }
