@@ -14,6 +14,7 @@ function IronOrderForm() {
     const requestedArrivalDate = e.target[2].value;
     const requestedQuantity = e.target[3].value;
     const unit = e.target[4].value;
+    const supplier = e.target[5].value;
 
     try {
       const data = await axios.post(`${Host}/ironOrder/createIronOrder`, {
@@ -23,6 +24,7 @@ function IronOrderForm() {
         dateOfOrder: dateOfOrder,
         requestedArrivalDate: requestedArrivalDate,
         requestedQuantity: requestedQuantity,
+        supplier: supplier,
         status: "pending",
       });
       console.log(data);
@@ -35,6 +37,7 @@ function IronOrderForm() {
     <div>
       <div id="ProductOrderForm-form-container">
         <form onSubmit={handleSubmitForm} id="Product-Order-Form">
+          <h2>צור הזמנת ברזל חדשה</h2>
           <h2 className="ProductOrderForm-form-title">:שם המוצר</h2>
           <input
             required
@@ -70,6 +73,13 @@ function IronOrderForm() {
             type="text"
             className="unit ProductOrderForm-input"
             placeholder="'יח"
+          />
+          <h2 className="ProductOrderForm-form-title">:ספק</h2>
+          <input
+            required
+            type="text"
+            className="unit ProductOrderForm-input"
+            placeholder="ספק"
           />
           <button className="product-order-submit-btn" type="submit">
             הזמן

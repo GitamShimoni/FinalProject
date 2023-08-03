@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import "./ProductOrder.css";
+import "./IronOrder.css";
 import axios from "axios";
 import Host from "../utils/routes";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
-const ProductOrder = ({ order, index }) => {
+const IronOrder = ({ order, index }) => {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
   const inventoryId = "64bfb6686d6efc963d2855ec";
 
-  console.log(order, "This is the order");
+  console.log(order, "This is the order!!!!!!!!!!!!!!!!!!!!!!!!!");
   const handleAddProduct = async () => {
     try {
       await axios
@@ -20,7 +20,7 @@ const ProductOrder = ({ order, index }) => {
           unit: order.unit,
           quantity: order.quantity,
           minQuantity: 0,
-          isIron: false,
+          isIron: true,
           orderId: order._id,
         })
         .then(({ data }) => {
@@ -70,24 +70,26 @@ const ProductOrder = ({ order, index }) => {
   useEffect(() => {
     setOrderStatus(order?.status);
   }, [order]);
-  console.log(order, "dasdsadsa");
 
   return (
-    <div className="project-productorder-table-row">
+    <div className="project-ironorder-table-row">
       <div
         className={
-          index % 2 == 0 ? "productorder-tr-zugi" : "productorder-tr-notzugi"
+          index % 2 == 0 ? "ironorder-tr-zugi" : "ironorder-tr-notzugi"
         }
       >
-        <div className="productorder-table-leftpart">
+        <div className="ironorder-table-leftpart">
+          {order?.imcSrc ? `${order?.imgSrc}` : `אין תמונה`}
+        </div>
+        <div className="ironorder-table-part">
           {order?.supplier ? `${order?.supplier}` : `צריך להזין ספק`}
         </div>
 
-        <div className="productorder-table-part">
+        <div className="ironorder-table-part">
           {orderStatus != "arrived" && (
             <button
               onClick={() => handleUpdateOrderStatus()}
-              className="productorder-table-option-button"
+              className="ironorder-table-option-button"
             >
               הגדר
             </button>
@@ -95,12 +97,12 @@ const ProductOrder = ({ order, index }) => {
           {orderStatus != "arrived" ? (
             <select
               onChange={(e) => setChangeStatus(e.target.value)}
-              className={`productorder-table-select ${
+              className={`ironorder-table-select ${
                 orderStatus === "pending"
-                  ? "productorder-option-pending"
+                  ? "ironorder-option-pending"
                   : orderStatus === "arrived"
-                  ? "productorder-option-arrived"
-                  : "productorder-option-declined"
+                  ? "ironorder-option-arrived"
+                  : "ironorder-option-declined"
               }`}
               name=""
               id=""
@@ -113,34 +115,48 @@ const ProductOrder = ({ order, index }) => {
                   : "נדחה"}
               </option>
               <option
-                className="productorder-table-option"
+                className="ironorder-table-option"
                 value="arrived"
               >{`הגיע`}</option>
               <option
-                className="productorder-table-option"
+                className="ironorder-table-option"
                 value="pending"
               >{`ממתין`}</option>
               <option
-                className="productorder-table-option"
+                className="ironorder-table-option"
                 value="declined"
               >{`בוטל`}</option>
             </select>
           ) : (
-            <h2 className="productorder-table-arrived-header">{"הגיע"}</h2>
+            <h2 className="ironorder-table-arrived-header">{"הגיע"}</h2>
           )}
-          {/* {order?.status == "pending" ? "ממתין" : "הגיע"} */}
         </div>
-        <div className="productorder-table-part">{`${
-          order?.dateOfOrder != undefined ? formatDate(order?.dateOfOrder) : ""
-        }`}</div>
-        <div className="productorder-table-part">{`${order?.quantity}`}</div>
-        <div className="productorder-table-toolpart">{`${order?.productName}`}</div>
+        <div className="ironorder-table-datespart">
+          <h3 className="ironorder-dates-headerstop">{`${
+            order?.requestedArrivalDate != undefined ? "הוזמן" : ""
+          }`}</h3>
+          <h3 className="ironorder-dates-headers">{`${
+            order?.requestedArrivalDate != undefined
+              ? formatDate(order?.requestedArrivalDate)
+              : ""
+          }`}</h3>
+          <h3 className="ironorder-dates-headerstop">{`${
+            order?.arrivalDate != undefined ? "הגיע" : ""
+          }`}</h3>
+          <h3 className="ironorder-dates-headers">{`${
+            order?.arrivalDate != undefined
+              ? formatDate(order?.arrivalDate)
+              : ""
+          }`}</h3>
+        </div>
+        <div className="ironorder-table-part">{`${order?.requestedQuantity}`}</div>
+        <div className="ironorder-table-toolpart">{`${order?.ironName}`}</div>
       </div>
     </div>
   );
 };
 
-export default ProductOrder;
+export default IronOrder;
 
 function formatDate(dateString) {
   const dateObj = new Date(dateString);
