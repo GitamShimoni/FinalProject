@@ -1,0 +1,75 @@
+.ContractorPage-AddContractorForm-div {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.ContractorPage-add-remove-contractor {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ContractorPage-add-btn {
+  padding: 20px;
+  width: 250px;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(48, 123, 238);
+  color: white;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+.ContractorPage-add-btn:hover {
+  background-color: rgb(31, 90, 179);
+}
+
+.ContractorPage-remove-btn {
+  padding: 20px;
+  width: 250px;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(48, 123, 238);
+  color: white;
+  cursor: pointer;
+  transition: 0.6s;
+  margin-bottom: 20px;
+}
+
+.ContractorPage-add-btn:hover {
+  background-color: rgb(31, 90, 179);
+}
+
+.ContractorPage-search-bar {
+  padding: 15px;
+  border-radius: 20px;
+  font-size: large;
+}
+
+.ContractorPage-search-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.contractor-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clear-btn{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #EEEEEE;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

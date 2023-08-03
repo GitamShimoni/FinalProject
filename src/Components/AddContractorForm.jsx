@@ -1,44 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useForm, Controller, useFieldArray } from "react-hook-form";
 import Host from "../utils/routes";
 import "../utils/routes";
 import "./AddContractorForm.css";
 import { Link } from "react-router-dom";
 import UpdateContractorForm from "./UpdateContractorForm";
 
-const AddContractorForm = () => {
-  const {
-    handleSubmit,
-    control,
-    register,
-    formState: { errors },
-  } = useForm();
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "services",
-  });
+const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => {
+  const [services, setServices] = useState([
+    { section: "", sectionName: "", unit: "", price: "" },
+  ]);
 
-  const projectId = localStorage.getItem("selectedProjectId");
 
-  const onSubmit = async (data) => {
+  const addService = () => {
+    setServices([...services, { section: "", sectionName: "", unit: "", price: "" }]);
+  };
+
+  const removeService = (index) => {
+    const updatedServices = [...services];
+    updatedServices.splice(index, 1);
+    setServices(updatedServices);
+  };
+
+  const handleChange = (index, field, value) => {
+    const updatedServices = [...services];
+    updatedServices[index][field] = value;
+    setServices(updatedServices);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const projectId = "64bfb6686d6efc963d2855f2";
     try {
-      const response = await axios.post(`${Host}/contractor/create`, data, {
-        headers: {
-          projectid: projectId,
-        },
-      });
+      const response = await axios.post(
+        `${Host}/contractor/create`,
+        { name: event.target.name.value, services },
+        {
+          headers: {
+            projectId: projectId,
+          },
+        }
+      );
+  
+      // Add the contractorId to each service in the services array
+      const contractorId = response.data._id;
+      const updatedServices = services.map((service) => ({ ...service, contractorId }));
+  
+      // Update the state with the updated services array
+      setServices(updatedServices);
+  
+      setContractorsArr((prev) => [...prev, response.data]);
+      setIsAddContractorClicked(false);
       console.log(response.data);
     } catch (error) {
       console.log("Error object:", error);
       console.log("Error response data:", error.response?.data);
     }
   };
+  
 
   return (
     <div className="add-contractor-holder">
       <h1 className="create-contractor-header">הוסף קבלן</h1>
-      <form className="add-contracor-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="add-contractor-form" onSubmit={handleSubmit}>
         <div className="contractor-input-holder">
           <div className="contractor-name-holder">
             <label className="add-contractor-input-label" htmlFor="name">
@@ -46,130 +70,115 @@ const AddContractorForm = () => {
             </label>
             <input
               className="add-contractor-input"
-              {...register("name", { required: "נדרש שם קבלן" })}
               type="text"
               placeholder="שם הקבלן"
+              required
+              name="name"
             />
-            {errors.name && (
-              <span className="add-contractor-span">{errors.name.message}</span>
-            )}
           </div>
         </div>
         <h2>שירותים</h2>
-        {fields.map((service, index) => (
-          <div className="add-contractor-services-holder" key={service.id}>
+        {services.map((service, index) => (
+          <div className="add-contractor-services-holder" key={index}>
             <h3>שירות מספר {index + 1}</h3>
             <div className="contractor-input-holder">
               <div className="add-contractor-input-container">
                 <div className="add-contractor-label-wrapper">
                   <label
                     className="add-contractor-input-label"
-                    htmlFor={`services[${index}].section`}
+                    htmlFor={`section-${index}`}
                   >
                     מספר סעיף
                   </label>
-                  <Controller
-                    name={`services[${index}].section`}
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "נדרש מספר סעיף" }}
-                    render={({ field }) => (
-                      <input
-                        className="add-contractor-input"
-                        {...field}
-                        type="text"
-                        placeholder="מספר סעיף"
-                      />
-                    )}
+                  <input
+                    className="add-contractor-input"
+                    type="number"
+                    placeholder="מספר סעיף"
+                    value={service.section}
+                    onChange={(e) => handleChange(index, "section", e.target.value)}
+                    required
+                    id={`section-${index}`}
                   />
-                  {errors?.services?.[index]?.section && (
-                    <span className="add-contractor-span">
-                      {errors.services[index].section.message}
-                    </span>
-                  )}
                 </div>
               </div>
               <div className="contractor-input-holder">
                 <div className="add-contractor-label-wrapper">
                   <label
                     className="add-contractor-input-label"
-                    htmlFor={`services[${index}].sectionName`}
+                    htmlFor={`sectionName-${index}`}
                   >
                     שם הסעיף
                   </label>
-                  <Controller
-                    name={`services[${index}].sectionName`}
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "נדרש שם סעיף" }}
-                    render={({ field }) => (
-                      <input
-                        className="add-contractor-input"
-                        {...field}
-                        type="text"
-                        placeholder="שם הסעיף"
-                      />
-                    )}
+                  <input
+                    className="add-contractor-input"
+                    type="text"
+                    placeholder="שם הסעיף"
+                    value={service.sectionName}
+                    onChange={(e) => handleChange(index, "sectionName", e.target.value)}
+                    required
+                    id={`sectionName-${index}`}
                   />
-                  {errors?.services?.[index]?.sectionName && (
-                    <span className="add-contractor-span">
-                      {errors.services[index].sectionName.message}
-                    </span>
-                  )}
                 </div>
               </div>
+              {/* Add the new input field for "יחידה" (unit) */}
               <div className="contractor-input-holder">
                 <div className="add-contractor-label-wrapper">
                   <label
                     className="add-contractor-input-label"
-                    htmlFor={`services[${index}].price`}
+                    htmlFor={`unit-${index}`}
+                  >
+                    יחידה
+                  </label>
+                  <input
+                    className="add-contractor-input"
+                    type="text"
+                    placeholder="יחידה"
+                    value={service.unit}
+                    onChange={(e) => handleChange(index, "unit", e.target.value)}
+                    required
+                    id={`unit-${index}`}
+                  />
+                </div>
+              </div>
+
+              <div className="contractor-input-holder">
+                <div className="add-contractor-label-wrapper">
+                  <label
+                    className="add-contractor-input-label"
+                    htmlFor={`price-${index}`}
                   >
                     מחיר
                   </label>
-                  <Controller
-                    name={`services[${index}].price`}
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "נדרש מחיר" }}
-                    render={({ field }) => (
-                      <input
-                        className="add-contractor-input"
-                        {...field}
-                        type="text"
-                        placeholder="מחיר"
-                      />
-                    )}
+                  <input
+                    className="add-contractor-input"
+                    type="number"
+                    placeholder="מחיר"
+                    value={service.price}
+                    onChange={(e) => handleChange(index, "price", e.target.value)}
+                    required
+                    id={`price-${index}`}
                   />
-                  {errors?.services?.[index]?.price && (
-                    <span className="add-contractor-span">
-                      {errors.services[index].price.message}
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
-            <button
-              id="deleteContractor-button"
-              type="button"
-              onClick={() => remove(index)}
-            >
-              הסר שירות
-            </button>
+            {index > 0 && (
+              <button
+                id="deleteContractor-button"
+                type="button"
+                onClick={() => removeService(index)}
+              >
+                הסר שירות
+              </button>
+              
+            )}
           </div>
         ))}
-        <button
-          id="addService-button"
-          type="button"
-          onClick={() => append()}
-        >
+        <button id="addService-button" type="button" onClick={addService}>
           הוסף שירות חדש
         </button>
         <button id="createContractor-button" type="submit">
           שמור
         </button>
-        <Link to={"/updateContractor"}>
-          <button id="createContractor-button">הוסף שירות קבלן</button>
-        </Link>
       </form>
     </div>
   );

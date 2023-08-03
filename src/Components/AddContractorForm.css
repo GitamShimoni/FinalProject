@@ -1,15 +1,16 @@
 .add-contractor-holder {
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  width: fit-content;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  animation-name: scale-when-opening-animation;
+  animation-duration: 1s;
 }
-.contractor-name-holder{
+.contractor-name-holder {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +36,7 @@
   border-radius: 10px;
   margin: 30px;
 }
-.add-contracor-form {
+.add-contractor-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,6 +56,7 @@
 .add-contractor-input-container {
   display: flex;
   flex-direction: row-reverse;
+
 }
 
 .add-contractor-input {
@@ -62,6 +64,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: right;
+  direction: rtl;
+
 }
 
 .add-contractor-span {
@@ -117,4 +121,17 @@
 }
 #createContractor-button:hover {
   background-color: rgb(82, 98, 10);
+}
+
+
+@keyframes scale-when-opening-animation{
+  from{
+     opacity: 0%;
+     scale: 0%;
+   }
+
+  to{
+     opacity: 100%;
+     scale: 100%;
+  }
 }

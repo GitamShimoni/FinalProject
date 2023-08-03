@@ -25,10 +25,20 @@
 }
 
 .service-name-table-title{
-  margin-right: 27px;
+  padding-right: 27px;
 }
 
 .contractTable-add-service-btn{
   display: flex;
   justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
 }
+
+.contractTable-delete-contractor-btn-div{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+

@@ -58,7 +58,7 @@
   
   .AddServiceBtn__button:hover .AddServiceBtn__icon {
     width: 148px;
-    transform: translateX(0);
+    transform: translateX(-5px);
   }
   
   .AddServiceBtn__button:active {

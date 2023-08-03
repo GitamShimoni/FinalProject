@@ -24,8 +24,7 @@ function App() {
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/inventory" element={<InventoryTable />} />
             <Route path="/orders" element={<ProductOrdersTable />} />
-
-            <Route path="/constructors" element={<AddContractorForm />} />
+            <Route path="/constructors" element={<ContractorPage />} />
             <Route path="/projects" element={<ProjectPage />} />
             <Route
               path="/updateContractor"
