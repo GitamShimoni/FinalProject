@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ContractorsTable.css";
 import { useContext } from "react";
+import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
-import ContractorsTable from "./ContractorsTable"
+import ContractorsTable from "./ContractorsTable";
+import AddContractorForm from "./AddContractorForm";
+import "./ContractorPage.css";
 
 function ContractorPage() {
-  const [contractorsArr, setContractorsArr] = useState([]);
+  const { contractorsArr, setContractorsArr } = useContext(ProjectContext);
+  const [contractorsArrCopy, setContractorsArrCopy] = useState(contractorsArr); // Initialize with the original array
+  const [isAddContractorClicked, setIsAddContractorClicked] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    // const projectId = "64bfb6686d6efc963d2855f2";
     axios
       .post(
         `${Host}/contractor/getAllContractor`,
@@ -19,15 +24,72 @@ function ContractorPage() {
         }
       )
       .then(({ data }) => {
-        setContractorsArr(data.contractors);        
+        setContractorsArr(data.contractors);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    setContractorsArrCopy(contractorsArr);
+  }, [contractorsArr]);
+
+  function handleSearchValue(searchValue) {
+    setSearchValue(searchValue);
+    setContractorsArrCopy(
+      contractorsArr.filter((item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    );
+  }
+
+  function handleResetSearch() {
+    setSearchValue("");
+    setContractorsArrCopy(contractorsArr);
+  }
+
   return (
-    <div>
-      {contractorsArr?.map((contractor,index)=><ContractorsTable key={index} contractor={contractor}/>)}
+    <div className="contractor-page-container">
+      <div className="ContractorPage-search-div">
+        <input
+          type="text"
+          className="ContractorPage-search-bar"
+          onChange={(e) => handleSearchValue(e.target.value)}
+          value={searchValue}
+          placeholder="חפש קבלן"
+        />
+        <div className="clear-btn" onClick={handleResetSearch}>X</div>
+      </div>
+
+      {contractorsArrCopy?.map((contractor, index) => (
+        <ContractorsTable key={index} contractor={contractor} />
+      ))}
+      <div className="ContractorPage-AddContractorForm-div">
+        {!isAddContractorClicked ? (
+          <div className="ContractorPage-add-remove-contractor">
+            <button
+              className="ContractorPage-add-btn"
+              onClick={() => setIsAddContractorClicked(true)}
+            >
+              הוסף קבלן חדש
+            </button>
+          </div>
+        ) : (
+          <div className="ContractorPage-add-remove-contractor">
+            <button
+              className="ContractorPage-remove-btn"
+              onClick={() => setIsAddContractorClicked(false)}
+            >
+              ביטול
+            </button>
+            <AddContractorForm
+              setIsAddContractorClicked={setIsAddContractorClicked}
+              setContractorsArr={setContractorsArr}
+            />
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default ContractorPage
+export default ContractorPage;
