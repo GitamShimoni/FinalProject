@@ -65,6 +65,7 @@ const IronOrder = ({ order, index }) => {
             handleAddProduct();
             handleClose();
             order.arrivalDate = arrivalDate;
+            order.arrivedQuantity = arrivedQuantity;
           });
       } catch (err) {
         console.log(err);

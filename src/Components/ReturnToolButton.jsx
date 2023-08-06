@@ -5,14 +5,14 @@ import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
 
-
 const ReturnToolButton = ({ toolId, toolName, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
   const [clicked, setClicked] = useState(false);
   const handleReturnTool = async () => {
+    console.log("Got to the function");
     try {
       await axios
-        .put(`${Host}tools/updateTool`, {
+        .put(`${Host}/tools/updateTool`, {
           toolId: toolId,
           toolName: toolName,
         })
