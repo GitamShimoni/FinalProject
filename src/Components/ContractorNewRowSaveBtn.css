@@ -5,9 +5,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid #34974d;
-  background-color: #3aa856;
-  border-radius: 10px;
+  border: 2px solid #34974d;
+  background-color: #ffffff00;
 }
 
 .ContractorNewRowSaveBtn-button,
@@ -19,14 +18,14 @@
 }
 
 .ContractorNewRowSaveBtn-button__text {
-  color: #fff;
+  color: black;
   font-weight: 600;
   width: 100%;
 }
 
 .ContractorNewRowSaveBtn-button__icon {
   position: absolute;
-  right: 0px;
+  right: -1px;
   height: 100%;
   width: 33px;
   background-color: #34974d;

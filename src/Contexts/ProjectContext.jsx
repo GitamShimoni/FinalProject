@@ -4,6 +4,8 @@ export const ProjectProvider = ({ children }) => {
   const [tools, setTools] = useState([]);
   const [orders, setOrders] = useState([]);
   const [productOrders, setProductOrders] = useState([]);
+  const [contractorsArr, setContractorsArr] = useState([]);
+  const [inventoryArr, setInventoryArr] = useState([]);
 
   const [ironOrders, setIronOrders] = useState([]);
 
@@ -22,7 +24,10 @@ export const ProjectProvider = ({ children }) => {
         setProductOrders,
         ordersId,
         setOrdersId,
-        contractorsArr, setContractorsArr
+        contractorsArr,
+        setContractorsArr,
+        inventoryArr,
+        setInventoryArr,
       }}
     >
       {children}
