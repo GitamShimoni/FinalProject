@@ -9,7 +9,6 @@ export const ProjectProvider = ({ children }) => {
   const [ironOrders, setIronOrders] = useState([]);
   const [projectId, setProjectId] = useState("");
   const [ordersId, setOrdersId] = useState("");
-  const [contractorsArr, setContractorsArr] = useState("");
 
   return (
     <ProjectContext.Provider
