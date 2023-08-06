@@ -42,14 +42,16 @@ const Login = () => {
   return (
     <div className="userpage">
       {loading ? (
-        <div className="banter-loader">
-        </div>
+        <div className="banter-loader"></div>
       ) : (
         <div className="login-block">
           <form className="login-form" onSubmit={handleLogin}>
             <div>
-              <label className="login-label" htmlFor="userName">:שם משתמש</label>
-              <input className="login-input"
+              <label className="login-label" htmlFor="userName">
+                :שם משתמש
+              </label>
+              <input
+                className="login-input"
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -57,8 +59,11 @@ const Login = () => {
             </div>
             <br />
             <div>
-              <label htmlFor="password">:סיסמא</label>
-              <input className="login-input"
+              <label className="login-label" htmlFor="password">
+                :סיסמא
+              </label>
+              <input
+                className="login-input"
                 type="password"
                 id="password"
                 value={password}
@@ -66,20 +71,13 @@ const Login = () => {
               />
             </div>
             <button className="login-btn" type="submit">
-              Login
+              התחבר
             </button>
-            <br />
           </form>
         </div>
       )}
     </div>
-    <button className='login-btn' type="submit">התחבר</button>
-    <br />
-  </form>
-    </div>)}
-  </div>
-)
-}
-
+  );
+};
 
 export default Login;
