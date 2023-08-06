@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EndDayForm from "./EndDayForm";
-import EndDayFormButton from "./EndDayFormButton";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 

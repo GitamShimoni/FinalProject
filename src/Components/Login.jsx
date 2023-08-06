@@ -73,7 +73,13 @@ const Login = () => {
         </div>
       )}
     </div>
-  );
-};
+    <button className='login-btn' type="submit">התחבר</button>
+    <br />
+  </form>
+    </div>)}
+  </div>
+)
+}
+
 
 export default Login;

@@ -107,7 +107,7 @@ const EndDayForm = ({contractor}) => {
           />
         </div>
         <button type="submit" className="submit-button">
-          End Day
+          submit
         </button>
       </form>
     </div>
