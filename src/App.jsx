@@ -7,6 +7,7 @@ import ProductOrdersTable from "./Components/ProductOrdersTable";
 import Login from "./Components/Login";
 import ToolsTable from "./Components/ToolsTable";
 import AddContractorForm from "./Components/AddContractorForm";
+import EndDay from "./Components/EndDay";
 import "./App.css";
 import { ProjectProvider } from "./Contexts/ProjectContext";
 import UpdateContractorForm from "./Components/UpdateContractorForm";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/inventory" element={<InventoryTable />} />
             <Route path="/orders" element={<ProductOrdersTable />} />
+            <Route path="/endDay" element={<EndDay />} />
 
             <Route path="/constructors" element={<AddContractorForm />} />
             <Route path="/projects" element={<ProjectPage />} />
