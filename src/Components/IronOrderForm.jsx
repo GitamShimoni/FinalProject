@@ -2,10 +2,15 @@ import React from "react";
 import Host from "../utils/routes";
 import axios from "axios";
 import "./ProductOrderForm.css";
+import { ProjectContext } from "../Contexts/ProjectContext";
+import { useContext, useState } from "react";
+import UploadWidget from "./UploadWidget";
 
 function IronOrderForm() {
+  const { ironOrders, setIronOrders } = useContext(ProjectContext);
+  const [image, setImage] = useState("hi");
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'yyyy-mm-dd' format
-
+  console.log(image, "This is the image uploaded");
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
@@ -17,22 +22,26 @@ function IronOrderForm() {
     const supplier = e.target[5].value;
 
     try {
-      const data = await axios.post(`${Host}/ironOrder/createIronOrder`, {
-        ordersId: "64c6496edd068b2c46962f28",
-        ironName: ironName,
-        unit: unit,
-        dateOfOrder: dateOfOrder,
-        requestedArrivalDate: requestedArrivalDate,
-        requestedQuantity: requestedQuantity,
-        supplier: supplier,
-        status: "pending",
-      });
+      const data = await axios
+        .post(`${Host}/ironOrder/createIronOrder`, {
+          ordersId: "64c6496edd068b2c46962f28",
+          ironName: ironName,
+          unit: unit,
+          dateOfOrder: dateOfOrder,
+          requestedArrivalDate: requestedArrivalDate,
+          requestedQuantity: requestedQuantity,
+          supplier: supplier,
+          status: "pending",
+        })
+        .then(({ data }) => {
+          setIronOrders(data);
+        });
       console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
-
+  console.log(image, "This is the image from that form");
   return (
     <div>
       <div id="ProductOrderForm-form-container">
@@ -81,6 +90,7 @@ function IronOrderForm() {
             className="unit ProductOrderForm-input"
             placeholder="ספק"
           />
+          <UploadWidget image={image} setImage={setImage} />
           <button className="product-order-submit-btn" type="submit">
             הזמן
           </button>

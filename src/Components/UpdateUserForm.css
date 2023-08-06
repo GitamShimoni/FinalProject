@@ -1,0 +1,108 @@
+.update-user-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.update-user-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 300px; /* Adjust the width as needed */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: right;
+}
+.update-user-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.update-user-form-headline{
+  margin-bottom: 25px;
+}
+.update-user-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.update-user-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.update-user-form .update-user-input[type="text"],
+.update-user-form .update-user-input[type="email"],
+.update-user-form .update-user-input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+
+.update-user-form .update-user-input[type="text"]:focus,
+.update-user-form .update-user-input[type="email"]:focus,
+.update-user-form .update-user-input[type="password"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+.update-user-input{
+  margin-top: 8px;
+}
+.update-user-submit-btn {
+  display: inline-block;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  margin: 1rem auto;
+  padding: 0.7rem 2rem;
+  border-radius: 30em;
+  border-style: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: #000000;
+  cursor: pointer;
+  box-shadow: 1px 1px 12px #000000;
+  margin-top: 5px;
+}
+
+.update-user-submit-btn::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  transform: translateX(-101%);
+  transition: all .3s ease;
+  z-index: -1;
+}
+
+.update-user-submit-btn:hover {
+  color: #272727;
+  transition: all .3s ease;
+}
+
+.update-user-submit-btn:hover::before {
+  transform: translateX(0);
+}

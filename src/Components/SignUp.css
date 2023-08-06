@@ -1,4 +1,4 @@
-.userpage {
+.signup-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,27 +6,27 @@
     background-color: #f1f1f1;
   }
 
-.login-block {
+.signup-block {
     width: 350px;
     background-color: #fff;
     padding: 50px;
     border-radius: 30px;
   }
   
-  .login-form .login-label {
+  .signup-form .signup-input-label {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
   }
 
-  .login-form{
+  .signup-form{
     display: flex;
     flex-direction: column;
   }
 
-  .login-form .login-input[type="text"],
-  .login-form .login-input[type="password"] {
+  .signup-form .signup-input[type="text"],
+  .signup-form .signup-input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -34,13 +34,13 @@
     margin-bottom: 15px;
   }
   
-  .login-form .login-input[type="text"]:focus,
-  .login-form .login-input[type="password"]:focus {
+  .signup-form .signup-input[type="text"]:focus,
+  .signup-form .signup-input[type="password"]:focus {
     outline: none;
     border-color: #007bff;
   }
  
-  .login-btn {
+  .signup-buttons {
     display: inline-block;
     font-family: sans-serif;
     font-weight: 600;
@@ -62,7 +62,7 @@
     margin-top: 35px;
   }
   
-  .login-btn::before {
+  .signup-buttons::before {
     content: "";
     width: 100%;
     height: 100%;
@@ -75,12 +75,12 @@
     z-index: -1;
   }
   
-  .login-btn:hover {
+  .signup-buttons:hover {
     color: #272727;
     transition: all .3s ease;
   }
   
-  .login-btn:hover::before {
+  .signup-buttons:hover::before {
     transform: translateX(0);
   }
 .banter-loader {

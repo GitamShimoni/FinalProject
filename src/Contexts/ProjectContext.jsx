@@ -6,14 +6,16 @@ export const ProjectProvider = ({ children }) => {
   const [productOrders, setProductOrders] = useState([]);
   const [contractorsArr, setContractorsArr] = useState([]);
   const [inventoryArr, setInventoryArr] = useState([]);
-
   const [ironOrders, setIronOrders] = useState([]);
-
   const [projectId, setProjectId] = useState("");
   const [ordersId, setOrdersId] = useState("");
+  const [contractorsArr, setContractorsArr] = useState("");
+
   return (
     <ProjectContext.Provider
       value={{
+        projectId,
+        setProjectId,
         tools,
         setTools,
         orders,
@@ -28,6 +30,7 @@ export const ProjectProvider = ({ children }) => {
         setContractorsArr,
         inventoryArr,
         setInventoryArr,
+
       }}
     >
       {children}
