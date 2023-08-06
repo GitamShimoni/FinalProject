@@ -39,7 +39,7 @@ const IronOrdersTable = () => {
         </div>
         <div className="project-ironOrders-toprow-tr">
           <h3>{`כמות מוזמנת`}</h3>
-          <h3>{`כמות שהגיע`}</h3>
+          <h3>{`כמות שהגיעה`}</h3>
         </div>
         <div
           className="project-ironOrders-toprow-tr"
