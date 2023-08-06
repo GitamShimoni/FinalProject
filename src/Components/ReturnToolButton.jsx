@@ -12,7 +12,7 @@ const ReturnToolButton = ({ toolId, toolName, index }) => {
   const handleReturnTool = async () => {
     try {
       await axios
-        .put(`${Host}tools/updateTool`, {
+        .put(`${Host}/tools/updateTool`, {
           toolId: toolId,
           toolName: toolName,
         })

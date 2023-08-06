@@ -48,8 +48,8 @@ const Login = () => {
         <div className="login-block">
           <form className="login-form" onSubmit={handleLogin}>
             <div>
-              <label htmlFor="userName">:שם משתמש</label>
-              <input
+              <label className="login-label" htmlFor="userName">:שם משתמש</label>
+              <input className="login-input"
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -58,7 +58,7 @@ const Login = () => {
             <br />
             <div>
               <label htmlFor="password">:סיסמא</label>
-              <input
+              <input className="login-input"
                 type="password"
                 id="password"
                 value={password}

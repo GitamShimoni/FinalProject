@@ -4,14 +4,16 @@ export const ProjectProvider = ({ children }) => {
   const [tools, setTools] = useState([]);
   const [orders, setOrders] = useState([]);
   const [productOrders, setProductOrders] = useState([]);
-
   const [ironOrders, setIronOrders] = useState([]);
-
   const [projectId, setProjectId] = useState("");
   const [ordersId, setOrdersId] = useState("");
+  const [contractorsArr, setContractorsArr] = useState("");
+
   return (
     <ProjectContext.Provider
       value={{
+        projectId,
+        setProjectId,
         tools,
         setTools,
         orders,

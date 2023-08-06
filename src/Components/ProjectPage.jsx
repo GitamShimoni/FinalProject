@@ -9,7 +9,8 @@ const ProjectPage = () => {
   const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [token, setToken] = useState(""); // Add state for token
+  const [token, setToken] = useState(""); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   function formatDate(dateString) {
@@ -40,9 +41,8 @@ const ProjectPage = () => {
 
     const fetchToken = async () => {
       try {
-        // You can fetch the token from your preferred source (e.g., local storage, cookies, etc.)
-        const token = await getTheTokenFromSomeSource();
-        setToken(token);
+        const token = localStorage.getItem("token");
+        console.log( token);;
       } catch (error) {
         console.error("Error fetching token:", error);
       }
@@ -50,7 +50,7 @@ const ProjectPage = () => {
 
     getAllProjects();
     getAllUsers();
-    fetchToken(); // Fetch and set the token when the component mounts
+    fetchToken;
   }, []);
 
   const getStatus = (finishDate) => {
@@ -65,6 +65,7 @@ const ProjectPage = () => {
 
   const handleUserClick = (userId) => {
     setSelectedUserId(userId);
+    setIsModalOpen(true);
   };
 
   return (
@@ -101,19 +102,15 @@ const ProjectPage = () => {
               <h2 className="user-name">{user.fullName}</h2>
             </div>
             <div className="user-info">
-              <p className="user-info">
-                <Link to={`/updateUser`}>
-                  <button>ערוך משתמש</button>
-                </Link>
-              </p>
-              <p className="user-info"></p>
+                <h5 className="user-phone">{user.phoneNumber}</h5>
+                <h5 className="user-email">{user.email}</h5>
             </div>
           </div>
         ))}
       </div>
-      {selectedUserId && (
-        <div className="update-user-container">
-          <UpdateUserForm token={token} userId={selectedUserId} />
+      {selectedUserId && isModalOpen && (
+        <div className="update-user-model">
+          <UpdateUserForm token={token} userId={selectedUserId} onClose={() => setIsModalOpen(false)} />
         </div>
       )}
     </div>
