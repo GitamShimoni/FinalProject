@@ -1,99 +1,115 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Host from "../utils/routes";
 
 const SignUp = () => {
-
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const navigate = useNavigate()
-
-  const handleSubmit = (e) => {
+    
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password.length < 8) {
-      alert('Password should be at least 8 characters long');
-      return;
+    try {
+        console.log(userName, password, fullName, phoneNumber, email);
+      const response = await axios.post(`${Host}/users/signup`, {
+        userName: userName,
+        password: password,
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        email: email,
+      });
+
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userId", response.data._id);
+
+      setUserName("");
+      setPassword("");
+      setFullName("");
+      setPhoneNumber("");
+      setEmail("");
+
+      alert("Signup successful!");
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration failed:", error.message);
+      alert("Registration failed. Please try again.");
     }
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      alert(
-        'Password should contain at least one uppercase letter and one number'
-      );
-      return;
-    }
-
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('password', password);
-    localStorage.setItem('fullName', fullName);
-    localStorage.setItem('phoneNumber',phoneNumber);
-    localStorage.setItem('email', email);
-
-    setName('');
-    setPassword('');
-
-    alert('Signup successful!');
-
-    navigate('/projects')
   };
-
+  console.log(userName);
+  console.log(password);
   return (
     <form onSubmit={handleSubmit}>
-      <h2 id='signup-header'>Sign-Up</h2>
-      <div className='sign-inputs'>
-        <label className='input-label'>
-          First Name: <br />
-          <input className='input'
+      <h2 id="signup-header">Sign-Up</h2>
+      <div className="sign-inputs">
+        <label className="input-label">
+          User Name: <br />
+          <input
+            className="input"
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
       </div>
-      <div className='sign-inputs'>
-        <label className='input-label'>
+      <div className="sign-inputs">
+        <label className="input-label">
           Password: <br />
-          <input className='input'
+          <input
+            className="input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
       </div>
-      <div className='sign-inputs'>
-        <label className='input-label'>
-          Password: <br />
-          <input className='input'
+      <div className="sign-inputs">
+        <label className="input-label">
+          Full Name: <br />
+          <input
+            className="input"
             type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
         </label>
       </div>
-      <div className='sign-inputs'>
-        <label className='input-label'>
-          Password: <br />
-          <input className='input'
+      <div className="sign-inputs">
+        <label className="input-label">
+          Phone Number: <br />
+          <input
+            className="input"
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </label>
       </div>
-      <div className='sign-inputs'>
-        <label className='input-label'>
-          Password: <br />
-          <input className='input'
+      <div className="sign-inputs">
+        <label className="input-label">
+          Email: <br />
+          <input
+            className="input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
       </div>
-      <button type="submit" className='login-buttons'>Sign Up</button>
+      <button type="submit" className="login-buttons">
+        Sign Up
+      </button>
+      <div>
+        נרשמת? <Link to={"/login"}>
+            לחץ כאן
+        </Link>
+      </div>
     </form>
   );
 };

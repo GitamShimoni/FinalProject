@@ -14,19 +14,25 @@ import UpdateContractorForm from "./Components/UpdateContractorForm";
 import ProjectPage from "./Components/ProjectPage";
 import ContractorPage from "./Components/ContractorPage";
 
+import OrdersPage from "./Components/OrdersPage";
+
+import SignUp from "./Components/SignUp";
+import UpdateUserForm from "./Components/UpdateUserForm";
+
+
 // import { UserProvider } from "./Contexts/UserContext";
 function App() {
   return (
     <ProjectProvider>
       <div className="appmain-container">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" index element={<SignUp />} />
+          <Route path="/" element={<Layout />}> 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/inventory" element={<InventoryTable />} />
-            <Route path="/orders" element={<ProductOrdersTable />} />
             <Route path="/endDay" element={<EndDay />} />
-
+            <Route path="/orders" element={<OrdersPage />} />
             <Route path="/constructors" element={<AddContractorForm />} />
             <Route path="/projects" element={<ProjectPage />} />
             <Route
@@ -37,6 +43,7 @@ function App() {
             <Route path="/endoftheday" element={<Layout />} />
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/updateUser" element={<UpdateUserForm />} />
         </Routes>
       </div>
     </ProjectProvider>

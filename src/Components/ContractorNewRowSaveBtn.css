@@ -1,0 +1,62 @@
+.ContractorNewRowSaveBtn-button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+  border-radius: 10px;
+}
+
+.ContractorNewRowSaveBtn-button,
+.ContractorNewRowSaveBtn-button__icon,
+.ContractorNewRowSaveBtn-button__text {
+  transition: all 0.3s;
+  border-radius: 10px;
+
+}
+
+.ContractorNewRowSaveBtn-button__text {
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+}
+
+.ContractorNewRowSaveBtn-button__icon {
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  width: 33px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ContractorNewRowSaveBtn-svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.ContractorNewRowSaveBtn-button:hover {
+  background: #34974d;
+}
+
+.ContractorNewRowSaveBtn-button:hover .ContractorNewRowSaveBtn-button__text {
+  color: transparent;
+}
+
+.ContractorNewRowSaveBtn-button:hover .ContractorNewRowSaveBtn-button__icon {
+  width: 148px;
+  right: 0; /* Adjusted right positioning on hover */
+}
+
+.ContractorNewRowSaveBtn-button:active .ContractorNewRowSaveBtn-button__icon {
+  background-color: #2e8644;
+}
+
+.ContractorNewRowSaveBtn-button:active {
+  border: 1px solid #2e8644;
+}

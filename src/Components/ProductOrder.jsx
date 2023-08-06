@@ -3,12 +3,36 @@ import "./ProductOrder.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+
 import Host from "../utils/routes";
+
 const ProductOrder = ({ order, index }) => {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
+  const inventoryId = "64bfb6686d6efc963d2855ec";
 
+  console.log(order, "This is the order");
+  const handleAddProduct = async () => {
+    try {
+      await axios
+        .post(`${Host}/product/create`, {
+          inventoryId: inventoryId,
+          name: order.productName,
+          unit: order.unit,
+          quantity: order.quantity,
+          minQuantity: 0,
+          isIron: false,
+          orderId: order._id,
+        })
+        .then(({ data }) => {
+          //   setOrderStatus(changeStatus);
+          console.log("Success!", data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleUpdateOrderStatus = async () => {
     if (changeStatus == "arrived") {
@@ -23,6 +47,7 @@ const ProductOrder = ({ order, index }) => {
             })
             .then(({ data }) => {
               setOrderStatus(changeStatus);
+              handleAddProduct();
             });
         } catch (err) {
           console.log(err);
@@ -47,6 +72,8 @@ const ProductOrder = ({ order, index }) => {
   useEffect(() => {
     setOrderStatus(order?.status);
   }, [order]);
+  console.log(order, "dasdsadsa");
+
   return (
     <div className="project-productorder-table-row">
       <div
@@ -54,7 +81,9 @@ const ProductOrder = ({ order, index }) => {
           index % 2 == 0 ? "productorder-tr-zugi" : "productorder-tr-notzugi"
         }
       >
-        <div className="productorder-table-leftpart">{`צריך להזין ספק`}</div>
+        <div className="productorder-table-leftpart">
+          {order?.supplier ? `${order?.supplier}` : `צריך להזין ספק`}
+        </div>
 
         <div className="productorder-table-part">
           {orderStatus != "arrived" && (

@@ -19,7 +19,7 @@ const ProductOrdersTable = () => {
       })
       .then(({ data }) => setOrders([data]))
       .catch((err) => console.log(err));
-    console.log(orders);
+    console.log(orders, "Thats a fetch for the orders");
   }, []);
   useEffect(() => {
     setProductOrders(orders[0]?.productOrders);
