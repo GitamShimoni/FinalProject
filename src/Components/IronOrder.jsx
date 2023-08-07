@@ -26,17 +26,16 @@ const IronOrder = ({ order, index }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const inventoryId = "64bfb6686d6efc963d2855ec";
 
   const handleAddProduct = async () => {
     try {
       await axios
         .post(`${Host}/product/create`, {
-          inventoryId: inventoryId,
-          name: order.productName,
+          inventoryId: localStorage.getItem("inventoryId"),
+          name: order.ironName,
           unit: order.unit,
-          quantity: order.quantity,
-          minQuantity: 0,
+          quantity: order.requestedQuantity,
+          minQuantity: order.minQuantity,
           isIron: true,
           orderId: order._id,
         })
@@ -48,6 +47,7 @@ const IronOrder = ({ order, index }) => {
       console.log(err);
     }
   };
+  console.log(order, "djsakldjsalkdjaslkdsajdlkdsajlk");
 
   const handleUpdateOrderStatus = async () => {
     if (changeStatus == "arrived") {

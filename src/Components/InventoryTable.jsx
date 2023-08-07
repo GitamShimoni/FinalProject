@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
 import { ProjectContext } from "../Contexts/ProjectContext";
-import "./InventoryTable.css"
+import "./InventoryTable.css";
 import InventoryTableRow from "./InventoryTableRow";
+
 
 const InventoryTable = ({inventoryArr}) => {
  
@@ -33,6 +34,7 @@ const InventoryTable = ({inventoryArr}) => {
           );
         })}
       </div>
+
   );
 };
 

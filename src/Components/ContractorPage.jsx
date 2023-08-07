@@ -20,7 +20,7 @@ function ContractorPage() {
         `${Host}/contractor/getAllContractor`,
         {},
         {
-          headers: { projectId: "64bfb6686d6efc963d2855f2" },
+          headers: { projectId: localStorage.getItem("selectedProjectId") },
         }
       )
       .then(({ data }) => {
@@ -57,7 +57,9 @@ function ContractorPage() {
           value={searchValue}
           placeholder="חפש קבלן"
         />
-        <div className="clear-btn" onClick={handleResetSearch}>X</div>
+        <div className="clear-btn" onClick={handleResetSearch}>
+          X
+        </div>
       </div>
 
       {contractorsArrCopy?.map((contractor, index) => (

@@ -6,14 +6,19 @@ import "./AddContractorForm.css";
 import { Link } from "react-router-dom";
 import UpdateContractorForm from "./UpdateContractorForm";
 
-const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => {
+const AddContractorForm = ({
+  setIsAddContractorClicked,
+  setContractorsArr,
+}) => {
   const [services, setServices] = useState([
     { section: "", sectionName: "", unit: "", price: "" },
   ]);
 
-
   const addService = () => {
-    setServices([...services, { section: "", sectionName: "", unit: "", price: "" }]);
+    setServices([
+      ...services,
+      { section: "", sectionName: "", unit: "", price: "" },
+    ]);
   };
 
   const removeService = (index) => {
@@ -30,7 +35,7 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const projectId = "64bfb6686d6efc963d2855f2";
+    const projectId = localStorage.getItem("selectedProjectId");
     try {
       const response = await axios.post(
         `${Host}/contractor/create`,
@@ -41,14 +46,17 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
           },
         }
       );
-  
+
       // Add the contractorId to each service in the services array
       const contractorId = response.data._id;
-      const updatedServices = services.map((service) => ({ ...service, contractorId }));
-  
+      const updatedServices = services.map((service) => ({
+        ...service,
+        contractorId,
+      }));
+
       // Update the state with the updated services array
       setServices(updatedServices);
-  
+
       setContractorsArr((prev) => [...prev, response.data]);
       setIsAddContractorClicked(false);
       console.log(response.data);
@@ -57,7 +65,6 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
       console.log("Error response data:", error.response?.data);
     }
   };
-  
 
   return (
     <div className="add-contractor-holder">
@@ -95,7 +102,9 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
                     type="number"
                     placeholder="מספר סעיף"
                     value={service.section}
-                    onChange={(e) => handleChange(index, "section", e.target.value)}
+                    onChange={(e) =>
+                      handleChange(index, "section", e.target.value)
+                    }
                     required
                     id={`section-${index}`}
                   />
@@ -114,7 +123,9 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
                     type="text"
                     placeholder="שם הסעיף"
                     value={service.sectionName}
-                    onChange={(e) => handleChange(index, "sectionName", e.target.value)}
+                    onChange={(e) =>
+                      handleChange(index, "sectionName", e.target.value)
+                    }
                     required
                     id={`sectionName-${index}`}
                   />
@@ -134,7 +145,9 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
                     type="text"
                     placeholder="יחידה"
                     value={service.unit}
-                    onChange={(e) => handleChange(index, "unit", e.target.value)}
+                    onChange={(e) =>
+                      handleChange(index, "unit", e.target.value)
+                    }
                     required
                     id={`unit-${index}`}
                   />
@@ -154,7 +167,9 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
                     type="number"
                     placeholder="מחיר"
                     value={service.price}
-                    onChange={(e) => handleChange(index, "price", e.target.value)}
+                    onChange={(e) =>
+                      handleChange(index, "price", e.target.value)
+                    }
                     required
                     id={`price-${index}`}
                   />
@@ -169,7 +184,6 @@ const AddContractorForm = ({ setIsAddContractorClicked, setContractorsArr }) => 
               >
                 הסר שירות
               </button>
-              
             )}
           </div>
         ))}
