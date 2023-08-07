@@ -4,11 +4,15 @@ import Host from "../utils/routes";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function InventoryPage() {
   const { setInventoryArr } = useContext(ProjectContext);
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const inventoryId = "64bfb6686d6efc963d2855ec";
@@ -43,15 +47,21 @@ function InventoryPage() {
       <InventoryTable inventoryArr={ironsArr} />
       <h1>מתכלים</h1>
       <InventoryTable inventoryArr={productsArr} />
-
       <h1>:צריך להזמין</h1>
-      {needToOrderArr.length>0 ? (
-        <div>
+      {needToOrderArr.length > 0 ? (
+        <div className="inventoryPage-need-to-order">
           <InventoryTable inventoryArr={needToOrderArr} />
-          <Link to={"/orders"}>לביצוע הזמנה עבור להזמנות</Link>
+          <div
+            className="inventoryPage-order-btn"
+            onClick={() => navigate("/orders")}
+          >
+            <h3>לביצוע הזמנה עבור להזמנות</h3>
+          </div>
         </div>
       ) : (
-        <div><h1>כרגע אין חומרים שדרוש להזמין </h1></div>
+        <div>
+          <h1>כרגע אין חומרים שדרוש להזמין </h1>
+        </div>
       )}
     </div>
   );

@@ -6,7 +6,6 @@ import "./InventoryTable.css"
 import InventoryTableRow from "./InventoryTableRow";
 
 const InventoryTable = ({inventoryArr}) => {
-  const [products, setProducts] = useState([]);
  
 
   return (
@@ -19,18 +18,10 @@ const InventoryTable = ({inventoryArr}) => {
           <div className="contractor-row-info-div">
             <h3>כמות</h3>
           </div>
-          <div className="contractor-row-info-div service-name-table-title">
+          <div className="contractor-row-info-div">
             <h3>כמות מינימלית</h3>
           </div>
         </div>
-        {/* {inventoryArr.map((product, index) => (
-        <div key={index} className="product-row">
-          <div className="product-info">{product.name}</div>
-          <div className="product-info">{product.unit}</div>
-          <div className="product-info">{product.quantity}</div>
-          <div className="product-info">{product.minQuantity}</div>
-        </div>
-      ))} */}
         {inventoryArr?.map((product, index) => {
           return (
             <span key={index}>

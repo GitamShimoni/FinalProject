@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  flex: 1; /* Allow the table row to take the available width equally */
+  width: 100%;
 }
 .ironorder-tr-notzugi {
   background: radial-gradient(
@@ -31,25 +31,24 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  flex: 1; /* Allow the table row to take the available width equally */
+  width: 100%;
 }
 
 .ironorder-table-part,
 .ironorder-table-toolpart {
-  flex: 1; /* Allow the table cells to take the available width equally */
   border-left: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px; /* Add some padding for better appearance */
-  width: 15%;
+  width: 17%;
+  flex-wrap: wrap;
+  flex-direction: column;
+
 }
 .ironorder-table-leftpart {
-  flex: 1; /* Allow the table cells to take the available width equally */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px; /* Add some padding for better appearance */
 }
 
 /* Additional style for the button */
@@ -78,31 +77,30 @@
   color: rgb(104, 163, 15);
   padding: 10px;
 }
-.ironorder-dates-headers {
-  font-size: 1.4vw;
-}
+
 .ironorder-dates-headerstop {
-  font-size: 1.4vw;
   color: red;
-  margin-bottom: 5px;
 }
 .ironorder-table-datespart {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Allow the table cells to take the available width equally */
   border-left: 1px solid black;
-  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px; /* Add some padding for better appearance */
-  width: 15%;
+  width: 30%;
+}
+
+.ironorder-table-date-info {
+  justify-content: space-around;
+  padding: 5px;
+  font-size: 1.1vw;
+
 }
 .ironorder-table-select {
   position: relative;
   display: flex;
   border-radius: 0.25em;
   overflow: hidden;
-  width: 100px;
   text-align: center;
   height: 30px;
   background-color: rgba(144, 144, 144, 0);
@@ -120,7 +118,6 @@
   color: black;
   cursor: pointer;
   border-radius: 15px;
-  margin-right: 15px;
   transition: 0.4s;
 }
 .ironorder-table-option-button:hover {
@@ -165,4 +162,15 @@
 }
 .open-dialog-button:hover {
   background-color: rgb(62, 110, 214);
+}
+
+.ironorder-quantity-div {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.ironorder-table-space-around{
+  justify-content: space-around;
 }
