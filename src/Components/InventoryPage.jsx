@@ -5,17 +5,16 @@ import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
 function InventoryPage() {
-  const { setInventoryArr } = useContext(ProjectContext);
+  const { setInventoryArr, inventoryId } = useContext(ProjectContext);
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
 
   useEffect(() => {
-    const inventoryId = "64bfb6686d6efc963d2855ec";
     const fetchProducts = async () => {
       try {
         const response = await axios.post(`${Host}/product/getAll`, {
-          inventoryId,
+          inventoryId: localStorage.getItem("inventoryId"),
         });
         console.log(response.data);
         setInventoryArr(response.data);
@@ -34,9 +33,13 @@ function InventoryPage() {
       }
     };
 
-    fetchProducts();
-  }, [setInventoryArr]);
+    if (inventoryId) {
+      console.log(inventoryId);
+      fetchProducts();
+    }
+  }, [setInventoryArr, inventoryId]);
 
+  console.log(inventoryId);
   return (
     <div className="inventory-page-container">
       <h1>ברזל</h1>
@@ -45,13 +48,14 @@ function InventoryPage() {
       <InventoryTable inventoryArr={productsArr} />
 
       <h1>:צריך להזמין</h1>
-      {needToOrderArr.length>0 ? (
+      {needToOrderArr.length > 0 ? (
         <div>
           <InventoryTable inventoryArr={needToOrderArr} />
-          <Link to={"/orders"}>לביצוע הזמנה עבור להזמנות</Link>
         </div>
       ) : (
-        <div><h1>כרגע אין חומרים שדרוש להזמין </h1></div>
+        <div>
+          <h1>כרגע אין חומרים שדרוש להזמין </h1>
+        </div>
       )}
     </div>
   );
