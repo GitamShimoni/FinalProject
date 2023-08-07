@@ -9,10 +9,9 @@ const ToolsTable = () => {
   const { tools, setTools } = useContext(ProjectContext);
   // const [tools, setTools] = useState([]);
   useEffect(() => {
-    const inventoryId = "64bfb6686d6efc963d2855ec";
     axios
       .post(`${Host}/tools/getAllTools`, {
-        inventoryId,
+        inventoryId: localStorage.getItem("inventoryId"),
       })
       .then(({ data }) => setTools(data))
       .catch((err) => console.log(err));

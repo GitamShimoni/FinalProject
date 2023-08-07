@@ -20,6 +20,7 @@ function IronOrderForm() {
     const requestedQuantity = e.target[3].value;
     const unit = e.target[4].value;
     const supplier = e.target[5].value;
+    const minQuantity = e.target[6].value;
 
     try {
       const data = await axios
@@ -32,6 +33,7 @@ function IronOrderForm() {
           requestedQuantity: requestedQuantity,
           supplier: supplier,
           status: "pending",
+          minQuantity: minQuantity,
         })
         .then(({ data }) => {
           setIronOrders(data);
@@ -89,6 +91,13 @@ function IronOrderForm() {
             type="text"
             className="unit ProductOrderForm-input"
             placeholder="ספק"
+          />
+          <h2 className="ProductOrderForm-form-title">:כמות מינימאלית</h2>
+          <input
+            required
+            type="number"
+            className="unit ProductOrderForm-input"
+            placeholder="כמות מינימאלית"
           />
           <UploadWidget image={image} setImage={setImage} />
           <button className="product-order-submit-btn" type="submit">

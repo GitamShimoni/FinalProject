@@ -19,6 +19,7 @@ function ProductOrderForm() {
     const quantity = e.target[2].value;
     const unit = e.target[3].value;
     const supplier = e.target[4].value;
+    const minQuantity = e.target[5].value;
 
     try {
       await axios
@@ -31,6 +32,7 @@ function ProductOrderForm() {
           quantity: quantity,
           supplier: supplier,
           status: "pending",
+          minQuantity: minQuantity,
         })
         .then(({ data }) => {
           setProductOrders(data);
@@ -78,6 +80,13 @@ function ProductOrderForm() {
             type="text"
             className="unit ProductOrderForm-input"
             placeholder="ספק"
+          />
+          <h2 className="ProductOrderForm-form-title">:כמות מינימאלית</h2>
+          <input
+            required
+            type="number"
+            className="unit ProductOrderForm-input"
+            placeholder="כמות מינימאלית"
           />
           <button className="product-order-submit-btn" type="submit">
             הזמן
