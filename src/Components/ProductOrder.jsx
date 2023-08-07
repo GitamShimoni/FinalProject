@@ -10,18 +10,17 @@ const ProductOrder = ({ order, index }) => {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
-  const inventoryId = "64bfb6686d6efc963d2855ec";
 
   console.log(order, "This is the order");
   const handleAddProduct = async () => {
     try {
       await axios
         .post(`${Host}/product/create`, {
-          inventoryId: inventoryId,
+          inventoryId: localStorage.getItem("inventoryId"),
           name: order.productName,
           unit: order.unit,
           quantity: order.quantity,
-          minQuantity: 0,
+          minQuantity: minQuantity,
           isIron: false,
           orderId: order._id,
         })

@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
 import { Link, useNavigate } from "react-router-dom";
-import UpdateUserForm from "./UpdateUserForm"; // Import the UpdateUserForm component
+import UpdateUserForm from "./UpdateUserForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./ProjectPage.css";
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [token, setToken] = useState(""); 
+  const [token, setToken] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ const ProjectPage = () => {
     const fetchToken = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log( token);;
+        console.log(token);
       } catch (error) {
         console.error("Error fetching token:", error);
       }
@@ -70,6 +72,18 @@ const ProjectPage = () => {
 
   return (
     <div id="project-holder">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <h1 className="projectPage-headline">פרוייקטים</h1>
       <div className="project-container">
         {projects.map((project) => (
@@ -102,15 +116,19 @@ const ProjectPage = () => {
               <h2 className="user-name">{user.fullName}</h2>
             </div>
             <div className="user-info">
-                <h5 className="user-phone">{user.phoneNumber}</h5>
-                <h5 className="user-email">{user.email}</h5>
+              <h5 className="user-phone">{user.phoneNumber}</h5>
+              <h5 className="user-email">{user.email}</h5>
             </div>
           </div>
         ))}
       </div>
       {selectedUserId && isModalOpen && (
         <div className="update-user-model">
-          <UpdateUserForm token={token} userId={selectedUserId} onClose={() => setIsModalOpen(false)} />
+          <UpdateUserForm
+            token={token}
+            userId={selectedUserId}
+            onClose={() => setIsModalOpen(false)}
+          />
         </div>
       )}
     </div>

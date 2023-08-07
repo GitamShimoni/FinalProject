@@ -8,28 +8,54 @@ import ContractorNewRow from "./ContractorNewRow";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import DeleteContractorBtn from "./DeleteContractorBtn";
+import { ToastContainer, toast } from "react-toastify";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import Slide from "@mui/material/Slide";
 
 function ContractorsTable({ contractor }) {
   const { contractorsArr, setContractorsArr } = useContext(ProjectContext);
   const [servicesArr, setServicesArr] = useState([]);
   const [addNewService, setAddNewService] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   async function handleDeleteContractor() {
-    if (
-      confirm(
-        `האם אתה בטוח שאתה רוצה למחוק את ${contractor.name} מרשימת הקבלנים? לא תהיה דרך לשחזר`
-      )
-    ) {
-      await axios
-        .post(`${Host}/contractor/delete`, {
-          contractorId: contractor._id,
+    setOpenDialog(false);
+    {
+      await axios.post(`${Host}/contractor/delete`, {
+        contractorId: contractor._id,
+      });
+      toast.success("קבלן נמחק", {
+        position: "top-center",
+        autoClose: 1200,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      then(({ data }) => {
+        let newArr = [...contractorsArr];
+        newArr = newArr.filter((item) => item._id != contractor._id);
+        setContractorsArr(newArr);
+      }).catch(
+        (err) => console.log(err),
+        toast.error("לא ניתן למחוק את הקבלן ", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
         })
-        .then(({ data }) => {
-          let newArr = [...contractorsArr];
-          newArr = newArr.filter((item) => item._id != contractor._id);
-          setContractorsArr(newArr);
-        })
-        .catch((err) => console.log(err));
+      );
     }
   }
 
@@ -46,6 +72,30 @@ function ContractorsTable({ contractor }) {
 
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="project-table">
         <div className="contractor-table-name">
           <h2>{contractor?.name}</h2>
@@ -87,7 +137,7 @@ function ContractorsTable({ contractor }) {
         )}
       </div>
       <div className="contractTable-delete-contractor-btn-div">
-        <DeleteContractorBtn handleDeleteContractor={handleDeleteContractor} />
+      <DeleteContractorBtn handleDeleteContractor={handleDeleteContractor} />
       </div>
     </div>
   );

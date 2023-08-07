@@ -8,7 +8,6 @@ import IronOrderForm from "./IronOrderForm";
 const OrdersPage = () => {
   return (
     <div id="orders-page-container">
-      This is the Orders Page
       <ProductOrdersTable />
       <ProductOrderForm />
       <IronOrdersTable />

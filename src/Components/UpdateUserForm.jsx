@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
-import "./UpdateUserForm.css"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./UpdateUserForm.css";
 
 const UpdateUserForm = ({ token, onClose }) => {
   const [userName, setUserName] = useState("");
@@ -18,15 +20,33 @@ const UpdateUserForm = ({ token, onClose }) => {
         token: localStorage.getItem("token"),
         userName: userName || undefined,
         phone: phone || undefined,
-        password: password || undefined, 
-        email: email || undefined, 
+        password: password || undefined,
+        email: email || undefined,
       });
 
       if (response.status === 200) {
-        setMessage("User updated successfully.");
-      }
+        toast.success("המשתמש עודכן בהצלחה!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } onClose();
     } catch (error) {
-      setMessage("An error occurred while updating the user.");
+      toast.error("אי אפשר לשמור את המשתמש", {
+        position: "top-center",
+        autoClose: 1200,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
   const handleClose = () => {
@@ -35,15 +55,28 @@ const UpdateUserForm = ({ token, onClose }) => {
 
   return (
     <div className="update-user-modal">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="update-user-modal-content">
         <span className="update-user-modal-close-button" onClick={handleClose}>
-            &times;
+          &times;
         </span>
         <h2 className="update-user-form-headline">עדכון משתמש</h2>
         <form className="update-user-form" onSubmit={handleSubmit}>
           <label className="update-user-label">
-             :שם משתמש
-            <input className="update-user-input"
+            :שם משתמש
+            <input
+              className="update-user-input"
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
@@ -51,8 +84,9 @@ const UpdateUserForm = ({ token, onClose }) => {
           </label>
           <br />
           <label className="update-user-label">
-             :מספר פלאפון
-            <input className="update-user-input"
+            :מספר פלאפון
+            <input
+              className="update-user-input"
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -60,8 +94,9 @@ const UpdateUserForm = ({ token, onClose }) => {
           </label>
           <br />
           <label className="update-user-label">
-             :סיסמא
-            <input className="update-user-input"
+            :סיסמא
+            <input
+              className="update-user-input"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -70,14 +105,21 @@ const UpdateUserForm = ({ token, onClose }) => {
           <br />
           <label className="update-user-label">
             :אימייל
-            <input className="update-user-input"
+            <input
+              className="update-user-input"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
           <br />
-          <button className="update-user-submit-btn" type="submit">שמור</button>
+          <button
+            className="update-user-submit-btn"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            שמור
+          </button>
         </form>
         {message && <p>{message}</p>}
       </div>

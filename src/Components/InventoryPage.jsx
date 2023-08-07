@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
+import { Link } from 'react-router-dom'
 import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
 function InventoryPage() {
-  const { setInventoryArr } = useContext(ProjectContext);
+  const { setInventoryArr, inventoryId } = useContext(ProjectContext);
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const inventoryId = "64bfb6686d6efc963d2855ec";
     const fetchProducts = async () => {
       try {
         const response = await axios.post(`${Host}/product/getAll`, {
-          inventoryId,
+          inventoryId: localStorage.getItem("inventoryId"),
         });
         console.log(response.data);
         setInventoryArr(response.data);
@@ -38,9 +39,13 @@ function InventoryPage() {
       }
     };
 
-    fetchProducts();
-  }, [setInventoryArr]);
+    if (inventoryId) {
+      console.log(inventoryId);
+      fetchProducts();
+    }
+  }, [setInventoryArr, inventoryId]);
 
+  console.log(inventoryId);
   return (
     <div className="inventory-page-container">
       <h1>ברזל</h1>
@@ -49,6 +54,7 @@ function InventoryPage() {
       <InventoryTable inventoryArr={productsArr} />
       <h1>:צריך להזמין</h1>
       {needToOrderArr.length > 0 ? (
+
         <div className="inventoryPage-need-to-order">
           <InventoryTable inventoryArr={needToOrderArr} />
           <div
@@ -57,6 +63,7 @@ function InventoryPage() {
           >
             <h3>לביצוע הזמנה עבור להזמנות</h3>
           </div>
+
         </div>
       ) : (
         <div>
