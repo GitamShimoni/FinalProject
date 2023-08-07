@@ -6,12 +6,19 @@ import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
 import { ToastContainer, toast } from "react-toastify";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import "./Dialog.css";
 
 const Tool = ({ tool, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
   const [loanButton, setLoanButton] = useState(false);
   const [signedButton, setSignedButton] = useState(false);
   const [signedName, setSignedName] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
 
   function formatDate(dateString) {
     const dateObj = new Date(dateString);
@@ -64,7 +71,8 @@ const Tool = ({ tool, index }) => {
   };
 
   const handleDeleteTool = async () => {
-    if (confirm("האם אתה בטוח רוצה למחוק? אין דרך לשחזר.")) {
+    setOpenDialog(false);
+    {
       console.log(tool._id, "This is the tool id");
       try {
         await axios.delete(`${Host}/tools/deleteTool`, {
@@ -97,9 +105,13 @@ const Tool = ({ tool, index }) => {
           draggable: true,
           progress: undefined,
           theme: "colored",
-        })
+        });
       }
     }
+  };
+  const handleConfirmDelete = () => {
+    handleDeleteTool();
+    setOpenDialog(false);
   };
   return (
     <div className="project-table-row">
@@ -138,7 +150,7 @@ const Tool = ({ tool, index }) => {
         draggable
         pauseOnHover
         theme="colored"
-        />
+      />
       <div
         className={
           tool?.takenBy == undefined
@@ -202,11 +214,39 @@ const Tool = ({ tool, index }) => {
           <div className="tool-table-deletetool-div">
             {`${tool?.toolName}`}
             <button
-              onClick={() => handleDeleteTool()}
+              onClick={() => setOpenDialog(true)}
               className="tool-table-x-button"
             >
               X
             </button>
+            <Dialog
+              open={openDialog}
+              onClose={() => setOpenDialog(false)}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              id="dialog-container"
+              sx={{ direction: "rtl" }}
+            >
+              <DialogTitle id="alert-dialog-title">מחיקת כלי</DialogTitle>
+              <DialogContent>
+                <DialogContentText sx={{color: "black"}} id="alert-dialog-description">
+                   האם אתה בטוח שאתה רוצה למחוק את הכלי הזה? לא תהיה דרך לשחזר אותו
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 10,
+                }}
+              >
+                <button className="dialog-btn" onClick={() => setOpenDialog(false)}>ביטול</button>
+                <button className="dialog-btn" id="dialog-approved-btn" onClick={handleConfirmDelete} autoFocus>
+                  אישור
+                </button>
+              </DialogActions>
+            </Dialog>
           </div>
           {tool?.takenBy?.length > 0 && (
             <ReturnToolButton

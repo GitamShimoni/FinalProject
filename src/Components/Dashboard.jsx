@@ -5,6 +5,7 @@ import axios from "axios";
 import Host from "../utils/routes";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Loader from "./Loader";
 
 const Dashboard = () => {
   const { inventoryId, setInventoryId, project, setProject } =
@@ -28,14 +29,18 @@ const Dashboard = () => {
   useEffect(() => {
     if (project) {
       axios
-        .post(`${Host}/project/get`, {
-          projectId: localStorage.getItem("selectedProjectId"),
-        })
+        .post(
+          `${Host}/project/get`,
+          {},
+          {
+            headers: { projectId: localStorage.getItem("selectedProjectId") },
+          }
+        )
         .then(({ data }) => {
           console.log(data, "Thats a log");
           setProject(data);
           setInventoryId(data.inventory[0]);
-          localStorage.setItem("inventoryId", data.inventory[0]);
+          localStorage.setItem("inventoryId", data.inventory[0]._id);
         })
         .catch((err) => console.log(err));
     }
@@ -234,7 +239,9 @@ const Dashboard = () => {
   const { labels: donutTwoLabels, data: donutTwoData } = getDonutTwoChartData();
 
   if (loading) {
-    return <div>Loading.....</div>;
+    return (
+      <Loader />
+    )
   }
   // console.log(tools, "tools");
   // console.log(orders, "this is orders");

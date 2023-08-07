@@ -5,18 +5,23 @@ import "./ToolsTable.css";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
+import Loader from "./Loader";
 const ToolsTable = () => {
   const { tools, setTools } = useContext(ProjectContext);
   // const [tools, setTools] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .post(`${Host}/tools/getAllTools`, {
         inventoryId: localStorage.getItem("inventoryId"),
       })
-      .then(({ data }) => setTools(data))
-      .catch((err) => console.log(err));
+      .then(({ data }) => setTools(data));
+    setLoading(false).catch((err) => console.log(err));
   }, []);
   console.log(tools);
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="project-table">
       <div className="project-tr">
