@@ -55,10 +55,10 @@ const SignUp = () => {
       ) : (
         <div className="signup-block">
           <form className="signup-form" onSubmit={handleSubmit}>
-            <h2 id="signup-header">Sign-Up</h2>
+            <h2 id="signup-header">הרשמה</h2>
             <div className="signup-inputs-container">
               <label className="signup-input-label">
-                User Name: <br />
+                 :שם משתמש <br />
                 <input
                   className="signup-input"
                   type="text"
@@ -69,7 +69,7 @@ const SignUp = () => {
             </div>
             <div className="signup-inputs-container">
               <label className="signup-input-label">
-                Password: <br />
+                :סיסמא <br />
                 <input
                   className="signup-input"
                   type="password"
@@ -80,7 +80,7 @@ const SignUp = () => {
             </div>
             <div className="signup-inputs-container">
               <label className="signup-input-label">
-                Full Name: <br />
+                :שם מלא <br />
                 <input
                   className="signup-input"
                   type="text"
@@ -91,7 +91,7 @@ const SignUp = () => {
             </div>
             <div className="signup-inputs-container">
               <label className="signup-input-label">
-                Phone Number: <br />
+                 :מספר פלאפון <br />
                 <input
                   className="signup-input"
                   type="text"
@@ -102,7 +102,7 @@ const SignUp = () => {
             </div>
             <div className="signup-inputs-container">
               <label className="signup-input-label">
-                Email: <br />
+                :מייל <br />
                 <input
                   className="signup-input"
                   type="text"
@@ -112,7 +112,7 @@ const SignUp = () => {
               </label>
             </div>
             <button type="submit" className="signup-buttons">
-              Sign Up
+               הירשם
             </button>
             <div>
               נרשמת? <Link to={"/login"}>לחץ כאן</Link>

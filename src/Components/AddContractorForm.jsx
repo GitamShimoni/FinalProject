@@ -5,6 +5,7 @@ import "../utils/routes";
 import "./AddContractorForm.css";
 import { Link } from "react-router-dom";
 import UpdateContractorForm from "./UpdateContractorForm";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddContractorForm = ({
   setIsAddContractorClicked,
@@ -60,9 +61,29 @@ const AddContractorForm = ({
       setContractorsArr((prev) => [...prev, response.data]);
       setIsAddContractorClicked(false);
       console.log(response.data);
+      toast.success("  הקבלן נוסף בהצלחה  !", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } catch (error) {
       console.log("Error object:", error);
       console.log("Error response data:", error.response?.data);
+      toast.error("    לא ניתן להוסיף את הקבלן  ", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 

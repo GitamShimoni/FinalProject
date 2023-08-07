@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
+import { Link } from 'react-router-dom'
 import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 
 function InventoryPage() {
   const { setInventoryArr, inventoryId } = useContext(ProjectContext);
