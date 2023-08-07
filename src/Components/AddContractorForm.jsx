@@ -36,7 +36,7 @@ const AddContractorForm = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const projectId = "64bfb6686d6efc963d2855f2";
+    const projectId = localStorage.getItem("selectedProjectId");
     try {
       const response = await axios.post(
         `${Host}/contractor/create`,

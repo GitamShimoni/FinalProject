@@ -3,13 +3,18 @@ import "./Dashboard.css";
 import Chart from "react-apexcharts";
 import axios from "axios";
 import Host from "../utils/routes";
+import { useContext } from "react";
+import { ProjectContext } from "../Contexts/ProjectContext";
 
 const Dashboard = () => {
+  const { inventoryId, setInventoryId, project, setProject } =
+    useContext(ProjectContext);
   const [contractorsArray, setContractorsArray] = useState([]);
   const [tools, setTools] = useState([]);
   const [orders, setOrders] = useState([]);
   const [service, setService] = useState([]);
   const [products, setProducts] = useState([]);
+  // const [currentProject, setCurrentProject] = useState([]);
   const [selectedDonutChartOption, setselectedDonutChartOption] =
     useState("service");
   const [selectedDonutTwoChartOption, setselectedDonutTwoChartOption] =
@@ -21,7 +26,24 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const inventoryId = "64bfb6686d6efc963d2855ec";
+    if (project) {
+      axios
+        .post(`${Host}/project/get`, {
+          projectId: localStorage.getItem("selectedProjectId"),
+        })
+        .then(({ data }) => {
+          console.log(data, "Thats a log");
+          setProject(data);
+          setInventoryId(data.inventory[0]);
+          localStorage.setItem("inventoryId", data.inventory[0]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+  console.log(project, "This is the current project");
+  console.log(inventoryId, "INVENTORY ID");
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.post(`${Host}/product/getAll`, {
@@ -34,9 +56,9 @@ const Dashboard = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [inventoryId]);
 
-  console.log(products, "this is products");
+  // console.log(products, "this is products");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +67,7 @@ const Dashboard = () => {
           `${Host}/contractor/getAllContractor`,
           {},
           {
-            headers: { projectId: "64bfb6686d6efc963d2855f2" },
+            headers: { projectId: project._id },
           }
         );
         setContractorsArray(contractorsResponse.data.contractors);
@@ -59,7 +81,7 @@ const Dashboard = () => {
           }
         );
         setService(serviceResponse.data);
-        console.log(service, "this is the servicesss");
+        // console.log(service, "this is the servicesss");
 
         const ordersResponse = await axios.post(
           `${Host}/productOrder/getAllProductOrders`,
@@ -70,7 +92,7 @@ const Dashboard = () => {
         setOrders([ordersResponse.data]);
 
         const toolsResponse = await axios.post(`${Host}/tools/getAllTools`, {
-          inventoryId: "64bfb6686d6efc963d2855ec",
+          inventoryId: inventoryId,
         });
         setTools(toolsResponse.data);
 
@@ -81,9 +103,9 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [inventoryId]);
 
-  console.log(contractorsArray, "contractors array");
+  // console.log(contractorsArray, "contractors array");
 
   const getLineChartData = () => {
     switch (selectedLineChartOption) {
@@ -212,16 +234,12 @@ const Dashboard = () => {
   const { labels: donutTwoLabels, data: donutTwoData } = getDonutTwoChartData();
 
   if (loading) {
-    return (
-      <div>
-        Loading.....
-</div>
-    );
+    return <div>Loading.....</div>;
   }
-  console.log(tools, "tools");
-  console.log(orders, "this is orders");
-  console.log(service, "the servicesssss");
-  console.log(products, "this is productsa");
+  // console.log(tools, "tools");
+  // console.log(orders, "this is orders");
+  // console.log(service, "the servicesssss");
+  // console.log(products, "this is productsa");
   return (
     <div className="data-dashboard">
       <div className="chart-container">

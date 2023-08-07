@@ -1,6 +1,6 @@
 import React from 'react'
 
-function InventoryTableRow({index, setInventoryArr, product}) {
+function InventoryTableRow({index, product}) {
   return (
     <div
       className={
@@ -11,13 +11,13 @@ function InventoryTableRow({index, setInventoryArr, product}) {
     >
      
       <div className="contractor-row-info-div border-left">
-        <div className="contractor-row-service-name-title"><h3>{product?.name}</h3></div>
+        <div className="contractor-row-service-name-title"><h3>{product?.name || product?.ironName}</h3></div>
       </div>
       <div className="contractor-row-info-div border-left">
         <h3>{product?.unit}</h3>
       </div>
       <div className="contractor-row-info-div border-left">
-        <h3>{product?.quantity}</h3>
+        <h3>{product?.quantity || product?.arrivedQuantity}</h3>
       </div>
       <div className="contractor-row-info-div ">
         <h3>{product?.minQuantity}</h3>

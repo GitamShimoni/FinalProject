@@ -9,10 +9,9 @@ const OrdersPage = () => {
   return (
     <div id="orders-page-container">
       <ProductOrdersTable />
-      <ProductOrderForm></ProductOrderForm>
-      <IronOrderForm></IronOrderForm>
+      <ProductOrderForm />
       <IronOrdersTable />
-      <CreateAProductOrder />
+      <IronOrderForm />
     </div>
   );
 };

@@ -21,7 +21,7 @@ function ContractorPage() {
         `${Host}/contractor/getAllContractor`,
         {},
         {
-          headers: { projectId: "64bfb6686d6efc963d2855f2" },
+          headers: { projectId: localStorage.getItem("selectedProjectId") },
         }
       )
       .then(({ data }) => {
