@@ -90,6 +90,10 @@ const IronOrder = ({ order, index }) => {
     setOrderStatus(order?.status);
   }, [order]);
 
+  function isEarlierDate(a, b) {
+    return new Date(a) < new Date(b);
+  }
+
   return (
     <div className="project-ironorder-table-row">
       <div
@@ -206,11 +210,18 @@ const IronOrder = ({ order, index }) => {
           <h3 className="ironorder-dates-headerstop">{`${
             order?.arrivalDate != undefined ? "הגיע" : ""
           }`}</h3>
-          <h3 className="ironorder-dates-headers">{`${
-            order?.arrivalDate != undefined
+          <h3
+            className={`ironorder-dates-headers ${
+              order?.arrivalDate !== undefined &&
+              isEarlierDate(order?.arrivalDate, order?.requestedArrivalDate)
+                ? "ironorder-dates-late"
+                : ""
+            }`}
+          >
+            {order?.arrivalDate !== undefined
               ? formatDate(order?.arrivalDate)
-              : ""
-          }`}</h3>
+              : ""}
+          </h3>
         </div>
         {/* <div className="ironorder-table-part">{`${order?.requestedQuantity}`}</div> */}
         <div className="ironorder-table-part ironorder-table-space-around">
@@ -228,9 +239,18 @@ const IronOrder = ({ order, index }) => {
             <h3 className="ironorder-dates-headerstop">{`${
               order?.arrivedQuantity != undefined ? " - הגיע" : ""
             }`}</h3>
-            <h3 className="ironorder-dates-headers">{`${
-              order?.arrivedQuantity != undefined ? order?.arrivedQuantity : ""
-            }`}</h3>
+            <h3
+              className={`ironorder-dates-headers ${
+                order?.arrivedQuantity !== undefined &&
+                order?.arrivedQuantity < order?.requestedQuantity
+                  ? "ironorder-less-arrivedQuantity"
+                  : ""
+              }`}
+            >
+              {order?.arrivedQuantity !== undefined
+                ? order?.arrivedQuantity
+                : ""}
+            </h3>
           </div>
         </div>
         <div className="ironorder-table-toolpart">{`${order?.ironName}`}</div>

@@ -79,6 +79,9 @@
 }
 
 .ironorder-dates-headerstop {
+  color: rgb(238, 178, 39);
+}
+.ironorder-dates-late {
   color: red;
 }
 .ironorder-table-datespart {
@@ -177,4 +180,7 @@
   width: 5vw;
   height: 5vw;
   object-fit: cover;
+}
+.ironorder-less-arrivedQuantity {
+  color: rgb(255, 0, 0);
 }
