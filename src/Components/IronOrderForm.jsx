@@ -8,7 +8,7 @@ import UploadWidget from "./UploadWidget";
 
 function IronOrderForm() {
   const { ironOrders, setIronOrders } = useContext(ProjectContext);
-  const [image, setImage] = useState("hi");
+  const [image, setImage] = useState("");
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'yyyy-mm-dd' format
   console.log(image, "This is the image uploaded");
   const handleSubmitForm = async (e) => {
@@ -34,6 +34,7 @@ function IronOrderForm() {
           supplier: supplier,
           status: "pending",
           minQuantity: minQuantity,
+          receiptSrc: image,
         })
         .then(({ data }) => {
           setIronOrders(data);
@@ -100,6 +101,17 @@ function IronOrderForm() {
             placeholder="כמות מינימאלית"
           />
           <UploadWidget image={image} setImage={setImage} />
+          {image != "" && (
+            <div id="uploaded-image-container">
+              <img id="uploaded-image" src={image} alt="" />
+              <button
+                id="delete-uploaded-image-button"
+                onClick={() => setImage("")}
+              >
+                X
+              </button>
+            </div>
+          )}
           <button className="product-order-submit-btn" type="submit">
             הזמן
           </button>
