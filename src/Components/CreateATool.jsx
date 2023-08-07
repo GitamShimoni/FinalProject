@@ -19,9 +19,7 @@ const CreateATool = () => {
             toolName: toolName,
           },
           {
-            headers: {
-              projectId: localStorage.getItem("selectedProjectId"),
-            },
+            headers: { projectId: localStorage.getItem("selectedProjectId") },
           }
         )
         .then(({ data }) => {

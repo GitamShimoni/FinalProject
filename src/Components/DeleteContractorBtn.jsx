@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import './Dialog.css'
 
 function DeleteContractorBtn({ handleDeleteContractor }) {
   const [openDialog, setOpenDialog] = useState(false);
@@ -108,16 +109,17 @@ function DeleteContractorBtn({ handleDeleteContractor }) {
         onClose={() => setOpenDialog(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        sx={{direction:'rtl'}}
       >
         <DialogTitle id="alert-dialog-title">{"מחיקת קבלן"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText sx={{color: "black"}}  id="alert-dialog-description">
             האם אתה בטוח שאתה רוצה למחוק את הקבלן? לא תהיה דרך לשחזר
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <button onClick={() => setOpenDialog(false)}>ביטול</button>
-          <button onClick={handleConfirmDelete} autoFocus>
+        <DialogActions sx={{display:'flex', alignItems:'center', justifyContent:'center', gap:10}}>
+          <button className="dialog-btn" onClick={() => setOpenDialog(false)}>ביטול</button>
+          <button className="dialog-btn" id="dialog-approved-btn" onClick={handleConfirmDelete} autoFocus>
             אישור
           </button>
         </DialogActions>
