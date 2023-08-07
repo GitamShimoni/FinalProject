@@ -27,7 +27,6 @@ const IronOrder = ({ order, index }) => {
     setOpen(false);
   };
 
-  console.log(order, "This is the order!!!!!!!!!!!!!!!!!!!!!!!!!");
   const handleAddProduct = async () => {
     try {
       await axios
@@ -104,7 +103,7 @@ const IronOrder = ({ order, index }) => {
           {order?.supplier ? `${order?.supplier}` : `צריך להזין ספק`}
         </div>
 
-        <div className="ironorder-table-part">
+        <div className="ironorder-table-part ironorder-table-space-around"> 
           {orderStatus != "arrived" && changeStatus != "arrived" ? (
             <button
               onClick={() => handleUpdateOrderStatus()}
@@ -143,6 +142,7 @@ const IronOrder = ({ order, index }) => {
                     />
                   </div>
                 </DialogContent>
+
                 <DialogActions>
                   <Button onClick={handleClose}>ביטול</Button>
                   <Button onClick={() => handleUpdateOrderStatus()}>
@@ -189,7 +189,7 @@ const IronOrder = ({ order, index }) => {
             <h2 className="ironorder-table-arrived-header">{"הגיע"}</h2>
           )}
         </div>
-        <div className="ironorder-table-datespart">
+        <div className="ironorder-table-datespart ironorder-table-date-info">
           <h3 className="ironorder-dates-headerstop">{`${
             order?.requestedArrivalDate != undefined ? "הוזמן" : ""
           }`}</h3>
@@ -208,21 +208,25 @@ const IronOrder = ({ order, index }) => {
           }`}</h3>
         </div>
         {/* <div className="ironorder-table-part">{`${order?.requestedQuantity}`}</div> */}
-        <div className="ironorder-table-datespart">
-          <h3 className="ironorder-dates-headerstop">{`${
-            order?.requestedQuantity != undefined ? "הוזמן" : ""
-          }`}</h3>
-          <h3 className="ironorder-dates-headers">{`${
-            order?.requestedQuantity != undefined
-              ? order?.requestedQuantity
-              : ""
-          }`}</h3>
-          <h3 className="ironorder-dates-headerstop">{`${
-            order?.arrivedQuantity != undefined ? "הגיע" : ""
-          }`}</h3>
-          <h3 className="ironorder-dates-headers">{`${
-            order?.arrivedQuantity != undefined ? order?.arrivedQuantity : ""
-          }`}</h3>
+        <div className="ironorder-table-part ironorder-table-space-around">
+          <div className="ironorder-quantity-div">
+            <h3 className="ironorder-dates-headerstop">{`${
+              order?.requestedQuantity != undefined ? " - הוזמן" : ""
+            }`}</h3>
+            <h3 className="ironorder-dates-headers">{`${
+              order?.requestedQuantity != undefined
+                ? order?.requestedQuantity
+                : ""
+            }`}</h3>
+          </div>
+          <div className="ironorder-quantity-div">
+            <h3 className="ironorder-dates-headerstop">{`${
+              order?.arrivedQuantity != undefined ? " - הגיע" : ""
+            }`}</h3>
+            <h3 className="ironorder-dates-headers">{`${
+              order?.arrivedQuantity != undefined ? order?.arrivedQuantity : ""
+            }`}</h3>
+          </div>
         </div>
         <div className="ironorder-table-toolpart">{`${order?.ironName}`}</div>
       </div>

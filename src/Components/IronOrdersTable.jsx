@@ -21,8 +21,7 @@ const IronOrdersTable = () => {
       .catch((err) => console.log(err));
     console.log(orders);
   }, []);
-  console.log(orders, "THIS IS THE ORDERS!!!!!!!!");
-  console.log(ironOrders, "This is the product orders");
+
 
   return (
     <div className="project-ironOrders-table">
@@ -34,12 +33,10 @@ const IronOrdersTable = () => {
           id="project-ironOrders-topleft-td"
         >{`סטאטוס`}</div>
         <div className="project-ironOrders-toprow-tr">
-          <h3>{`תאריך שהוזמן`}</h3>
-          <h3>{`תאריך שהגיע`}</h3>
+          <h3>תאריך</h3>
         </div>
         <div className="project-ironOrders-toprow-tr">
-          <h3>{`כמות מוזמנת`}</h3>
-          <h3>{`כמות שהגיעה`}</h3>
+          <h3>כמות</h3>
         </div>
         <div
           className="project-ironOrders-toprow-tr"
