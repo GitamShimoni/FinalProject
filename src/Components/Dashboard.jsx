@@ -16,26 +16,34 @@ const Dashboard = () => {
   const [products, setProducts] = useState([]);
   // const [currentProject, setCurrentProject] = useState([]);
   const [selectedDonutChartOption, setselectedDonutChartOption] =
-    useState("service");
+    useState("מחיר לשירות");
   const [selectedDonutTwoChartOption, setselectedDonutTwoChartOption] =
-    useState("service");
+    useState("מחיר לשירות");
   const [selectedLineChartOption, setSelectedLineChartOption] =
-    useState("service");
+    useState("מחיר לשירות");
   const [selectedBarChartOption, setSelectedBarChartOption] =
-    useState("service");
+    useState("מחיר לשירות");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (project) {
+    if (project && localStorage.getItem("selectedProjectId") != undefined) {
+      console.log(localStorage.getItem("selectedProjectId"), "GOT INTO THE IF");
+      console.log(project, "Thats a project inside of the if");
       axios
-        .post(`${Host}/project/get`, {
-          projectId: localStorage.getItem("selectedProjectId"),
-        })
+        .post(
+          `${Host}/project/get`,
+          {},
+          {
+            headers: { projectId: localStorage.getItem("selectedProjectId") },
+          }
+        )
         .then(({ data }) => {
           console.log(data, "Thats a log");
           setProject(data);
           setInventoryId(data.inventory[0]);
-          localStorage.setItem("inventoryId", data.inventory[0]);
+          setProducts(data.inventory[0].products);
+          setContractorsArray(data.contractors);
+          localStorage.setItem("inventoryId", data.inventory[0]._id);
         })
         .catch((err) => console.log(err));
     }
@@ -43,45 +51,44 @@ const Dashboard = () => {
   console.log(project, "This is the current project");
   console.log(inventoryId, "INVENTORY ID");
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.post(`${Host}/product/getAll`, {
-          inventoryId,
-        });
-        setProducts(response.data);
-      } catch (error) {
-        console.log("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, [inventoryId]);
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.post(`${Host}/product/getAll`, {
+  //         inventoryId,
+  //       });
+  //       setProducts(response.data);
+  //     } catch (error) {
+  //       console.log("Error fetching products:", error);
+  //     }
+  //   };
+  //   if (inventoryId) {
+  //     fetchProducts();
+  //   }
+  // }, [inventoryId]);
 
   // console.log(products, "this is products");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const contractorsResponse = await axios.post(
-          `${Host}/contractor/getAllContractor`,
-          {},
-          {
-            headers: { projectId: project._id },
-          }
-        );
-        setContractorsArray(contractorsResponse.data.contractors);
+        //     const contractorsResponse = await axios.post(
+        //       `${Host}/contractor/getAllContractor`,
+        //       {},
+        //       {
+        //         headers: { projectId: localStorage.getItem("selectedProjectId") },
+        //       }
+        //     );
+        //     setContractorsArray(contractorsResponse.data.contractors);
 
         const serviceResponse = await axios.post(
           `${Host}/contractor/getAllServices`,
           {
-            contractorId: contractorsResponse.data.contractors.map(
-              (order) => order._id
-            ),
+            contractorId: contractorsArray.map((order) => order._id),
           }
         );
         setService(serviceResponse.data);
-        // console.log(service, "this is the servicesss");
+        console.log(service, "this is the servicesss");
 
         const ordersResponse = await axios.post(
           `${Host}/productOrder/getAllProductOrders`,
@@ -101,7 +108,7 @@ const Dashboard = () => {
         console.error("Error fetching data:", error);
       }
     };
-
+    console.log(service, "THIS IS THE SERVICE@$!@$@!#!@#");
     fetchData();
   }, [inventoryId]);
 
@@ -109,20 +116,22 @@ const Dashboard = () => {
 
   const getLineChartData = () => {
     switch (selectedLineChartOption) {
-      case "service":
+      case "מחיר לשירות":
         return {
           labels: service.map((v) => v.unit),
           data: service.map((v) => v.price),
         };
-      case "contractors":
+      case "כמות שירותים לקבלן":
         return {
           labels: contractorsArray.map((contractor) => contractor.name),
-          data: contractorsArray.map((contractor) => contractor._id),
+          data: contractorsArray.map(
+            (contractor) => contractor.services.length
+          ),
         };
-      case "product":
+      case "כמות מוצר":
         return {
-          labels: products.map((item) => item.name),
-          data: products.map((item) => item.quantity),
+          labels: products.map((item) => item?.name),
+          data: products.map((item) => item?.quantity),
         };
       case "tools":
         return {
@@ -139,26 +148,28 @@ const Dashboard = () => {
 
   const getBarChartData = () => {
     switch (selectedBarChartOption) {
-      case "service":
+      case "מחיר לשירות":
         return {
           labels: service.map((v) => v.unit),
           data: service.map((v) => v.price),
         };
-      case "contractors":
+      case "כמות שירותים לקבלן":
         return {
           labels: contractorsArray.map((contractor) => contractor.name),
-          data: contractorsArray.map((contractor) => contractor._id),
+          data: contractorsArray.map(
+            (contractor) => contractor.services.length
+          ),
         };
-      case "product":
+      case "כמות מוצר":
         return {
           labels: products.map((item) => item.name),
           data: products.map((item) => item.quantity),
         };
-      case "tools":
-        return {
-          labels: tools.map((item) => item.toolName),
-          data: tools.map((item) => item.takenBy),
-        };
+      // case "tools":
+      //   return {
+      //     labels: tools.map((item) => item.toolName),
+      //     data: tools.map((item) => item.takenBy),
+      //   };
       default:
         return {
           labels: [],
@@ -166,20 +177,23 @@ const Dashboard = () => {
         };
     }
   };
-
+  console.log(
+    products,
+    "THIS IS THE PRODUCTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+  );
   const getDonutChartData = () => {
     switch (selectedDonutChartOption) {
-      case "service":
+      case "מחיר לשירות":
         return {
           labels: service.map((v) => v.unit),
           data: service.map((v) => v.price),
         };
-      case "contractors":
+      case "כמות שירותים לקבלן":
         return {
           labels: contractorsArray.map((contractor) => contractor.name),
           data: contractorsArray.map((contractor) => contractor._id),
         };
-      case "product":
+      case "כמות מוצר":
         return {
           labels: products.map((item) => item.name),
           data: products.map((item) => item.quantity),
@@ -199,17 +213,17 @@ const Dashboard = () => {
 
   const getDonutTwoChartData = () => {
     switch (selectedDonutTwoChartOption) {
-      case "service":
+      case "מחיר לשירות":
         return {
           labels: service.map((v) => v.unit),
           data: service.map((v) => v.price),
         };
-      case "contractors":
+      case "כמות שירותים לקבלן":
         return {
           labels: contractorsArray.map((contractor) => contractor.name),
           data: contractorsArray.map((contractor) => contractor._id),
         };
-      case "product":
+      case "כמות מוצר":
         return {
           labels: products.map((item) => item.name),
           data: products.map((item) => item.quantity),
@@ -250,10 +264,10 @@ const Dashboard = () => {
               value={selectedLineChartOption}
               onChange={(e) => setSelectedLineChartOption(e.target.value)}
             >
-              <option value="service">שירותים</option>
-              <option value="contractors">קבלנים</option>
-              <option value="product">מוצרים</option>
-              <option value="tools">כלים</option>
+              {/* <option value="service">שירותים</option> */}
+              <option value="כמות שירותים לקבלן">קבלנים</option>
+              <option value="כמות מוצר">מוצרים</option>
+              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -276,10 +290,10 @@ const Dashboard = () => {
               value={selectedBarChartOption}
               onChange={(e) => setSelectedBarChartOption(e.target.value)}
             >
-              <option value="service">שירותים</option>
-              <option value="contractors">קבלנים</option>
-              <option value="product">מוצרים</option>
-              <option value="tools">כלים</option>
+              <option value="מחיר לשירות">שירותים</option>
+              <option value="כמות שירותים לקבלן">קבלנים</option>
+              <option value="כמות מוצר">מוצרים</option>
+              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -302,10 +316,10 @@ const Dashboard = () => {
               value={selectedDonutChartOption}
               onChange={(e) => setselectedDonutChartOption(e.target.value)}
             >
-              <option value="service">שירותים</option>
-              <option value="contractors">קבלנים</option>
-              <option value="product">מוצרים</option>
-              <option value="tools">כלים</option>
+              <option value="מחיר לשירות">שירותים</option>
+              <option value="כמות שירותים לקבלן">קבלנים</option>
+              <option value="כמות מוצר">מוצרים</option>
+              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -324,10 +338,10 @@ const Dashboard = () => {
               value={selectedDonutTwoChartOption}
               onChange={(e) => setselectedDonutTwoChartOption(e.target.value)}
             >
-              <option value="service">שירותים</option>
-              <option value="contractors">קבלנים</option>
-              <option value="product">מוצרים</option>
-              <option value="tools">כלים</option>
+              <option value="מחיר לשירות">שירותים</option>
+              <option value="כמות שירותים לקבלן">קבלנים</option>
+              <option value="כמות מוצר">מוצרים</option>
+              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>

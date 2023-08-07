@@ -9,6 +9,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import { Link } from "react-router-dom";
 
 const IronOrder = ({ order, index }) => {
   const { ironOrders, setIronOrders } = useContext(ProjectContext);
@@ -97,13 +98,17 @@ const IronOrder = ({ order, index }) => {
         }
       >
         <div className="ironorder-table-leftpart">
-          {order?.imcSrc ? `${order?.imgSrc}` : `אין תמונה`}
+          {order?.receiptSrc ? (
+            <Link to={`${order?.receiptSrc}`}>לחץ לתמונה</Link>
+          ) : (
+            <h6>{`אין תמונה`}</h6>
+          )}
         </div>
         <div className="ironorder-table-part">
           {order?.supplier ? `${order?.supplier}` : `צריך להזין ספק`}
         </div>
 
-        <div className="ironorder-table-part ironorder-table-space-around"> 
+        <div className="ironorder-table-part ironorder-table-space-around">
           {orderStatus != "arrived" && changeStatus != "arrived" ? (
             <button
               onClick={() => handleUpdateOrderStatus()}

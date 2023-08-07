@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
-import { Link } from 'react-router-dom'
 import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 
 function InventoryPage() {
   const { setInventoryArr, inventoryId } = useContext(ProjectContext);
@@ -54,7 +51,6 @@ function InventoryPage() {
       <InventoryTable inventoryArr={productsArr} />
       <h1>:צריך להזמין</h1>
       {needToOrderArr.length > 0 ? (
-
         <div className="inventoryPage-need-to-order">
           <InventoryTable inventoryArr={needToOrderArr} />
           <div
@@ -63,7 +59,6 @@ function InventoryPage() {
           >
             <h3>לביצוע הזמנה עבור להזמנות</h3>
           </div>
-
         </div>
       ) : (
         <div>
