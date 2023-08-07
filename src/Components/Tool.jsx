@@ -5,7 +5,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
-
+import { ToastContainer, toast } from "react-toastify";
 
 const Tool = ({ tool, index }) => {
   const { tools, setTools } = useContext(ProjectContext);
@@ -44,6 +44,16 @@ const Tool = ({ tool, index }) => {
             setLoanButton(false);
             setTools(newArr);
           });
+        toast.success("כלי הושאל בהצלחה", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         console.log(tools, "This is the tools from tool");
       } catch (err) {
         console.log(err);
@@ -57,7 +67,7 @@ const Tool = ({ tool, index }) => {
     if (confirm("האם אתה בטוח רוצה למחוק? אין דרך לשחזר.")) {
       console.log(tool._id, "This is the tool id");
       try {
-        await axios.delete("http://localhost:5000/tools/deleteTool", {
+        await axios.delete(`${Host}/tools/deleteTool`, {
           data: {
             toolId: tool._id,
           },
@@ -66,13 +76,69 @@ const Tool = ({ tool, index }) => {
           (obj, localindex) => index != localindex
         );
         setTools(newArr);
+        toast.success("כלי נמחק", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (err) {
         console.log(err);
+        toast.error("לא ניתן למחוק את הכלי ", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
       }
     }
   };
   return (
     <div className="project-table-row">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
       <div
         className={
           tool?.takenBy == undefined

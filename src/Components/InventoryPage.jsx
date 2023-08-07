@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
+import { Link } from 'react-router-dom'
 import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
+
+
 function InventoryPage() {
   const { setInventoryArr } = useContext(ProjectContext);
   const [productsArr, setProductsArr] = useState([]);

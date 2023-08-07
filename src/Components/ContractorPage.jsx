@@ -6,6 +6,7 @@ import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
 import ContractorsTable from "./ContractorsTable";
 import AddContractorForm from "./AddContractorForm";
+import { ToastContainer, toast } from "react-toastify";
 import "./ContractorPage.css";
 
 function ContractorPage() {
@@ -49,6 +50,30 @@ function ContractorPage() {
 
   return (
     <div className="contractor-page-container">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="ContractorPage-search-div">
         <input
           type="text"
@@ -57,7 +82,9 @@ function ContractorPage() {
           value={searchValue}
           placeholder="חפש קבלן"
         />
-        <div className="clear-btn" onClick={handleResetSearch}>X</div>
+        <div className="clear-btn" onClick={handleResetSearch}>
+          X
+        </div>
       </div>
 
       {contractorsArrCopy?.map((contractor, index) => (
