@@ -1,15 +1,38 @@
 .data-dashboard {
-
-    display: grid;
+  /* display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    padding: 20px;
-  }
-  
-  .chart-container {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+    padding: 20px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.chart-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: 40%;
+  height: 30%;
+}
+.h2-graphs {
+  font-size: 18px;
+  color: black;
+  margin-bottom: 20px;
+}
+.dashboard-select {
+  border-radius: 8px;
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.dashboard-select:hover {
+  background-color: rgb(112, 112, 112);
+  color: white;
+  text-align: center;
+}

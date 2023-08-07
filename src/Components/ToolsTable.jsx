@@ -15,13 +15,16 @@ const ToolsTable = () => {
       .post(`${Host}/tools/getAllTools`, {
         inventoryId: localStorage.getItem("inventoryId"),
       })
-      .then(({ data }) => setTools(data));
-    setLoading(false).catch((err) => console.log(err));
+      .then(({ data }) => {
+        setTools(data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   }, []);
   console.log(tools);
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
   return (
     <div className="project-table">
       <div className="project-tr">
