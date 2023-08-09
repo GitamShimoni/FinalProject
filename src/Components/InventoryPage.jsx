@@ -7,12 +7,13 @@ import "./InventoryPage.css";
 import { useNavigate } from "react-router-dom";
 
 function InventoryPage() {
-  const { setInventoryArr, inventoryId } = useContext(ProjectContext);
+  
+  const [inventoryId, setInventoryId] = useState("");
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
+  const [inventoryArr, setInventoryArr] = useState([])
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -35,11 +36,9 @@ function InventoryPage() {
         console.log("Error fetching products:", error);
       }
     };
-
-    if (inventoryId) {
-      console.log(inventoryId);
+   
       fetchProducts();
-    }
+    
   }, [setInventoryArr, inventoryId]);
 
   console.log(inventoryId);
