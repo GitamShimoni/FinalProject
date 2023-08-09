@@ -30,6 +30,7 @@ const OrdersPage = () => {
         <Loader />
       ) : (
         <div className="prodact-page-holder">
+          <h1 className="orders-page-header">טבלת הזמנות מתכלים</h1>
           <ProductOrdersTable />
           <div className="order-button">
             <br />
@@ -56,6 +57,7 @@ const OrdersPage = () => {
               </div>
             )}
           </div>
+          <h1 className="orders-page-header">טבלת הזמנות ברזל</h1>
           <IronOrdersTable />
           <div className="order-button">
             <button

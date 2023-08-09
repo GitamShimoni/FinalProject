@@ -20,6 +20,7 @@ const ProductOrder = ({ order, index }) => {
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
 
+
   console.log(order, "This is the order");
   const handleAddProduct = async () => {
     try {
@@ -29,7 +30,7 @@ const ProductOrder = ({ order, index }) => {
           name: order.productName,
           unit: order.unit,
           quantity: order.quantity,
-          minQuantity: minQuantity,
+          minQuantity: order.minQuantity,
           isIron: false,
           orderId: order._id,
         })
@@ -53,7 +54,9 @@ const ProductOrder = ({ order, index }) => {
               changeStatus,
             })
             .then(({ data }) => {
+              console.log("Updated successfuly");
               setOrderStatus(changeStatus);
+              console.log("DID THE HANDLE ADD PRODUCT");
               handleAddProduct();
               toast.success("  ההזמנה עודכנה בהצלחה!", {
                 position: "top-center",

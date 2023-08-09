@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [selectedDonutTwoChartOption, setselectedDonutTwoChartOption] =
     useState("מחיר לשירות");
   const [selectedLineChartOption, setSelectedLineChartOption] =
-    useState("מחיר לשירות");
+    useState("כמות שירותים לקבלן");
   const [selectedBarChartOption, setSelectedBarChartOption] =
     useState("מחיר לשירות");
   const [loading, setLoading] = useState(true);
@@ -45,8 +45,8 @@ const Dashboard = () => {
           setProducts(data.inventory[0].products);
           setContractorsArray(data.contractors);
           setLoading(false);
-          
-          localStorage.setItem("ordersId", data.projectOrders)
+
+          localStorage.setItem("ordersId", data.projectOrders);
           localStorage.setItem("inventoryId", data.inventory[0]._id);
         })
         .catch((err) => console.log(err));
@@ -106,15 +106,12 @@ const Dashboard = () => {
           inventoryId: inventoryId,
         });
         setTools(toolsResponse.data);
-
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     console.log(service, "THIS IS THE SERVICE@$!@$@!#!@#");
-    if(localStorage.getItem("inventoryId", inventoryId))
-    fetchData();
+    if (localStorage.getItem("inventoryId", inventoryId)) fetchData();
   }, [inventoryId]);
 
   // console.log(contractorsArray, "contractors array");

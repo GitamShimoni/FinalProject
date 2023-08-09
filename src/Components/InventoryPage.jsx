@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 
 function InventoryPage() {
-  
   const [inventoryId, setInventoryId] = useState("");
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [inventoryArr, setInventoryArr] = useState([])
+  const [inventoryArr, setInventoryArr] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -23,7 +22,7 @@ function InventoryPage() {
         const response = await axios.post(`${Host}/product/getAll`, {
           inventoryId: localStorage.getItem("inventoryId"),
         });
-        console.log(response.data);
+        console.log(response.data, "THIS IS THE INVENTORY");
         setInventoryArr(response.data);
 
         const products = response.data.filter((item) => !item.isIron);
@@ -40,9 +39,8 @@ function InventoryPage() {
         console.log("Error fetching products:", error);
       }
     };
-   
-      fetchProducts();
-    
+
+    fetchProducts();
   }, [setInventoryArr, inventoryId]);
   if (loading) {
     return <Loader />;
@@ -77,21 +75,20 @@ function InventoryPage() {
 
 export default InventoryPage;
 
+// useEffect(() => {
+//   const checkTokenAndFetch = async () => {
+//     const token = localStorage.getItem("token");
 
-          // useEffect(() => {
-          //   const checkTokenAndFetch = async () => {
-          //     const token = localStorage.getItem("token");
-        
-          //     if (!token || token == null || token == undefined) {
-          //       useNavigate("/")
-          //     }
-              // else{
-              //   const answer = await axios.post(`${Host}/users/isToken`,{
-              //   token: token
-              //  })
-              //  console.log(answer);
-              // }
-              // try {
-              //   const response = await axios.post(`${Host}/product/getAll`, {
-              //     inventoryId: localStorage.getItem("inventoryId"),
-              //   });
+//     if (!token || token == null || token == undefined) {
+//       useNavigate("/")
+//     }
+// else{
+//   const answer = await axios.post(`${Host}/users/isToken`,{
+//   token: token
+//  })
+//  console.log(answer);
+// }
+// try {
+//   const response = await axios.post(`${Host}/product/getAll`, {
+//     inventoryId: localStorage.getItem("inventoryId"),
+//   });

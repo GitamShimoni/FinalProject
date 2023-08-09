@@ -126,6 +126,11 @@ const ProjectPage = () => {
               className="user-square"
               onClick={() => handleUserClick(user._id)}
             >
+              <img
+                className="user-image"
+                src="https://i.ibb.co/QNnfszM/1463111-removebg-preview.png"
+                alt=""
+              />
               <h2 className="user-name">{user.fullName}</h2>
             </div>
             <div className="user-info">
@@ -149,9 +154,9 @@ const ProjectPage = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke-linejoin="round"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                strokeLinecap="round"
                 stroke="currentColor"
                 height="24"
                 fill="none"

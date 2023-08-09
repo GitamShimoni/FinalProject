@@ -18,12 +18,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
   display: flex;
   align-items: center;
   flex-direction: column;
   text-align: right;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 #Product-Order-Form {
@@ -75,8 +75,8 @@
 }
 
 #uploaded-image {
-  width: 30vw;
-  height: 30vw;
+  width: 50%;
+  height: 50%;
   margin: 20px;
   object-fit: cover;
 }

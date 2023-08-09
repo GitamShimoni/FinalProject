@@ -14,38 +14,39 @@ const ToolsPage = () => {
       setLoading(false);
     }, 1500);
   }, []);
-  
+
   // const token = localStorage.getItem("token");
   // useEffect(() => {
-  
+
   //       if (!token || token == null || token == undefined) {
   //         useNavigate("/");
   //       }
-        // else{
-        //   axios.post(`${Host}/users/isToken`,{
-        //   token: token
-        //  })
-        //  console.log(answer);
-        // }
-      // }
-      //   , [])
-          
-        // if(!localStorage.getItem("token")){
-        //   useNavigate("/");
-        // }
-        // else{
-        //   axios.post(`${Host}/users/isToken`,{
-        //   token: localStorage.getItem("token")
-        //   }).then(console.log("HELLO"))
-        //   .catch((err) => console.log(err, "error"))
-        // }
+  // else{
+  //   axios.post(`${Host}/users/isToken`,{
+  //   token: token
+  //  })
+  //  console.log(answer);
+  // }
+  // }
+  //   , [])
+
+  // if(!localStorage.getItem("token")){
+  //   useNavigate("/");
+  // }
+  // else{
+  //   axios.post(`${Host}/users/isToken`,{
+  //   token: localStorage.getItem("token")
+  //   }).then(console.log("HELLO"))
+  //   .catch((err) => console.log(err, "error"))
+  // }
 
   return (
     <div id="toolspage-container">
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div id="tools-page-main-container">
+          <h1 id="tools-page-main-header">טבלת הכלים שלי</h1>
           <ToolsTable />
           <CreateATool />
         </div>
