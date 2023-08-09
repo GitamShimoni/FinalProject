@@ -44,7 +44,9 @@ const Dashboard = () => {
           setInventoryId(data.inventory[0]);
           setProducts(data.inventory[0].products);
           setContractorsArray(data.contractors);
-
+          setLoading(false);
+          
+          localStorage.setItem("ordersId", data.projectOrders)
           localStorage.setItem("inventoryId", data.inventory[0]._id);
         })
         .catch((err) => console.log(err));
@@ -105,12 +107,13 @@ const Dashboard = () => {
         });
         setTools(toolsResponse.data);
 
-        setLoading(false);
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     console.log(service, "THIS IS THE SERVICE@$!@$@!#!@#");
+    if(localStorage.getItem("inventoryId", inventoryId))
     fetchData();
   }, [inventoryId]);
 
