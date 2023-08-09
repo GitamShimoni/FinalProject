@@ -11,6 +11,24 @@ const EndDay = () => {
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
 
+
+  async function handleSubmitEndDay() {
+    const summary = {
+      contractorsArr: contractors,
+      allMaterialsUsed: allMaterials,
+    };
+    try {
+      const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
+        summary: summary,
+        projectId: localStorage.getItem("selectedProjectId"),
+      });
+      console.log(newSummary, "THIS IS THE NEW SUMMARY");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   useEffect(() => {
     axios
       .post(
@@ -59,7 +77,6 @@ const EndDay = () => {
           />
         </div>
       ))}
-
       <button onClick={() => handleSubmitEndDay()}>SEND</button>
     </div>
   );
