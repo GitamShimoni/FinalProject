@@ -182,6 +182,7 @@ const ProductOrder = ({ order, index }) => {
         <div className="productorder-table-part">{`${order?.quantity}`}</div>
         <div className="productorder-table-toolpart">{`${order?.productName}`}</div>
       </div>
+      
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
