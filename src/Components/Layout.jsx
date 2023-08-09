@@ -1,14 +1,44 @@
 import Loader from "./Loader";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useNavigate } from "react-router-dom";
+import "./Layout.css";
+import { useState } from "react";
 const Layout = () => {
-
+  const [endDayClicked, setEndDayClicked] = useState(false);
+  const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="Layout-container">
       <Navbar />
       <Outlet />
+      <div
+        className="Layout-EndDay-btn"
+        onClick={() => setEndDayClicked(!endDayClicked)}
+      >
+        סוף יום
+        {endDayClicked && (
+          <div className="Layout-endDayOptions-section">
+            <div
+              className="Layout-endDayOptions"
+              onClick={() => {
+                navigate("/endDayTable");
+                setEndDayClicked(false);
+              }}
+            >
+              יום קודם
+            </div>{" "}
+            <div
+              className="Layout-endDayOptions"
+              onClick={() => {
+                navigate("/endDay");
+                setEndDayClicked(false);
+              }}
+            >
+              הגש סוף יום
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

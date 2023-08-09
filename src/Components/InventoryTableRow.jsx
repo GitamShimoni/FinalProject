@@ -7,7 +7,7 @@ function InventoryTableRow({ index, product }) {
         index % 2 == 0
           ? "contractor-row-container contractor-tr-zugi"
           : "contractor-row-container contractor-tr-notzugi"
-      }
+      }>
 
       <div className="contractor-row-info-div border-left">
         <div className="contractor-row-service-name-title">

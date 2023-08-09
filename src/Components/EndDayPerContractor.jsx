@@ -15,7 +15,7 @@ const EndDayPerContractor = ({
         className="open-form-button"
         type="button"
       >
-        <span className="button__text">הזן נתונים</span>
+        <span className="button__text">{contractor.name}</span>
         <span className="button__icon">
           <svg
             className="svg"
