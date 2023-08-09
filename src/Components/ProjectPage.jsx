@@ -165,6 +165,8 @@ const ProjectPage = () => {
       {selectedUserId && isModalOpen && (
         <div className="update-user-model">
           <UpdateUserForm
+            users={users}
+            setUsers={setUsers}
             token={token}
             userId={selectedUserId}
             onClose={() => setIsModalOpen(false)}
