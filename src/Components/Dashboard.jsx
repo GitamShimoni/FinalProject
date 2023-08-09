@@ -323,7 +323,7 @@ const Dashboard = () => {
               onChange={(e) => setselectedDonutChartOption(e.target.value)}
             >
               <option value="מחיר לשירות">שירותים</option>
-              <option value="כמות שירותים לקבלן">קבלנים</option>
+              {/* <option value="כמות שירותים לקבלן">קבלנים</option> */}
               <option value="כמות מוצר">מוצרים</option>
               {/* <option value="tools">כלים</option> */}
             </select>

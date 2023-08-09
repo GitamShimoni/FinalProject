@@ -20,7 +20,6 @@ const ProductOrder = ({ order, index }) => {
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
 
-
   console.log(order, "This is the order");
   const handleAddProduct = async () => {
     try {
@@ -47,7 +46,7 @@ const ProductOrder = ({ order, index }) => {
     if (changeStatus == "arrived") {
       {
         try {
-          openDialog(false)
+          setOpenDialog(false);
           await axios
             .patch(`${Host}/productOrder/updateProductOrder`, {
               productOrderId: order._id,
@@ -67,7 +66,7 @@ const ProductOrder = ({ order, index }) => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-              })
+              });
             });
         } catch (err) {
           console.log(err);
@@ -85,16 +84,16 @@ const ProductOrder = ({ order, index }) => {
           .then(({ data }) => {
             setOrderStatus(changeStatus);
           });
-          toast.success("  ההזמנה עודכנה בהצלחה!", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          })
+        toast.success("  ההזמנה עודכנה בהצלחה!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (err) {
         console.log(err);
       }
@@ -185,7 +184,7 @@ const ProductOrder = ({ order, index }) => {
         <div className="productorder-table-part">{`${order?.quantity}`}</div>
         <div className="productorder-table-toolpart">{`${order?.productName}`}</div>
       </div>
-      
+
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}

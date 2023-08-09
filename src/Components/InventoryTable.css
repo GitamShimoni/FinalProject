@@ -1,23 +1,26 @@
-.inventory-tr{
-    text-align: center;
-    font-weight: bolder;
-    background: radial-gradient(
-      circle,
-      rgba(46, 124, 238, 1) 0%,
-      rgba(82, 115, 222, 1) 100%
-    );
-    color: white;
-    height: 50px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-    align-items: center;
+.inventory-tr {
+  text-align: center;
+  font-weight: bolder;
+  background: radial-gradient(
+    circle,
+    rgba(46, 124, 238, 1) 0%,
+    rgba(82, 115, 222, 1) 100%
+  );
+  color: white;
+  height: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.inventory-table{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 65vw;
-    box-shadow: 3px 3px 4px 3px rgba(112, 112, 112, 0.75);
-    /* padding: ; */
+.inventory-table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 65vw;
+  box-shadow: 3px 3px 4px 3px rgba(112, 112, 112, 0.75);
+  /* padding: ; */
+}
+.min-quantity-inventory {
+  color: red;
 }
