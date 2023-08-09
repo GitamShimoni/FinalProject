@@ -26,6 +26,20 @@ const EndDay = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  async function handleSubmitEndDay() {
+    const summary = {contractorsArr:contractors, allMaterialsUsed: allMaterials}
+    try{
+      const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
+        summary: summary,
+        projectId: localStorage.getItem("selectedProjectId")
+      })
+      console.log(newSummary, "THIS IS THE NEW SUMMARY");
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   console.log(filledContractors, "THIS IS THE FIELD CONTRACTORS");
   console.log(allMaterials, "THIS IS THE ALL MATERIALS");
   return (
@@ -37,6 +51,8 @@ const EndDay = () => {
           allMaterials={allMaterials} setAllMaterials={setAllMaterials} />
         </div>
       ))}
+
+      <button onClick={() => handleSubmitEndDay()}>SEND</button>
     </div>
   );
 };
