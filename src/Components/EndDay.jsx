@@ -10,7 +10,7 @@ const EndDay = () => {
   const [contractors, setContractors] = useState([]);
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
-  
+
   useEffect(() => {
     axios
       .post(
@@ -26,6 +26,22 @@ const EndDay = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  async function handleSubmitEndDay() {
+    const summary = {
+      contractorsArr: contractors,
+      allMaterialsUsed: allMaterials,
+    };
+    try {
+      const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
+        summary: summary,
+        projectId: localStorage.getItem("selectedProjectId"),
+      });
+      console.log(newSummary, "THIS IS THE NEW SUMMARY");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   console.log(filledContractors, "THIS IS THE FIELD CONTRACTORS");
   console.log(allMaterials, "THIS IS THE ALL MATERIALS");
   return (
@@ -33,10 +49,17 @@ const EndDay = () => {
       {contractors?.map((contractor, index) => (
         <div key={index} className="contractor-form-container">
           <h3 id="contractor-name">{contractor.name}</h3>
-          <EndDayPerContractor  contractor={contractor} filledContractors={filledContractors} setFilledContractors={setFilledContractors}
-          allMaterials={allMaterials} setAllMaterials={setAllMaterials} />
+          <EndDayPerContractor
+            contractor={contractor}
+            filledContractors={filledContractors}
+            setFilledContractors={setFilledContractors}
+            allMaterials={allMaterials}
+            setAllMaterials={setAllMaterials}
+          />
         </div>
       ))}
+
+      <button onClick={() => handleSubmitEndDay()}>SEND</button>
     </div>
   );
 };

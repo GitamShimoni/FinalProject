@@ -252,6 +252,7 @@ const Dashboard = () => {
   if (loading) {
     return <Loader />;
   }
+  console.log(new Date());
   // console.log(tools, "tools");
   // console.log(orders, "this is orders");
   // console.log(service, "the servicesssss");
