@@ -10,7 +10,7 @@ const EndDay = () => {
   const [contractors, setContractors] = useState([]);
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
-  
+
   useEffect(() => {
     axios
       .post(
@@ -28,15 +28,18 @@ const EndDay = () => {
   }, []);
 
   async function handleSubmitEndDay() {
-    const summary = {contractorsArr:contractors, allMaterialsUsed: allMaterials}
-    try{
+
+    const summary = {
+      contractorsArr: contractors,
+      allMaterialsUsed: allMaterials,
+    };
+    try {
       const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
         summary: summary,
-        projectId: localStorage.getItem("selectedProjectId")
-      })
+        projectId: localStorage.getItem("selectedProjectId"),
+      });
       console.log(newSummary, "THIS IS THE NEW SUMMARY");
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
   }
@@ -47,8 +50,13 @@ const EndDay = () => {
       {contractors?.map((contractor, index) => (
         <div key={index} className="contractor-form-container">
           <h3 id="contractor-name">{contractor.name}</h3>
-          <EndDayPerContractor  contractor={contractor} filledContractors={filledContractors} setFilledContractors={setFilledContractors}
-          allMaterials={allMaterials} setAllMaterials={setAllMaterials} />
+          <EndDayPerContractor
+            contractor={contractor}
+            filledContractors={filledContractors}
+            setFilledContractors={setFilledContractors}
+            allMaterials={allMaterials}
+            setAllMaterials={setAllMaterials}
+          />
         </div>
       ))}
 
