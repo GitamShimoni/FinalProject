@@ -12,7 +12,6 @@ const OrdersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isIronModalOpen, setIsIronModalOpen] = useState(false);
 
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -23,8 +22,8 @@ const OrdersPage = () => {
     setIsModalOpen(true);
   };
   const createIronOrder = () => {
-    setIsIronModalOpen(true)
-  }
+    setIsIronModalOpen(true);
+  };
   return (
     <div id="orders-page-container">
       {loading ? (
@@ -33,7 +32,24 @@ const OrdersPage = () => {
         <div className="prodact-page-holder">
           <ProductOrdersTable />
           <div className="order-button">
-            <button onClick={() => createProductOrder()}></button>
+            <br />
+            <button
+              className="product-order-btn"
+              onClick={() => createProductOrder()}
+            >
+              <span className="btn-span-mother">
+                <span>ן</span>
+                <span>מ</span>
+                <span>ז</span>
+                <span>ה</span>
+              </span>
+              <span className="btn-span-mother2">
+                <span>ן</span>
+                <span>מ</span>
+                <span>ז</span>
+                <span>ה</span>
+              </span>
+            </button>
             {isModalOpen && (
               <div className="crete-product-order-model">
                 <ProductOrderForm onClose={() => setIsModalOpen(false)} />
@@ -42,7 +58,23 @@ const OrdersPage = () => {
           </div>
           <IronOrdersTable />
           <div className="order-button">
-            <button onClick={() => createIronOrder()}></button>
+            <button
+              className="product-order-btn"
+              onClick={() => createIronOrder()}
+            >
+              <span className="btn-span-mother">
+                <span>ן</span>
+                <span>מ</span>
+                <span>ז</span>
+                <span>ה</span>
+              </span>
+              <span className="btn-span-mother2">
+                <span>ן</span>
+                <span>מ</span>
+                <span>ז</span>
+                <span>ה</span>
+              </span>
+            </button>
             {isIronModalOpen && (
               <div className="crete-product-order-modal">
                 <IronOrderForm onClose={() => setIsIronModalOpen(false)} />
@@ -51,7 +83,6 @@ const OrdersPage = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };
