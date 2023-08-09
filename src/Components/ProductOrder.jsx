@@ -10,6 +10,7 @@ const ProductOrder = ({ order, index }) => {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
+  const [loading, setLoading] = useState(true)
 
   console.log(order, "This is the order");
   const handleAddProduct = async () => {

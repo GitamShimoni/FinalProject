@@ -5,9 +5,13 @@ import "./ProductOrdersTable.css";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
+import Loader from "./Loader";
+import ProductOrderForm from "./ProductOrderForm";
 const ProductOrdersTable = () => {
   const { productOrders, setProductOrders, orders, setOrders } =
     useContext(ProjectContext);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
   // const [tools, setTools] = useState([]);
 
   //SHOULD ADD SORTING FILTER THAT SORTS THE ORDERS FROM PENDING TO NOT PENDING
@@ -17,7 +21,9 @@ const ProductOrdersTable = () => {
       .post(`${Host}/productOrder/getAllProductOrders`, {
         ordersId,
       })
-      .then(({ data }) => setOrders([data]))
+      .then(({ data }) => {
+        setOrders([data])
+      })
       .catch((err) => console.log(err));
     console.log(orders, "Thats a fetch for the orders");
   }, []);
@@ -25,6 +31,8 @@ const ProductOrdersTable = () => {
     setProductOrders(orders[0]?.productOrders);
   }, [orders]);
   console.log(productOrders, "This is the product orders");
+
+
   return (
     <div className="project-orders-table">
       <div className="project-orders-tr">

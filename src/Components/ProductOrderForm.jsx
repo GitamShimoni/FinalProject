@@ -5,9 +5,8 @@ import "./ProductOrderForm.css";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext } from "react";
 
-function ProductOrderForm() {
+function ProductOrderForm({ onClose }) {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
-  // const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'yyyy-mm-dd' format
   let currentDate = new Date();
   currentDate.setHours(12, 0, 0, 0);
 
@@ -41,12 +40,30 @@ function ProductOrderForm() {
       console.log(err);
     }
   };
+  const handleClose = () => {
+    onClose();
+  };
 
   return (
-    <div>
-      <div id="ProductOrderForm-form-container">
-        <form onSubmit={handleSubmitForm} id="Product-Order-Form">
-          <h2>צור הזמנה חדשה</h2>
+    <div className="product-order-modal">
+      {/* <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      /> */}
+      <div className="order-product-modal-content" >
+        <span className="update-user-modal-close-button" onClick={handleClose}>
+          &times;
+        </span>
+        <h2 className="update-user-form-headline">הזמנה חדשה</h2>
+        <form onSubmit={handleSubmitForm} id="Product-Order-Form" className="update-user-form">
           <h2 className="ProductOrderForm-form-title">:שם המוצר</h2>
           <input
             required
@@ -92,6 +109,7 @@ function ProductOrderForm() {
             הזמן
           </button>
         </form>
+        {/* {message && <p>{message}</p>} */}
       </div>
     </div>
   );

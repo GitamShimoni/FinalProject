@@ -4,11 +4,13 @@ import axios from "axios";
 import Host from "../utils/routes";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext } from "react";
+import Loader from "./Loader";
 const CreateAProductOrder = () => {
   const [productName, setProductName] = useState("");
   const [productUnit, setProductUnit] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [productSupplier, setProductSupplier] = useState("");
+  const [loading, setLoading] = useState(true)
 
   const { productOrders, setProductOrders } = useContext(ProjectContext);
 
@@ -26,11 +28,18 @@ const CreateAProductOrder = () => {
         })
         .then(({ data }) => {
           setProductOrders(data);
+          setLoading(false)
         });
     } catch (err) {
       console.log(err);
+      setLoading(false)
     }
   };
+  if (loading) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <div id="create-aproduct-container">

@@ -15,3 +15,15 @@
 .ordersPage-iron-form{
   margin-left: 50px;
 }
+.prodact-page-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.order-button{
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  height: 30px;
+}
