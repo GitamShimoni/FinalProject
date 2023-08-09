@@ -70,3 +70,22 @@ function InventoryPage() {
 }
 
 export default InventoryPage;
+
+
+          // useEffect(() => {
+          //   const checkTokenAndFetch = async () => {
+          //     const token = localStorage.getItem("token");
+        
+          //     if (!token || token == null || token == undefined) {
+          //       useNavigate("/")
+          //     }
+              // else{
+              //   const answer = await axios.post(`${Host}/users/isToken`,{
+              //   token: token
+              //  })
+              //  console.log(answer);
+              // }
+              // try {
+              //   const response = await axios.post(`${Host}/product/getAll`, {
+              //     inventoryId: localStorage.getItem("inventoryId"),
+              //   });
