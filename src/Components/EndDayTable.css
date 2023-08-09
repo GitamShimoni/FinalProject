@@ -1,0 +1,48 @@
+.EndDayTable-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.EndDayTable-tr {
+  text-align: center;
+  font-weight: bolder;
+  background: radial-gradient( circle, #778DA9 0%, #415A77 100% );
+  color: white;
+  height: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  }
+  
+  .EndDayTable-table-name{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      padding: 5px;
+      font-weight: bold;
+    
+  }
+  
+  .service-name-table-title{
+    padding-right: 27px;
+  }
+  
+  .contractTable-add-service-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  
+  }
+  
+  .contractTable-delete-EndDayTable-btn-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  

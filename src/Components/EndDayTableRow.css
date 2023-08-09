@@ -1,0 +1,46 @@
+.EndDayTableRow-row-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  height: fit-content;
+  min-height: 50px;
+  align-items: center;
+}
+
+.EndDayTableRow-row-info-div {
+    width: calc(100% / 5);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.border-left {
+  border-left-style: solid;
+  border-width: 1px;
+}
+
+.EndDayTableRow-tr-zugi {
+  background-color: rgb(209, 209, 209);
+}
+
+.EndDayTableRow-tr-notzugi {
+  background-color: #e3e3e3;
+}
+
+.EndDayTableRow-row-service-name-title{
+    width: 100%;
+}
+
+.delete-service-btn{
+  /* background-color: rgb(80,115,224); */
+  height: 100%;
+  display: flex;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-left-style: solid ;
+  border-width: 1px;
+
+}

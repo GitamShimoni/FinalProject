@@ -19,6 +19,8 @@ import OrdersPage from "./Components/OrdersPage";
 import SignUp from "./Components/SignUp";
 import UpdateUserForm from "./Components/UpdateUserForm";
 import InventoryPage from "./Components/InventoryPage";
+import EndDayTable from "./Components/EndDayTable";
+import LastDaySummary from "./Components/LastDaySummary";
 
 // import { UserProvider } from "./Contexts/UserContext";
 function App() {
@@ -34,6 +36,7 @@ function App() {
             <Route path="/endDay" element={<EndDay />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/constructors" element={<ContractorPage />} />
+            <Route path="/endDayTable" element={<LastDaySummary />} />
             <Route
               path="/updateContractor"
               element={<UpdateContractorForm />}

@@ -25,6 +25,7 @@ const EndDayForm = ({
     setServicesArr(newArr);
   }
   function changeWhatWasDone(index, value) {
+    setChanges(value);
     const newArr = [...servicesArr];
     newArr[index].WhatWasDone = value;
     setServicesArr(newArr);
@@ -40,8 +41,7 @@ const EndDayForm = ({
       .catch((err) => console.log(err));
   }, []);
 
-  const calculateTextareaHeight = (index) => {
-    let content = changes[index];
+  const calculateTextareaHeight = (content) => {
     const lineHeight = 20;
     const lines = content?.split("\n").length;
     return lineHeight * lines;
@@ -60,7 +60,7 @@ const EndDayForm = ({
     const newContractors = [...filledContractors, contractor];
     setFilledContractors(newContractors);
     console.log(allMaterials, "LINE 61");
-    setAllMaterials(...allMaterials, contractor.materialsUsed)
+    setAllMaterials(...allMaterials, contractor.materialsUsed);
   };
   console.log(contractor);
   return (
@@ -109,61 +109,71 @@ const EndDayForm = ({
                 <textarea
                   className="EndDayForm-textarea"
                   onChange={(e) => changeWhatWasDone(index, e.target.value)}
-                  style={{ height: calculateTextareaHeight(index) }}
+                  style={{
+                    height: `${calculateTextareaHeight(item.WhatWasDone)}px`,
+                  }}
                   placeholder="מה נעשה"
                 />
               </div>
             </div>
           ))}
-
-          <select onChange={(e) => setProductSelected(e.target.value)}>
-            <option disabled selected hidden value="">
-              בחר משאב
-            </option>
-            {inventory?.map((item, index) => (
-              <option key={index}>{item?.name}</option>
-            ))}
-          </select>
-          <button
-            type="button"
-            onClick={() =>
-              setProductsArr([
-                ...productsArr,
-                ...inventory.filter((item) => item?.name == productSelected),
-              ])
-            }
-          >
-            הוסף
-          </button>
-          {console.log(productsArr)}
-          {productsArr?.map((item, index) => (
-            <div
-              key={index}
-              className={
-                index % 2 === 0
-                  ? "EndDayForm-service-div contractor-tr-zugi"
-                  : "EndDayForm-service-div contractor-tr-notzugi"
-              }
-            >
-              <div className="EndDayForm-table-row-div">
-                <h3>{item?.name}</h3>
-              </div>
-              <div className="EndDayForm-table-row-div">
-                <h3>{item?.unit}</h3>
-              </div>
-
-              <div className="EndDayForm-table-row-div">
-                <input
-                  type="number"
-                  onChange={(e) => handleProductQuantity(index, e.target.value)}
-                  placeholder="כמות"
-                />
-              </div>
+          <div className="EndDayForm-resources-section">
+            <div className="EndDayForm-select-btn-div">
+              <select onChange={(e) => setProductSelected(e.target.value)}>
+                <option disabled selected hidden value="">
+                  בחר משאב
+                </option>
+                {inventory?.map((item, index) => (
+                  <option key={index}>{item?.name}</option>
+                ))}
+              </select>
+              <button
+                className="add-resource-btn"
+                type="button"
+                onClick={() =>
+                  setProductsArr([
+                    ...productsArr,
+                    ...inventory.filter(
+                      (item) => item?.name == productSelected
+                    ),
+                  ])
+                }
+              >
+                הוסף
+              </button>
             </div>
-          ))}
+            {console.log(productsArr)}
+            {productsArr?.map((item, index) => (
+              <div
+                key={index}
+                className={
+                  index % 2 === 0
+                    ? "EndDayForm-service-div contractor-tr-zugi"
+                    : "EndDayForm-service-div contractor-tr-notzugi"
+                }
+              >
+                <div className="EndDayForm-table-row-div">
+                  <h3>{item?.name}</h3>
+                </div>
+                <div className="EndDayForm-table-row-div">
+                  <h3>{item?.unit}</h3>
+                </div>
+
+                <div className="EndDayForm-table-row-div">
+                  <input
+                    type="number"
+                    onChange={(e) =>
+                      handleProductQuantity(index, e.target.value)
+                    }
+                    placeholder="כמות"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <button type="submit" className="submit-button">
-          submit
+          שמור קבלן
         </button>
       </form>
     </div>

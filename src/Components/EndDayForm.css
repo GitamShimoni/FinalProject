@@ -46,3 +46,23 @@
     text-align: center;
     border-radius: 5px;
 }
+
+.add-resource-btn{
+  margin-right: 20px;
+  padding: 7px;
+}
+
+.EndDayForm-resources-section{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 40px;
+ 
+}
+
+.EndDayForm-select-btn-div{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-bottom: 20px;
+}

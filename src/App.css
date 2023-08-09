@@ -13,6 +13,6 @@ input{
   direction: rtl;
 }
 
-option{
+option , select{
   text-align: center;
 }
