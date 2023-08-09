@@ -12,3 +12,7 @@
 input{
   direction: rtl;
 }
+
+option{
+  text-align: center;
+}

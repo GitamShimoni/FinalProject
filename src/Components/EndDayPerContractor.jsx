@@ -1,6 +1,12 @@
 import { useState } from "react";
 import EndDayForm from "./EndDayForm";
-const EndDayPerContractor = ({ contractor }) => {
+const EndDayPerContractor = ({
+  contractor,
+  filledContractors,
+  setFilledContractors,
+  allMaterials,
+  setAllMaterials,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="end-day-perContractor-page">
@@ -28,7 +34,15 @@ const EndDayPerContractor = ({ contractor }) => {
           </svg>
         </span>
       </button>
-      {isOpen && <EndDayForm contractor={contractor} />}
+      {isOpen && (
+        <EndDayForm
+          contractor={contractor}
+          filledContractors={filledContractors}
+          setFilledContractors={setFilledContractors}
+          allMaterials={allMaterials}
+          setAllMaterials={setAllMaterials}
+        />
+      )}
     </div>
   );
 };
