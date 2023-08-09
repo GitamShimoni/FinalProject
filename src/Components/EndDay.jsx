@@ -67,7 +67,6 @@ const EndDay = () => {
     <div className="end-day-container">
       {contractors?.map((contractor, index) => (
         <div key={index} className="contractor-form-container">
-          <h3 id="contractor-name">{contractor.name}</h3>
           <EndDayPerContractor
             contractor={contractor}
             filledContractors={filledContractors}

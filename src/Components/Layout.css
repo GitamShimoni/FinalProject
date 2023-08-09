@@ -1,0 +1,41 @@
+.Layout-container{
+    position: relative;
+}
+
+.Layout-EndDay-btn{
+    position: fixed;
+    bottom: 50px;
+    left: 40px;
+    background-color: green;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.Layout-endDayOptions-section{
+    position: absolute;
+    left: 80px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    transition: 2s;
+}
+
+.Layout-endDayOptions{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    background-color: aqua;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
