@@ -64,7 +64,6 @@ const EndDayForm = ({
   };
   console.log(contractor);
   return (
-    <div>
       <form className="end-day-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="howManyWorkers">:כמה עובדים</label>
@@ -176,7 +175,6 @@ const EndDayForm = ({
           שמור קבלן
         </button>
       </form>
-    </div>
   );
 };
 
