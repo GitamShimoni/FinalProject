@@ -5,8 +5,13 @@ import "./ProductOrderForm.css";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext, useState } from "react";
 import UploadWidget from "./UploadWidget";
+import { ToastContainer, toast } from "react-toastify";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 
-function IronOrderForm({onClose}) {
+function IronOrderForm({ onClose }) {
   const { ironOrders, setIronOrders } = useContext(ProjectContext);
   const [image, setImage] = useState("");
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'yyyy-mm-dd' format
@@ -39,6 +44,17 @@ function IronOrderForm({onClose}) {
         .then(({ data }) => {
           setIronOrders(data);
         });
+        toast.success("  ההזמנה עודכנה בהצלחה!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      onClose();
       console.log(data);
     } catch (err) {
       console.log(err);
@@ -50,6 +66,18 @@ function IronOrderForm({onClose}) {
   console.log(image, "This is the image from that form");
   return (
     <div className="update-user-modal">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="order-product-modal-content">
         <span className="update-user-modal-close-button" onClick={handleClose}>
           &times;
@@ -118,7 +146,11 @@ function IronOrderForm({onClose}) {
               </button>
             </div>
           )}
-          <button className="product-order-submit-btn" type="submit">
+          <button
+            onClick={() => handleSubmitForm}
+            className="product-order-submit-btn"
+            type="submit"
+          >
             הזמן
           </button>
         </form>

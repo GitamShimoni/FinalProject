@@ -3,6 +3,13 @@ import "./ProductOrder.css";
 import axios from "axios";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import { ToastContainer, toast } from "react-toastify";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import "./Dialog.css";
 
 import Host from "../utils/routes";
 
@@ -11,6 +18,8 @@ const ProductOrder = ({ order, index }) => {
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
   const [loading, setLoading] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
+
 
   console.log(order, "This is the order");
   const handleAddProduct = async () => {
@@ -36,10 +45,9 @@ const ProductOrder = ({ order, index }) => {
 
   const handleUpdateOrderStatus = async () => {
     if (changeStatus == "arrived") {
-      if (
-        confirm("האם לשנות את הסטטוס ל-`הגיע`? אין אפשרות לשנות זאת בחזרה.")
-      ) {
+      {
         try {
+          openDialog(false)
           await axios
             .patch(`${Host}/productOrder/updateProductOrder`, {
               productOrderId: order._id,
@@ -50,6 +58,16 @@ const ProductOrder = ({ order, index }) => {
               setOrderStatus(changeStatus);
               console.log("DID THE HANDLE ADD PRODUCT");
               handleAddProduct();
+              toast.success("  ההזמנה עודכנה בהצלחה!", {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              })
             });
         } catch (err) {
           console.log(err);
@@ -58,6 +76,7 @@ const ProductOrder = ({ order, index }) => {
     } else {
       //NEED TO ADD A POP UP THAT ALERTS ACCEPTED OR DECLINED
       try {
+        setOpenDialog(false);
         await axios
           .patch(`${Host}/productOrder/updateProductOrder`, {
             productOrderId: order._id,
@@ -66,6 +85,16 @@ const ProductOrder = ({ order, index }) => {
           .then(({ data }) => {
             setOrderStatus(changeStatus);
           });
+          toast.success("  ההזמנה עודכנה בהצלחה!", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          })
       } catch (err) {
         console.log(err);
       }
@@ -75,9 +104,25 @@ const ProductOrder = ({ order, index }) => {
     setOrderStatus(order?.status);
   }, [order]);
   console.log(order, "dasdsadsa");
+  const handleConfirmDelete = () => {
+    handleUpdateOrderStatus();
+    setOpenDialog(false);
+  };
 
   return (
     <div className="project-productorder-table-row">
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div
         className={
           index % 2 == 0 ? "productorder-tr-zugi" : "productorder-tr-notzugi"
@@ -90,7 +135,7 @@ const ProductOrder = ({ order, index }) => {
         <div className="productorder-table-part">
           {orderStatus != "arrived" && (
             <button
-              onClick={() => handleUpdateOrderStatus()}
+              onClick={() => setOpenDialog(true)}
               className="productorder-table-option-button"
             >
               הגדר
@@ -140,6 +185,45 @@ const ProductOrder = ({ order, index }) => {
         <div className="productorder-table-part">{`${order?.quantity}`}</div>
         <div className="productorder-table-toolpart">{`${order?.productName}`}</div>
       </div>
+      
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        id="dialog-container"
+        sx={{ direction: "rtl" }}
+      >
+        <DialogTitle id="alert-dialog-title">עדכון הזמנה </DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            sx={{ color: "black" }}
+            id="alert-dialog-description"
+          >
+            האם אתה בטוח שברצונך לעדכן את ההזמנה ? לא תהיה דרך לעדכן אותה שוב
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 10,
+          }}
+        >
+          <button className="dialog-btn" onClick={() => setOpenDialog(false)}>
+            ביטול
+          </button>
+          <button
+            className="dialog-btn"
+            id="dialog-approved-btn"
+            onClick={handleConfirmDelete}
+            autoFocus
+          >
+            אישור
+          </button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

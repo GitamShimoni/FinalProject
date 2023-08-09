@@ -88,6 +88,7 @@ const CreateATool = () => {
             type="text"
             className="new-tool-input"
           />
+
           <span className="the-highlight"></span>
           <span className="the-bar"></span>
           <label className="new-tool-label">צור כלי </label>
