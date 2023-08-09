@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Host from "../utils/routes";
+
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
+import { ProjectContext } from "../Contexts/ProjectContext";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
-
+  const [filledContractors, setFilledContractors] = useState([]);
+  const [allMaterials, setAllMaterials] = useState([]);
+  
   useEffect(() => {
     axios
       .post(
-        `http://localhost:5000/contractor/getAllContractor`,
+        `${Host}/contractor/getAllContractor`,
         {},
         {
-          headers: { projectId: "64bfb6686d6efc963d2855f2" },
+          headers: { projectId: localStorage.getItem("selectedProjectId") },
         }
       )
       .then(({ data }) => {
@@ -21,16 +26,15 @@ const EndDay = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  console.log(contractors, "THIS IS THE CONTRACTORS");
-
-console.log(contractors);
+  console.log(filledContractors, "THIS IS THE FIELD CONTRACTORS");
+  console.log(allMaterials, "THIS IS THE ALL MATERIALS");
   return (
     <div className="end-day-container">
       {contractors?.map((contractor, index) => (
         <div key={index} className="contractor-form-container">
           <h3 id="contractor-name">{contractor.name}</h3>
-          <EndDayPerContractor contractor={contractor}/>
+          <EndDayPerContractor  contractor={contractor} filledContractors={filledContractors} setFilledContractors={setFilledContractors}
+          allMaterials={allMaterials} setAllMaterials={setAllMaterials} />
         </div>
       ))}
     </div>
@@ -38,6 +42,3 @@ console.log(contractors);
 };
 
 export default EndDay;
-
-
-

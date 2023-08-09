@@ -1,11 +1,44 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./EndDayForm.css";
-const EndDayForm = ({ contractor }) => {
+import axios from "axios";
+import Host from "../utils/routes";
+
+const EndDayForm = ({
+  contractor,
+  filledContractors,
+  setFilledContractors,
+  allMaterials,
+  setAllMaterials,
+}) => {
   const [servicesArr, setServicesArr] = useState([...contractor.services]);
-  const [status, setStatus] = useState([]);
+
   const [changes, setChanges] = useState([]);
-  // const [textAreaHeight, setTextAreaHeight] = useState([]);
+  const [inventory, setInventory] = useState([]);
+  const [productsArr, setProductsArr] = useState([]);
+  const [productQuantity, setProductQuantity] = useState([]);
+  const [productSelected, setProductSelected] = useState("");
+
+  function changeStatus(index, value) {
+    const newArr = [...servicesArr];
+    newArr[index].status = value;
+    setServicesArr(newArr);
+  }
+  function changeWhatWasDone(index, value) {
+    const newArr = [...servicesArr];
+    newArr[index].WhatWasDone = value;
+    setServicesArr(newArr);
+  }
+  useEffect(() => {
+    axios
+      .post(`${Host}/product/getAll`, {
+        inventoryId: localStorage.getItem("inventoryId"),
+      })
+      .then(({ data }) => {
+        setInventory(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const calculateTextareaHeight = (index) => {
     let content = changes[index];
@@ -14,49 +47,22 @@ const EndDayForm = ({ contractor }) => {
     return lineHeight * lines;
   };
 
-  function handleSetChanges(index, value) {
-    let temp = [...changes];
-    temp[index] = value;
-    setChanges([...temp]);
+  function handleProductQuantity(index, value) {
+    const temp = [...productsArr];
+    temp[index].usedQuantity = value;
+    setProductsArr(temp);
   }
+  console.log(productQuantity);
 
-  function handleSetStatus(index, value) {
-    let temp = [...status];
-    temp[index] = value;
-    setStatus([...temp]);
-  }
-  console.log(status);
-
-  const [formData, setFormData] = useState({
-    whatWasDone: "",
-    howManyWorkers: "",
-    status: "",
-    sectionInContract: "",
-    units: "",
-    quantity: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Do something with the form data here, like submit it to a server or display a success message.
-    console.log("Form data:", formData);
-    setFormData({
-      whatWasDone: "",
-      howManyWorkers: "",
-      status: "",
-      sectionInContract: "",
-      units: "",
-      quantity: "",
-    });
+    contractor.materialsUsed = productsArr;
+    const newContractors = [...filledContractors, contractor];
+    setFilledContractors(newContractors);
+    console.log(allMaterials, "LINE 61");
+    setAllMaterials(...allMaterials, contractor.materialsUsed)
   };
-
+  console.log(contractor);
   return (
     <div>
       <form className="end-day-form" onSubmit={handleSubmit}>
@@ -66,8 +72,7 @@ const EndDayForm = ({ contractor }) => {
             type="number"
             id="howManyWorkers"
             name="howManyWorkers"
-            value={formData.howManyWorkers}
-            onChange={handleChange}
+            onChange={(e) => (contractor.howManyWorkers = e.target.value)}
             required
           />
         </div>
@@ -90,8 +95,9 @@ const EndDayForm = ({ contractor }) => {
               </div>
               <div className="EndDayForm-table-row-div">
                 {" "}
-                <select className="EndDayForm-select"
-                  onChange={(e) => handleSetStatus(index, e.target.value)}
+                <select
+                  className="EndDayForm-select"
+                  onChange={(e) => changeStatus(index, e.target.value)}
                 >
                   <option value="inProgress">{`בתהליך`}</option>
                   <option value="finished">{`הסתיים`}</option>
@@ -102,9 +108,55 @@ const EndDayForm = ({ contractor }) => {
                 {" "}
                 <textarea
                   className="EndDayForm-textarea"
-                  onChange={(e) => handleSetChanges(index, e.target.value)}
+                  onChange={(e) => changeWhatWasDone(index, e.target.value)}
                   style={{ height: calculateTextareaHeight(index) }}
                   placeholder="מה נעשה"
+                />
+              </div>
+            </div>
+          ))}
+
+          <select onChange={(e) => setProductSelected(e.target.value)}>
+            <option disabled selected hidden value="">
+              בחר משאב
+            </option>
+            {inventory?.map((item, index) => (
+              <option key={index}>{item?.name}</option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() =>
+              setProductsArr([
+                ...productsArr,
+                ...inventory.filter((item) => item?.name == productSelected),
+              ])
+            }
+          >
+            הוסף
+          </button>
+          {console.log(productsArr)}
+          {productsArr?.map((item, index) => (
+            <div
+              key={index}
+              className={
+                index % 2 === 0
+                  ? "EndDayForm-service-div contractor-tr-zugi"
+                  : "EndDayForm-service-div contractor-tr-notzugi"
+              }
+            >
+              <div className="EndDayForm-table-row-div">
+                <h3>{item?.name}</h3>
+              </div>
+              <div className="EndDayForm-table-row-div">
+                <h3>{item?.unit}</h3>
+              </div>
+
+              <div className="EndDayForm-table-row-div">
+                <input
+                  type="number"
+                  onChange={(e) => handleProductQuantity(index, e.target.value)}
+                  placeholder="כמות"
                 />
               </div>
             </div>

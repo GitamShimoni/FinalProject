@@ -8,13 +8,15 @@ import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 
 function InventoryPage() {
-  const { setInventoryArr, inventoryId } = useContext(ProjectContext);
+  
+  const [inventoryId, setInventoryId] = useState("");
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [inventoryArr, setInventoryArr] = useState([])
 
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -38,11 +40,9 @@ function InventoryPage() {
         console.log("Error fetching products:", error);
       }
     };
-
-    if (inventoryId) {
-      console.log(inventoryId);
+   
       fetchProducts();
-    }
+    
   }, [setInventoryArr, inventoryId]);
   if (loading) {
     return <Loader />;
@@ -76,3 +76,22 @@ function InventoryPage() {
 }
 
 export default InventoryPage;
+
+
+          // useEffect(() => {
+          //   const checkTokenAndFetch = async () => {
+          //     const token = localStorage.getItem("token");
+        
+          //     if (!token || token == null || token == undefined) {
+          //       useNavigate("/")
+          //     }
+              // else{
+              //   const answer = await axios.post(`${Host}/users/isToken`,{
+              //   token: token
+              //  })
+              //  console.log(answer);
+              // }
+              // try {
+              //   const response = await axios.post(`${Host}/product/getAll`, {
+              //     inventoryId: localStorage.getItem("inventoryId"),
+              //   });

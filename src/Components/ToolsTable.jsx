@@ -17,11 +17,11 @@ const ToolsTable = () => {
       })
       .then(({ data }) => {
         setTools(data)
+
       })
       .catch((err) => console.log(err));
   }, []);
   console.log(tools);
-
 
   return (
     <div className="project-table">

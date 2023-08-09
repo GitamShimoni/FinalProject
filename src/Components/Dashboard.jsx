@@ -250,9 +250,7 @@ const Dashboard = () => {
   const { labels: donutTwoLabels, data: donutTwoData } = getDonutTwoChartData();
 
   if (loading) {
-    return (
-      <Loader />
-    )
+    return <Loader />;
   }
   // console.log(tools, "tools");
   // console.log(orders, "this is orders");
@@ -261,10 +259,11 @@ const Dashboard = () => {
   return (
     <div className="data-dashboard">
       <div className="chart-container">
-        <h2 className="h2-graphs">גרף 1</h2>
+        <h2 className="h2-graphs">תרשים קו</h2>
         <div>
           <label>
             <select
+              className="dashboard-select"
               value={selectedLineChartOption}
               onChange={(e) => setSelectedLineChartOption(e.target.value)}
             >
@@ -287,10 +286,11 @@ const Dashboard = () => {
         />
       </div>
       <div className="chart-container">
-        <h2 className="h2-graphs">גרף 2</h2>
+        <h2 className="h2-graphs">דיאגרמת עמודות</h2>
         <div>
           <label>
             <select
+              className="dashboard-select"
               value={selectedBarChartOption}
               onChange={(e) => setSelectedBarChartOption(e.target.value)}
             >
@@ -313,10 +313,11 @@ const Dashboard = () => {
         />
       </div>
       <div className="chart-container">
-        <h2 className="h2-graphs">גרף 3 </h2>
+        <h2 className="h2-graphs">דיאגרמת עוגה</h2>
         <div>
           <label>
             <select
+              className="dashboard-select"
               value={selectedDonutChartOption}
               onChange={(e) => setselectedDonutChartOption(e.target.value)}
             >
@@ -334,7 +335,7 @@ const Dashboard = () => {
           height={350}
         />
       </div>
-      <div className="chart-container">
+      {/* <div className="chart-container">
         <h2 className="h2-graphs">גרף 4 </h2>
         <div>
           <label>
@@ -345,7 +346,7 @@ const Dashboard = () => {
               <option value="מחיר לשירות">שירותים</option>
               <option value="כמות שירותים לקבלן">קבלנים</option>
               <option value="כמות מוצר">מוצרים</option>
-              {/* <option value="tools">כלים</option> */}
+              <option value="tools">כלים</option>
             </select>
           </label>
         </div>
@@ -355,7 +356,7 @@ const Dashboard = () => {
           type="donut"
           height={350}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
