@@ -1,14 +1,13 @@
 #project-holder {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .projectPage-headline {
-    margin: 30px;
+  margin: 30px;
 }
-
 
 .project-container {
   display: flex;
@@ -25,7 +24,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: .2s;
+  transition: 0.2s;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
@@ -36,8 +35,8 @@
   background-size: 100% 100%;
   cursor: pointer;
 }
-.project-square:hover{
-    transform: scale(1.1);
+.project-square:hover {
+  transform: scale(1.1);
 }
 
 .project-name {
@@ -47,10 +46,9 @@
   cursor: pointer;
 }
 
-
 .project-name:hover {
-    color: black;
-    scale: 1.2;
+  color: black;
+  scale: 1.2;
 }
 .project-info {
   font-size: 14px;
@@ -58,49 +56,116 @@
   text-align: center;
 }
 .user-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .user-square {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: .2s;
-    border-radius: 15px;
-    align-items: center;
-    justify-content: center;
-    font-size: x-large;
-    text-shadow: 2px 2px 4px #000000;
-    color: white;
-    background-image: url("https://cdn-icons-png.flaticon.com/512/33/33356.png");
-    background-size: 100% 100%;
-    cursor: pointer;
-  }
-  .user-square:hover{
-      transform: scale(1.1);
-  }
-  
-  .user-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-    cursor: pointer;
-  }
-  
-  
-  .user-name:hover {
-      color: black;
-      scale: 1.2;
-  }
-  .user-info {
-    font-size: 14px;
-    margin: 5px 0;
-    text-align: center;
-  }
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-square {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+  text-shadow: 2px 2px 4px #000000;
+  color: white;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/33/33356.png");
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+.user-square:hover {
+  transform: scale(1.1);
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+}
+
+.user-name:hover {
+  color: black;
+  scale: 1.2;
+}
+.user-info {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+}
+.add-user-button {
+  --main-focus: #2d8cf0;
+  --font-color: #dedede;
+  --bg-color-sub: #222;
+  --bg-color: #323232;
+  --main-color: #dedede;
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.add-user-button,
+.add-user-button-icon,
+.add-user-button-text {
+  transition: all 0.3s;
+}
+
+.add-user-button .add-user-button-text {
+  transform: translateX(30px);
+  color: var(--font-color);
+  font-weight: 600;
+}
+
+.add-user-button .add-user-button-icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: var(--bg-color-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-user-button-icon .add-user-button-text{
+  display: flex;
+}
+.add-user-button .svg {
+  width: 20px;
+  stroke: var(--main-color);
+}
+
+.add-user-button:hover {
+  background: var(--bg-color);
+}
+
+.add-user-button:hover .add-user-button-text {
+  color: transparent;
+}
+
+.add-user-button:hover .add-user-button-icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.add-user-button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px var(--main-color);
+}

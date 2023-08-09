@@ -8,26 +8,32 @@ import ContractorsTable from "./ContractorsTable";
 import AddContractorForm from "./AddContractorForm";
 import { ToastContainer, toast } from "react-toastify";
 import "./ContractorPage.css";
+import Loader from "./Loader";
 
 function ContractorPage() {
   const { contractorsArr, setContractorsArr } = useContext(ProjectContext);
   const [contractorsArrCopy, setContractorsArrCopy] = useState(contractorsArr); // Initialize with the original array
   const [isAddContractorClicked, setIsAddContractorClicked] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .post(
-        `${Host}/contractor/getAllContractor`,
-        {},
-        {
-          headers: { projectId: localStorage.getItem("selectedProjectId") },
-        }
-      )
-      .then(({ data }) => {
-        setContractorsArr(data.contractors);
-      })
-      .catch((err) => console.log(err));
+    try {
+      axios
+        .post(
+          `${Host}/contractor/getAllContractor`,
+          {},
+          {
+            headers: { projectId: localStorage.getItem("selectedProjectId") },
+          }
+        )
+        .then(({ data }) => {
+          setContractorsArr(data.contractors);
+          setLoading(false)
+        });
+    } catch {
+      (err) => console.log(err);
+    }
   }, []);
 
   useEffect(() => {
@@ -46,6 +52,11 @@ function ContractorPage() {
   function handleResetSearch() {
     setSearchValue("");
     setContractorsArrCopy(contractorsArr);
+  }
+  if (loading) {
+    return ( 
+    <Loader />
+    )
   }
 
   return (

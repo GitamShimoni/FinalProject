@@ -5,6 +5,7 @@ import { ProjectContext } from "../Contexts/ProjectContext";
 import InventoryTable from "./InventoryTable";
 import "./InventoryPage.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 function InventoryPage() {
   
@@ -12,7 +13,9 @@ function InventoryPage() {
   const [productsArr, setProductsArr] = useState([]);
   const [ironsArr, setIronsArr] = useState([]);
   const [needToOrderArr, setNeedToOrderArr] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [inventoryArr, setInventoryArr] = useState([])
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,6 +35,7 @@ function InventoryPage() {
         setNeedToOrderArr(toOrderArr);
         setProductsArr(products);
         setIronsArr(irons);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching products:", error);
       }
@@ -40,6 +44,9 @@ function InventoryPage() {
       fetchProducts();
     
   }, [setInventoryArr, inventoryId]);
+  if (loading) {
+    return <Loader />;
+  }
 
   console.log(inventoryId);
   return (

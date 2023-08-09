@@ -3,14 +3,18 @@ import CreateATool from "./CreateATool";
 // import axios from "axios";
 // import Host from "../utils/routes";
 import "./ToolsPage.css";
-import { useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
-
-
-
+import React, { useEffect, useState } from "react";
+import Loader from "./Loader";
 
 const ToolsPage = () => {
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+  
   // const token = localStorage.getItem("token");
   // useEffect(() => {
   
@@ -35,10 +39,17 @@ const ToolsPage = () => {
         //   }).then(console.log("HELLO"))
         //   .catch((err) => console.log(err, "error"))
         // }
+
   return (
     <div id="toolspage-container">
-      <ToolsTable />
-      <CreateATool />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <ToolsTable />
+          <CreateATool />
+        </div>
+      )}
     </div>
   );
 };

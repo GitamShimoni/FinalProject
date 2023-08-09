@@ -6,7 +6,7 @@ import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext, useState } from "react";
 import UploadWidget from "./UploadWidget";
 
-function IronOrderForm() {
+function IronOrderForm({onClose}) {
   const { ironOrders, setIronOrders } = useContext(ProjectContext);
   const [image, setImage] = useState("");
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'yyyy-mm-dd' format
@@ -44,10 +44,16 @@ function IronOrderForm() {
       console.log(err);
     }
   };
+  const handleClose = () => {
+    onClose();
+  };
   console.log(image, "This is the image from that form");
   return (
-    <div>
-      <div id="ProductOrderForm-form-container">
+    <div className="update-user-modal">
+      <div className="order-product-modal-content">
+        <span className="update-user-modal-close-button" onClick={handleClose}>
+          &times;
+        </span>
         <form onSubmit={handleSubmitForm} id="Product-Order-Form">
           <h2>צור הזמנת ברזל חדשה</h2>
           <h2 className="ProductOrderForm-form-title">:שם המוצר</h2>

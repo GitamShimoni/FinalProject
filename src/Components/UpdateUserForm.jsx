@@ -4,6 +4,7 @@ import Host from "../utils/routes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./UpdateUserForm.css";
+import DeleteUserBtn from "./DeleteUserBtn";
 
 const UpdateUserForm = ({ token, onClose }) => {
   const [userName, setUserName] = useState("");
@@ -35,7 +36,8 @@ const UpdateUserForm = ({ token, onClose }) => {
           progress: undefined,
           theme: "dark",
         });
-      } onClose();
+      }
+      onClose();
     } catch (error) {
       toast.error("אי אפשר לשמור את המשתמש", {
         position: "top-center",
@@ -120,6 +122,7 @@ const UpdateUserForm = ({ token, onClose }) => {
           >
             שמור
           </button>
+            <DeleteUserBtn />
         </form>
         {message && <p>{message}</p>}
       </div>

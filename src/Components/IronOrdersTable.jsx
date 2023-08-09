@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
 import IronOrder from "./IronOrder";
+import Loader from "./Loader";
 const IronOrdersTable = () => {
   const { ironOrders, setIronOrders, orders, setOrders } =
     useContext(ProjectContext);
@@ -17,7 +18,9 @@ const IronOrdersTable = () => {
       .post(`${Host}/productOrder/getAllIronOrders`, {
         ordersId,
       })
-      .then(({ data }) => setIronOrders(data.ironOrders))
+      .then(({ data }) => {
+        setIronOrders(data.ironOrders)
+      })
       .catch((err) => console.log(err));
     console.log(orders);
   }, []);
