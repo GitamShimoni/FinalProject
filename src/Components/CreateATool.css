@@ -10,7 +10,8 @@
 #createatool-header {
   font-size: 38px;
   margin-bottom: 30px;
-  font-family: system-ui;}
+  font-family: system-ui;
+}
 #createatool-input-div {
   display: flex;
   flex-direction: row-reverse;
@@ -42,9 +43,9 @@
 }
 .the-group {
   position: relative;
- }
- 
- .new-tool-input {
+}
+
+.new-tool-input {
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   display: block;
@@ -52,13 +53,13 @@
   border: none;
   border-bottom: 1px solid #515151;
   background: transparent;
- }
- 
- .new-tool-input:focus {
+}
+
+.new-tool-input:focus {
   outline: none;
- }
- 
- .new-tool-label {
+}
+
+.new-tool-label {
   color: #999;
   font-size: 18px;
   font-weight: normal;
@@ -70,45 +71,50 @@
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
   color: black;
- }
- 
- .new-tool-input:focus ~ .new-tool-label, .new-tool-input:valid ~ .new-tool-label {
+  text-align: center;
+}
+
+.new-tool-input:focus ~ .new-tool-label,
+.new-tool-input:valid ~ .new-tool-label {
   top: -20px;
+  right: -130px;
   font-size: 14px;
-  color: #5264AE;
- }
- 
- .the-bar {
+  color: #5264ae;
+}
+
+.the-bar {
   position: relative;
   display: block;
   width: 200px;
- }
- 
- .the-bar:before, .the-bar:after {
-  content: '';
+}
+
+.the-bar:before,
+.the-bar:after {
+  content: "";
   height: 2px;
   width: 0;
   bottom: 1px;
   position: absolute;
-  background: #5264AE;
+  background: #5264ae;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
- }
- 
- .the-bar:before {
+}
+
+.the-bar:before {
   left: 50%;
- }
- 
- .the-bar:after {
+}
+
+.the-bar:after {
   right: 50%;
- }
- 
- .new-tool-input:focus ~ .the-bar:before, .new-tool-input:focus ~ .the-bar:after {
+}
+
+.new-tool-input:focus ~ .the-bar:before,
+.new-tool-input:focus ~ .the-bar:after {
   width: 50%;
- }
- 
- .the-highlight {
+}
+
+.the-highlight {
   position: absolute;
   height: 60%;
   width: 100px;
@@ -116,19 +122,19 @@
   left: 0;
   pointer-events: none;
   opacity: 0.5;
- }
- 
- .new-tool-input:focus ~ .the-highlight {
+}
+
+.new-tool-input:focus ~ .the-highlight {
   animation: inputHighlighter 0.3s ease;
- }
- 
- @keyframes inputHighlighter {
+}
+
+@keyframes inputHighlighter {
   from {
-   background: #5264AE;
+    background: #5264ae;
   }
- 
+
   to {
-   width: 0;
-   background: transparent;
+    width: 0;
+    background: transparent;
   }
- }
+}

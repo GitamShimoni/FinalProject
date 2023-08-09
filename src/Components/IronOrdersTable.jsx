@@ -19,12 +19,11 @@ const IronOrdersTable = () => {
         ordersId,
       })
       .then(({ data }) => {
-        setIronOrders(data.ironOrders)
+        setIronOrders(data.ironOrders);
       })
       .catch((err) => console.log(err));
     console.log(orders);
   }, []);
-
 
   return (
     <div className="project-ironOrders-table">

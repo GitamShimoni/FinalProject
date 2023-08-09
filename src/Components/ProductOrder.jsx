@@ -10,7 +10,7 @@ const ProductOrder = ({ order, index }) => {
   const { productOrders, setProductOrders } = useContext(ProjectContext);
   const [changeStatus, setChangeStatus] = useState("");
   const [orderStatus, setOrderStatus] = useState("");
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   console.log(order, "This is the order");
   const handleAddProduct = async () => {
@@ -21,7 +21,7 @@ const ProductOrder = ({ order, index }) => {
           name: order.productName,
           unit: order.unit,
           quantity: order.quantity,
-          minQuantity: minQuantity,
+          minQuantity: order.minQuantity,
           isIron: false,
           orderId: order._id,
         })
@@ -46,7 +46,9 @@ const ProductOrder = ({ order, index }) => {
               changeStatus,
             })
             .then(({ data }) => {
+              console.log("Updated successfuly");
               setOrderStatus(changeStatus);
+              console.log("DID THE HANDLE ADD PRODUCT");
               handleAddProduct();
             });
         } catch (err) {

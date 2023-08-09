@@ -1,9 +1,17 @@
 #navbar-container {
   height: 6vw;
   padding: 10px;
-  background: #457fca;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #457fca; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #5691c8,
+    #457fca
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #5691c8,
+    #457fca
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   display: flex;
   flex-direction: row-reverse;
@@ -25,11 +33,11 @@ background: linear-gradient(to top, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Fir
 .navbar-header {
   color: black;
   font-size: 2.4vw;
-  transition: 0.7s;
+  transition: 0.5s;
   position: relative;
 }
 .navbar-header:hover {
-  color: rgb(245, 14, 14);
+  color: rgb(255, 255, 255);
 }
 
 .navbar-header:after {
@@ -39,9 +47,9 @@ background: linear-gradient(to top, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Fir
   height: 1.7px;
   width: 0%;
   content: "";
-  background: rgb(245, 14, 14);
+  background: white;
   opacity: 0.2;
-  transition: 0.7s;
+  transition: 0.9s;
 }
 
 .navbar-header:hover::after {

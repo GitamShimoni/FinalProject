@@ -79,7 +79,8 @@
 }
 
 .ironorder-dates-late {
-font-size: small;
+  font-size: small;
+  color: red;
 }
 
 .ironorder-table-datespart {
@@ -90,16 +91,16 @@ font-size: small;
   justify-content: center;
   width: 30%;
 }
-.ironorder-dates-headers{
-  font-size: small;
+.ironorder-dates-headers {
+  font-size: 18px;
 }
-.ironorder-dates-headerstop{
+.ironorder-dates-headerstop {
   font-size: small;
 }
 .ironorder-table-date-info {
   justify-content: space-around;
   padding: 5px;
-  font-size: 1.1vw;
+  font-size: 1vw;
 }
 .ironorder-table-select {
   position: relative;
@@ -172,4 +173,6 @@ font-size: small;
   height: 5vw;
   object-fit: cover;
 }
-
+.ironorder-less-arrivedQuantity {
+  color: red;
+}

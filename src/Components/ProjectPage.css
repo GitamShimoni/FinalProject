@@ -41,14 +41,15 @@
 }
 
 .project-name {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: bold;
   margin: 0;
   cursor: pointer;
+  color: white;
 }
 
 .project-name:hover {
-  color: black;
+  color: beige;
   scale: 1.2;
 }
 .project-info {
@@ -64,7 +65,6 @@
 }
 
 .user-square {
-  border-radius: 5px;
   padding: 10px;
   margin: 10px;
   width: 200px;
@@ -73,23 +73,27 @@
   flex-direction: column;
   align-items: center;
   transition: 0.2s;
-  border-radius: 15px;
   align-items: center;
   justify-content: center;
   font-size: x-large;
   text-shadow: 2px 2px 4px #000000;
   color: rgb(243, 242, 242);
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ujsfeIeUb96a5M4HJUxN3OpcuDedO1XsFQ&usqp=CAU.png");
-  background-size: 100% 100%;
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ujsfeIeUb96a5M4HJUxN3OpcuDedO1XsFQ&usqp=CAU.png"); */
+  /* background-size: 100% 100%; */
   cursor: pointer;
-  object-fit: cover;
+}
+.user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 100%;
 }
 .user-square:hover {
   transform: scale(1.1);
 }
 
 .user-name {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: bold;
   margin: 0;
   cursor: pointer;
@@ -100,8 +104,8 @@
   scale: 1.2;
 }
 .user-info {
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 18px;
+  margin: 20px 0;
   text-align: center;
 }
 .add-user-button {
@@ -147,7 +151,7 @@
   align-items: center;
   justify-content: center;
 }
-.add-user-button-icon .add-user-button-text{
+.add-user-button-icon .add-user-button-text {
   display: flex;
 }
 .add-user-button .svg {
@@ -172,14 +176,13 @@
   transform: translate(3px, 3px);
   box-shadow: 0px 0px var(--main-color);
 }
-.add-user-container{
+.add-user-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
-.add-user-header{
+.add-user-header {
   margin-top: 60px;
   margin-bottom: 40px;
 }

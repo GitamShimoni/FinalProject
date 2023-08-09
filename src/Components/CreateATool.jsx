@@ -82,7 +82,12 @@ const CreateATool = () => {
       <br />
       <div id="createatool-input-div">
         <div className="the-group">
-          <input required="" type="text" className="new-tool-input" />
+          <input
+            onChange={(e) => setToolName(e.target.value)}
+            required=""
+            type="text"
+            className="new-tool-input"
+          />
           <span className="the-highlight"></span>
           <span className="the-bar"></span>
           <label className="new-tool-label">צור כלי </label>
