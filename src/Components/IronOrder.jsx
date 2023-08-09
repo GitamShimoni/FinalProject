@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const IronOrder = ({ order, index }) => {
   const { ironOrders, setIronOrders } = useContext(ProjectContext);
@@ -81,6 +82,16 @@ const IronOrder = ({ order, index }) => {
           .then(({ data }) => {
             setOrderStatus(changeStatus);
           });
+        toast.success("  ההזמנה עודכנה בהצלחה!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       } catch (err) {
         console.log(err);
       }
@@ -96,6 +107,18 @@ const IronOrder = ({ order, index }) => {
 
   return (
     <div className="project-ironorder-table-row">
+      <ToastContainer
+        position="top-center"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div
         className={
           index % 2 == 0 ? "ironorder-tr-zugi" : "ironorder-tr-notzugi"

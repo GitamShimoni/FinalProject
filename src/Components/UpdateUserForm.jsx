@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./UpdateUserForm.css";
 import DeleteUserBtn from "./DeleteUserBtn";
 
-const UpdateUserForm = ({ token, onClose }) => {
+const UpdateUserForm = ({ token, onClose, users, setUsers }) => {
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ const UpdateUserForm = ({ token, onClose }) => {
         password: password || undefined,
         email: email || undefined,
       });
-
+      setUsers(response.data);
       if (response.status === 200) {
         toast.success("המשתמש עודכן בהצלחה!", {
           position: "top-center",
@@ -122,7 +122,7 @@ const UpdateUserForm = ({ token, onClose }) => {
           >
             שמור
           </button>
-            <DeleteUserBtn />
+          <DeleteUserBtn />
         </form>
         {message && <p>{message}</p>}
       </div>

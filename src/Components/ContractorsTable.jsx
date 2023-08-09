@@ -28,21 +28,21 @@ function ContractorsTable({ contractor }) {
     {
       await axios.post(`${Host}/contractor/delete`, {
         contractorId: contractor._id,
-      });
-      toast.success("קבלן נמחק", {
-        position: "top-center",
-        autoClose: 1200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      then(({ data }) => {
+      })
+      .then(({ data }) => {
         let newArr = [...contractorsArr];
         newArr = newArr.filter((item) => item._id != contractor._id);
         setContractorsArr(newArr);
+        toast.success("קבלן נמחק", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }).catch(
         (err) => console.log(err),
         toast.error("לא ניתן למחוק את הקבלן ", {

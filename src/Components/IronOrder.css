@@ -67,7 +67,7 @@
   box-shadow: 0px 0px 3px 2px rgb(67, 144, 26);
 }
 .ironorder-option-pending {
-  box-shadow: 0px 0px 3px 2px rgb(68, 116, 155);
+  box-shadow: 0px 0px 3px 2px rgb(39, 42, 44);
 }
 .ironorder-option-declined {
   box-shadow: 0px 0px 3px 2px rgb(228, 90, 44);
@@ -78,12 +78,11 @@
   padding: 10px;
 }
 
-.ironorder-dates-headerstop {
-  color: rgb(238, 178, 39);
-}
 .ironorder-dates-late {
+  font-size: small;
   color: red;
 }
+
 .ironorder-table-datespart {
   display: flex;
   flex-direction: column;
@@ -92,40 +91,33 @@
   justify-content: center;
   width: 30%;
 }
-
+.ironorder-dates-headers {
+  font-size: 18px;
+}
+.ironorder-dates-headerstop {
+  font-size: small;
+}
 .ironorder-table-date-info {
   justify-content: space-around;
   padding: 5px;
-  font-size: 1.1vw;
+  font-size: 1vw;
 }
 .ironorder-table-select {
   position: relative;
   display: flex;
-  border-radius: 0.25em;
+  width: 60px;
+  border-radius: 15px;
   overflow: hidden;
   text-align: center;
   height: 30px;
-  background-color: rgba(144, 144, 144, 0);
-  color: black;
+  background-color: rgba(255, 255, 255, 0);
   font-size: 1.4vw;
   cursor: pointer;
 }
 .ironorder-table-option {
   background-color: rgb(234, 234, 234);
 }
-.ironorder-table-option-button {
-  border: 1px solid black;
-  font-size: 1.5vw;
-  background-color: rgba(255, 255, 255, 0);
-  color: black;
-  cursor: pointer;
-  border-radius: 15px;
-  transition: 0.4s;
-}
-.ironorder-table-option-button:hover {
-  color: white;
-  background-color: rgb(125, 155, 221);
-}
+
 .update-iron-order-dialog-dateinput {
   width: 80%;
   height: 40px;
@@ -182,5 +174,5 @@
   object-fit: cover;
 }
 .ironorder-less-arrivedQuantity {
-  color: rgb(255, 0, 0);
+  color: red;
 }

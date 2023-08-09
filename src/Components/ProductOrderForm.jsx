@@ -1,6 +1,7 @@
 import axios from "axios";
 import Host from "../utils/routes";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./ProductOrderForm.css";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext } from "react";
@@ -36,6 +37,17 @@ function ProductOrderForm({ onClose }) {
         .then(({ data }) => {
           setProductOrders(data);
         });
+        toast.success("ההזמנה נשלחה בהצלחה!", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      onClose()
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +58,7 @@ function ProductOrderForm({ onClose }) {
 
   return (
     <div className="product-order-modal">
-      {/* <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={1200}
         hideProgressBar={false}
@@ -57,7 +69,7 @@ function ProductOrderForm({ onClose }) {
         draggable
         pauseOnHover
         theme="colored"
-      /> */}
+      />
       <div className="order-product-modal-content" >
         <span className="update-user-modal-close-button" onClick={handleClose}>
           &times;
@@ -105,7 +117,7 @@ function ProductOrderForm({ onClose }) {
             className="unit ProductOrderForm-input"
             placeholder="כמות מינימאלית"
           />
-          <button className="product-order-submit-btn" type="submit">
+          <button onClick={() => handleSubmitForm()} className="product-order-submit-btn" type="submit">
             הזמן
           </button>
         </form>

@@ -78,14 +78,27 @@ const CreateATool = () => {
         pauseOnHover
         theme="colored"
       />
-      <h2 id="createatool-header">צור כלי חדש</h2>
+      <h5 id="createatool-header">צור כלי חדש</h5>
+      <br />
       <div id="createatool-input-div">
-        <input
+        <div className="the-group">
+          <input
+            onChange={(e) => setToolName(e.target.value)}
+            required=""
+            type="text"
+            className="new-tool-input"
+          />
+
+          <span className="the-highlight"></span>
+          <span className="the-bar"></span>
+          <label className="new-tool-label">צור כלי </label>
+        </div>
+        {/* <input
           onChange={(e) => setToolName(e.target.value)}
           id="createatool-input"
           type="text"
           placeholder="שם הכלי"
-        />
+        /> */}
         <button
           onClick={() => {
             handleCreateTool();

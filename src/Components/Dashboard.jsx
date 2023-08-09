@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [selectedDonutTwoChartOption, setselectedDonutTwoChartOption] =
     useState("מחיר לשירות");
   const [selectedLineChartOption, setSelectedLineChartOption] =
-    useState("מחיר לשירות");
+    useState("כמות שירותים לקבלן");
   const [selectedBarChartOption, setSelectedBarChartOption] =
     useState("מחיר לשירות");
   const [loading, setLoading] = useState(true);
@@ -44,7 +44,9 @@ const Dashboard = () => {
           setInventoryId(data.inventory[0]);
           setProducts(data.inventory[0].products);
           setContractorsArray(data.contractors);
+          setLoading(false);
 
+          localStorage.setItem("ordersId", data.projectOrders);
           localStorage.setItem("inventoryId", data.inventory[0]._id);
         })
         .catch((err) => console.log(err));
@@ -104,14 +106,12 @@ const Dashboard = () => {
           inventoryId: inventoryId,
         });
         setTools(toolsResponse.data);
-
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     console.log(service, "THIS IS THE SERVICE@$!@$@!#!@#");
-    fetchData();
+    if (localStorage.getItem("inventoryId", inventoryId)) fetchData();
   }, [inventoryId]);
 
   // console.log(contractorsArray, "contractors array");
@@ -252,6 +252,7 @@ const Dashboard = () => {
   if (loading) {
     return <Loader />;
   }
+  console.log(new Date());
   // console.log(tools, "tools");
   // console.log(orders, "this is orders");
   // console.log(service, "the servicesssss");
@@ -322,7 +323,7 @@ const Dashboard = () => {
               onChange={(e) => setselectedDonutChartOption(e.target.value)}
             >
               <option value="מחיר לשירות">שירותים</option>
-              <option value="כמות שירותים לקבלן">קבלנים</option>
+              {/* <option value="כמות שירותים לקבלן">קבלנים</option> */}
               <option value="כמות מוצר">מוצרים</option>
               {/* <option value="tools">כלים</option> */}
             </select>

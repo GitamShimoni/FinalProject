@@ -12,10 +12,11 @@
 .project-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .project-square {
-  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
@@ -30,8 +31,8 @@
   justify-content: center;
   font-size: x-large;
   text-shadow: 2px 2px 4px #000000;
-  color: white;
-  background-image: url("https://fellow.app/wp-content/uploads/2022/09/How-to-Organize-a-Busy-Schedule-2.jpg");
+  color: rgb(15, 2, 2);
+  background-image: url("https://cdn2.iconfinder.com/data/icons/whcompare-isometric-web-hosting-servers/50/website-under-construction-512.png");
   background-size: 100% 100%;
   cursor: pointer;
 }
@@ -40,14 +41,15 @@
 }
 
 .project-name {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: bold;
   margin: 0;
   cursor: pointer;
+  color: white;
 }
 
 .project-name:hover {
-  color: black;
+  color: beige;
   scale: 1.2;
 }
 .project-info {
@@ -58,11 +60,11 @@
 .user-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .user-square {
-  border: 1px solid #ccc;
-  border-radius: 5px;
   padding: 10px;
   margin: 10px;
   width: 200px;
@@ -71,34 +73,39 @@
   flex-direction: column;
   align-items: center;
   transition: 0.2s;
-  border-radius: 15px;
   align-items: center;
   justify-content: center;
   font-size: x-large;
   text-shadow: 2px 2px 4px #000000;
-  color: white;
-  background-image: url("https://cdn-icons-png.flaticon.com/512/33/33356.png");
-  background-size: 100% 100%;
+  color: rgb(243, 242, 242);
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ujsfeIeUb96a5M4HJUxN3OpcuDedO1XsFQ&usqp=CAU.png"); */
+  /* background-size: 100% 100%; */
   cursor: pointer;
+}
+.user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 100%;
 }
 .user-square:hover {
   transform: scale(1.1);
 }
 
 .user-name {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: bold;
   margin: 0;
   cursor: pointer;
 }
 
 .user-name:hover {
-  color: black;
+  color: rgb(247, 241, 241);
   scale: 1.2;
 }
 .user-info {
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 18px;
+  margin: 20px 0;
   text-align: center;
 }
 .add-user-button {
@@ -144,7 +151,7 @@
   align-items: center;
   justify-content: center;
 }
-.add-user-button-icon .add-user-button-text{
+.add-user-button-icon .add-user-button-text {
   display: flex;
 }
 .add-user-button .svg {
@@ -168,4 +175,14 @@
 .add-user-button:active {
   transform: translate(3px, 3px);
   box-shadow: 0px 0px var(--main-color);
+}
+.add-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.add-user-header {
+  margin-top: 60px;
+  margin-bottom: 40px;
 }
