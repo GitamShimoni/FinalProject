@@ -11,7 +11,6 @@ const EndDay = () => {
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
 
-
   async function handleSubmitEndDay() {
     const summary = {
       contractorsArr: contractors,
@@ -27,7 +26,6 @@ const EndDay = () => {
       console.log(err);
     }
   }
-
 
   useEffect(() => {
     axios
@@ -46,7 +44,6 @@ const EndDay = () => {
   }, []);
 
   async function handleSubmitEndDay() {
-
     const summary = {
       contractorsArr: contractors,
       allMaterialsUsed: allMaterials,
@@ -77,7 +74,9 @@ const EndDay = () => {
           />
         </div>
       ))}
-      <button onClick={() => handleSubmitEndDay()}>SEND</button>
+      <button id="send-endday-button" onClick={() => handleSubmitEndDay()}>
+        שלח
+      </button>
     </div>
   );
 };

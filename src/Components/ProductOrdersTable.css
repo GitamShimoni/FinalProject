@@ -6,18 +6,26 @@
   margin: auto;
   margin-top: 5vw;
   border-radius: 7px;
-  box-shadow: 3px 3px 4px 3px rgba(112, 112, 112, 0.75);
+  box-shadow: 3px 3px 4px 3px rgba(114, 114, 114, 0.75);
   display: flex;
   flex-direction: column;
 }
 .project-orders-tr {
   text-align: center;
   font-size: 1.8vw;
-  background: #4b6cb7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-align-items: center;
+  background: #4b6cb7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #182848,
+    #4b6cb7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #182848,
+    #4b6cb7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  align-items: center;
   color: white;
   height: 60px;
   display: flex;
