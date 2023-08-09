@@ -8,9 +8,9 @@
   border-radius: 15px;
 }
 #createatool-header {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
+  font-size: 38px;
+  margin-bottom: 30px;
+  font-family: system-ui;}
 #createatool-input-div {
   display: flex;
   flex-direction: row-reverse;
@@ -27,14 +27,108 @@
 #createatool-button {
   border-radius: 5px;
   border: 0;
-  padding: 5px;
+  /* padding: 5px; */
   width: 70px;
-  font-size: 1vw;
+  font-size: 14px;
   cursor: pointer;
   transition: 0.6s;
   background-color: rgb(30, 133, 192);
   color: white;
+  height: 30px;
+  margin-right: 25px;
 }
 #createatool-button:hover {
   background-color: rgb(21, 94, 136);
 }
+.the-group {
+  position: relative;
+ }
+ 
+ .new-tool-input {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+ }
+ 
+ .new-tool-input:focus {
+  outline: none;
+ }
+ 
+ .new-tool-label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  color: black;
+ }
+ 
+ .new-tool-input:focus ~ .new-tool-label, .new-tool-input:valid ~ .new-tool-label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+ }
+ 
+ .the-bar {
+  position: relative;
+  display: block;
+  width: 200px;
+ }
+ 
+ .the-bar:before, .the-bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+ }
+ 
+ .the-bar:before {
+  left: 50%;
+ }
+ 
+ .the-bar:after {
+  right: 50%;
+ }
+ 
+ .new-tool-input:focus ~ .the-bar:before, .new-tool-input:focus ~ .the-bar:after {
+  width: 50%;
+ }
+ 
+ .the-highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+ }
+ 
+ .new-tool-input:focus ~ .the-highlight {
+  animation: inputHighlighter 0.3s ease;
+ }
+ 
+ @keyframes inputHighlighter {
+  from {
+   background: #5264AE;
+  }
+ 
+  to {
+   width: 0;
+   background: transparent;
+  }
+ }

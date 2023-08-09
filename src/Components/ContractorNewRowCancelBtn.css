@@ -5,8 +5,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid #cc0000;
-  background-color: #e50000;
+  border: 1px solid #402828;
+  background-color: #2c2929;
   overflow: hidden;
   border-radius: 10px;
 }
@@ -29,7 +29,7 @@
   transform: translateX(109px);
   height: 100%;
   width: 39px;
-  background-color: #cc0000;
+  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@
 }
 
 .ContractorNewRowCancelBtn-button:hover {
-  background: #cc0000;
+  background: #322a2a;
 }
 
 .ContractorNewRowCancelBtn-button:hover
@@ -56,9 +56,9 @@
 
 .ContractorNewRowCancelBtn-button:active
   .ContractorNewRowCancelBtn-button__icon {
-  background-color: #b20000;
+  background-color: #2a2626;
 }
 
 .ContractorNewRowCancelBtn-button:active {
-  border: 1px solid #b20000;
+  border: 1px solid #2f2929;
 }

@@ -28,6 +28,7 @@ const EndDay = () => {
   }, []);
 
   async function handleSubmitEndDay() {
+
     const summary = {
       contractorsArr: contractors,
       allMaterialsUsed: allMaterials,
