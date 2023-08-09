@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import { useState } from "react";
+import "animate.css";
+
 const Layout = () => {
   const [endDayClicked, setEndDayClicked] = useState(false);
   const navigate = useNavigate();
@@ -17,9 +19,10 @@ const Layout = () => {
       >
         סוף יום
         {endDayClicked && (
-          <div className="Layout-endDayOptions-section">
+          <div className="Layout-endDayOptions-section ">
             <div
-              className="Layout-endDayOptions"
+              className="Layout-endDayOptions animate__animated animate__fadeInLeft"
+
               onClick={() => {
                 navigate("/endDayTable");
                 setEndDayClicked(false);
@@ -28,7 +31,8 @@ const Layout = () => {
               יום קודם
             </div>{" "}
             <div
-              className="Layout-endDayOptions"
+              className="Layout-endDayOptions animate__animated animate__fadeInLeft"
+
               onClick={() => {
                 navigate("/endDay");
                 setEndDayClicked(false);

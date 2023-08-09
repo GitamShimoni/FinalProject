@@ -199,7 +199,7 @@ const ProductOrder = ({ order, index }) => {
             sx={{ color: "black" }}
             id="alert-dialog-description"
           >
-            האם אתה בטוח שברצונך לעדכן את ההזמנה ? לא תהיה דרך לעדכן אותה שוב
+            האם אתה בטוח שברצונך לעדכן את ההזמנה ?
           </DialogContentText>
         </DialogContent>
         <DialogActions
