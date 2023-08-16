@@ -16,12 +16,11 @@ const ToolsTable = () => {
         inventoryId: localStorage.getItem("inventoryId"),
       })
       .then(({ data }) => {
-        setTools(data)
-
+        setTools(data);
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(tools);
+  // console.log(tools);
 
   return (
     <div className="project-table">
