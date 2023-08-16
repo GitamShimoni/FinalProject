@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./ProjectPage.css";
 import Loader from "./Loader";
 import SignUp from "./SignUp";
+import { set } from "mongoose";
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState([]);
@@ -16,7 +17,8 @@ const ProjectPage = () => {
   const [token, setToken] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [loadingUsers, setLoadingUsers] = useState(true);  
   const navigate = useNavigate();
 
   function formatDate(dateString) {
@@ -31,7 +33,7 @@ const ProjectPage = () => {
       try {
         const response = await axios.get(`${Host}/project/getAll`);
         setProjects(response.data);
-        setLoading(false);
+        setLoadingProjects(false);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -40,8 +42,9 @@ const ProjectPage = () => {
     const getAllUsers = async () => {
       try {
         const response = await axios.get(`${Host}/users/getUsers`);
+        console.log("this is the response", response.data);
         setUsers(response.data);
-        setLoading(false);
+        setLoadingUsers(false);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -50,6 +53,7 @@ const ProjectPage = () => {
     const fetchToken = async () => {
       try {
         const token = localStorage.getItem("token");
+        setToken(token)
         console.log(token);
       } catch (error) {
         console.error("Error fetching token:", error);
@@ -60,6 +64,16 @@ const ProjectPage = () => {
     getAllUsers();
     fetchToken;
   }, []);
+
+  const handleUserCreated = async () => {
+    setIsCreateModalOpen(false);
+    try {
+      const response = await axios.get(`${Host}/users/getUsers`);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }
 
   const getStatus = (finishDate) => {
     const currentDate = new Date();
@@ -75,7 +89,7 @@ const ProjectPage = () => {
     setSelectedUserId(userId);
     setIsModalOpen(true);
   };
-  if (loading) {
+  if (loadingProjects || loadingUsers) {
     return <Loader />;
   }
 
@@ -182,7 +196,7 @@ const ProjectPage = () => {
       )}
       {isCreateModalOpen && (
         <div className="crete-user-model">
-          <SignUp onClose={() => setIsCreateModalOpen(false)} />
+          <SignUp onClose={() => setIsCreateModalOpen(false)} onUserCreated={handleUserCreated} />
         </div>
       )}
     </div>

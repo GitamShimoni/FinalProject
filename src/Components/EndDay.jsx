@@ -5,12 +5,14 @@ import Loader from "./Loader";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Loader from "./Loader";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+
 
   // async function handleSubmitEndDay() {
   //   const summary = {
@@ -60,6 +62,7 @@ const EndDay = () => {
         setTimeout(() => {
           setLoading(false);
         }, 1500);
+
       })
       .catch((err) => console.log(err));
   }, []);

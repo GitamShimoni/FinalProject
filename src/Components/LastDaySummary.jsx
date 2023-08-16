@@ -10,7 +10,8 @@ import Loader from "./Loader";
 
 function LastDaySummary() {
   const [lastDay, setLastDay] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     axios
@@ -37,6 +38,11 @@ function LastDaySummary() {
   if (loading) {
     return <Loader />;
   }
+
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <div className="LastDaySummary-container">
       {lastDay.contractorsArr
