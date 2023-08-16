@@ -25,7 +25,6 @@
   border: 1px solid black;
 }
 
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -139,9 +138,3 @@
   transform: translate(3px, 3px);
   box-shadow: 0px 0px var(--main-color);
 }
-
-
-.EndDayTable-container{
-  margin-top: 50px;
-}
-
