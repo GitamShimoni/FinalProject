@@ -21,7 +21,7 @@ const ToolsTable = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(tools);
+  // console.log(tools);
 
   const tableRef = useRef(null);
   const { onDownload } = useDownloadExcel({

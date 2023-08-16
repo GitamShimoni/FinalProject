@@ -7,7 +7,7 @@ import "./EndDayTable.css";
 function EndDayAllMaterialTable({ allMaterialsUsed }) {
   return (
     <div className="EndDayTable-container">
-      <h2>חומרים שנוצלו היום</h2>
+      <h2>חומרים שנוצלו במהלך היום</h2>
       <div className="inventory-table">
         <div className="inventory-tr">
           <div className="contractor-row-info-div">מוצר</div>

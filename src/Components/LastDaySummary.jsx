@@ -11,7 +11,7 @@ import Loader from "./Loader";
 function LastDaySummary() {
   const [lastDay, setLastDay] = useState({});
   const [loading, setLoading] = useState(true)
-  
+
 
   useEffect(() => {
     axios
@@ -22,7 +22,8 @@ function LastDaySummary() {
         console.log(data);
         setLastDay(data);
         setTimeout(() => {
-          setLoading(false)},1500)
+          setLoading(false);
+        }, 1500);
       })
       .catch((err) => {
         console.log(err);
@@ -30,7 +31,12 @@ function LastDaySummary() {
   }, []);
 
   function filterServicesWithWhatWasDone(services) {
-    return services.filter(service => service.WhatWasDone && service.WhatWasDone.trim() !== "");
+    return services.filter(
+      (service) => service.WhatWasDone && service.WhatWasDone.trim() !== ""
+    );
+  }
+  if (loading) {
+    return <Loader />;
   }
 
   if (loading) {
@@ -40,14 +46,17 @@ function LastDaySummary() {
   return (
     <div className="LastDaySummary-container">
       {lastDay.contractorsArr
-        ?.filter(contractor => filterServicesWithWhatWasDone(contractor.services).length > 0)
+        ?.filter(
+          (contractor) =>
+            filterServicesWithWhatWasDone(contractor.services).length > 0
+        )
         .map((contractor, index) => (
           <div className="LastDaySummary-table-section" key={index}>
             <EndDayTable contractor={contractor} />
             <EndDayMaterialTable contractor={contractor} />
           </div>
         ))}
-        <EndDayAllMaterialTable allMaterialsUsed={lastDay?.allMaterialsUsed} />
+      <EndDayAllMaterialTable allMaterialsUsed={lastDay?.allMaterialsUsed} />
     </div>
   );
 }

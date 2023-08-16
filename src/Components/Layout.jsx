@@ -21,8 +21,7 @@ const Layout = () => {
         {endDayClicked && (
           <div className="Layout-endDayOptions-section ">
             <div
-              className="Layout-endDayOptions animate__animated animate__fadeInLeft"
-
+              className="Layout-endDayOptions animate_animated animate_zoomIn "
               onClick={() => {
                 navigate("/endDayTable");
                 setEndDayClicked(false);
@@ -31,8 +30,7 @@ const Layout = () => {
               יום קודם
             </div>{" "}
             <div
-              className="Layout-endDayOptions animate__animated animate__fadeInLeft"
-
+              className="Layout-endDayOptions animate_animated animate_zoomIn "
               onClick={() => {
                 navigate("/endDay");
                 setEndDayClicked(false);
