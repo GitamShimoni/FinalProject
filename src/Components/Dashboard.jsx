@@ -15,11 +15,8 @@ const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [service, setService] = useState([]);
   const [products, setProducts] = useState([]);
-  // const [currentProject, setCurrentProject] = useState([]);
   const [selectedDonutChartOption, setselectedDonutChartOption] =
-    useState("מחיר לשירות");
-  const [selectedDonutTwoChartOption, setselectedDonutTwoChartOption] =
-    useState("מחיר לשירות");
+    useState("כמות מוצר");
   const [selectedLineChartOption, setSelectedLineChartOption] =
     useState("כמות שירותים לקבלן");
   const [selectedBarChartOption, setSelectedBarChartOption] =
@@ -114,7 +111,6 @@ const Dashboard = () => {
     if (localStorage.getItem("inventoryId", inventoryId)) fetchData();
   }, [inventoryId]);
 
-  // console.log(contractorsArray, "contractors array");
 
   const getLineChartData = () => {
     switch (selectedLineChartOption) {
@@ -181,7 +177,7 @@ const Dashboard = () => {
   };
   console.log(
     products,
-    "THIS IS THE PRODUCTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    "THIS IS THE PRODUCTSSSSSS"
   );
   const getDonutChartData = () => {
     switch (selectedDonutChartOption) {
@@ -213,50 +209,17 @@ const Dashboard = () => {
     }
   };
 
-  const getDonutTwoChartData = () => {
-    switch (selectedDonutTwoChartOption) {
-      case "מחיר לשירות":
-        return {
-          labels: service.map((v) => v.unit),
-          data: service.map((v) => v.price),
-        };
-      case "כמות שירותים לקבלן":
-        return {
-          labels: contractorsArray.map((contractor) => contractor.name),
-          data: contractorsArray.map((contractor) => contractor._id),
-        };
-      case "כמות מוצר":
-        return {
-          labels: products.map((item) => item.name),
-          data: products.map((item) => item.quantity),
-        };
-      case "tools":
-        return {
-          labels: tools.map((item) => item.toolName),
-          data: tools.map((item) => item.takenBy),
-        };
-      default:
-        return {
-          labels: [],
-          data: [],
-        };
-    }
-  };
 
   const { labels: lineChartLabels, data: lineChartData } = getLineChartData();
   const { labels: barChartLabels, data: barChartData } = getBarChartData();
   const { labels: donutChartLabels, data: donutChartData } =
     getDonutChartData();
-  const { labels: donutTwoLabels, data: donutTwoData } = getDonutTwoChartData();
 
   if (loading) {
     return <Loader />;
   }
   console.log(new Date());
-  // console.log(tools, "tools");
-  // console.log(orders, "this is orders");
-  // console.log(service, "the servicesssss");
-  // console.log(products, "this is productsa");
+  
   return (
     <div className="data-dashboard">
       <div className="chart-container">
@@ -268,10 +231,8 @@ const Dashboard = () => {
               value={selectedLineChartOption}
               onChange={(e) => setSelectedLineChartOption(e.target.value)}
             >
-              {/* <option value="service">שירותים</option> */}
               <option value="כמות שירותים לקבלן">קבלנים</option>
               <option value="כמות מוצר">מוצרים</option>
-              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -298,7 +259,6 @@ const Dashboard = () => {
               <option value="מחיר לשירות">שירותים</option>
               <option value="כמות שירותים לקבלן">קבלנים</option>
               <option value="כמות מוצר">מוצרים</option>
-              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -323,9 +283,7 @@ const Dashboard = () => {
               onChange={(e) => setselectedDonutChartOption(e.target.value)}
             >
               <option value="מחיר לשירות">שירותים</option>
-              {/* <option value="כמות שירותים לקבלן">קבלנים</option> */}
               <option value="כמות מוצר">מוצרים</option>
-              {/* <option value="tools">כלים</option> */}
             </select>
           </label>
         </div>
@@ -336,28 +294,6 @@ const Dashboard = () => {
           height={350}
         />
       </div>
-      {/* <div className="chart-container">
-        <h2 className="h2-graphs">גרף 4 </h2>
-        <div>
-          <label>
-            <select
-              value={selectedDonutTwoChartOption}
-              onChange={(e) => setselectedDonutTwoChartOption(e.target.value)}
-            >
-              <option value="מחיר לשירות">שירותים</option>
-              <option value="כמות שירותים לקבלן">קבלנים</option>
-              <option value="כמות מוצר">מוצרים</option>
-              <option value="tools">כלים</option>
-            </select>
-          </label>
-        </div>
-        <Chart
-          options={{ labels: donutTwoLabels }}
-          series={donutTwoData}
-          type="donut"
-          height={350}
-        />
-      </div> */}
     </div>
   );
 };

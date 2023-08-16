@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import { useState } from "react";
-import "animate.css";
+// import "animate.css";
 
 const Layout = () => {
   const [endDayClicked, setEndDayClicked] = useState(false);
