@@ -5,11 +5,13 @@ import Host from "../utils/routes";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Loader from "./Loader";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   async function handleSubmitEndDay() {
     const summary = {
@@ -39,6 +41,8 @@ const EndDay = () => {
       .then(({ data }) => {
         setContractors(data.contractors);
         console.log(data.contractors, "This is the contractors");
+        setTimeout(() => {
+          setLoading(false)},1500)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -60,6 +64,11 @@ const EndDay = () => {
   }
   console.log(filledContractors, "THIS IS THE FIELD CONTRACTORS");
   console.log(allMaterials, "THIS IS THE ALL MATERIALS");
+  
+  if (loading) {
+    return <Loader />
+  }
+  
   return (
     <div className="end-day-container">
       {contractors?.map((contractor, index) => (

@@ -6,9 +6,12 @@ import EndDayTable from "./EndDayTable";
 import EndDayMaterialTable from "./EndDayMaterialTable";
 import EndDayAllMaterialTable from "./EndDayAllMaterialTable";
 import "./LastDaySummary.css";
+import Loader from "./Loader";
 
 function LastDaySummary() {
   const [lastDay, setLastDay] = useState({});
+  const [loading, setLoading] = useState(true)
+  
 
   useEffect(() => {
     axios
@@ -18,6 +21,8 @@ function LastDaySummary() {
       .then(({ data }) => {
         console.log(data);
         setLastDay(data);
+        setTimeout(() => {
+          setLoading(false)},1500)
       })
       .catch((err) => {
         console.log(err);
@@ -26,6 +31,10 @@ function LastDaySummary() {
 
   function filterServicesWithWhatWasDone(services) {
     return services.filter(service => service.WhatWasDone && service.WhatWasDone.trim() !== "");
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (

@@ -11,17 +11,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import "./Dialog.css";
 
-const DeleteUserBtn = () => {
+const DeleteUserBtn = ({ realId, users, setUsers, onClose }) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const [users, setUsers] = useState(ProjectContext)
   const token = localStorage.getItem("token");
   const deleteUser = async () => {
     setOpenDialog(false);
     try {
-      await axios.post(`${Host}/users/deleteUser`, { 
-        token: token 
-    });
-    toast.success("  המשתמש נוצר בהצלחה!", {
+      await axios.post(`${Host}/users/deleteUser`, {
+        token: token,
+        realId: realId,
+      });
+      const timestamp = new Date().getTime(); // Get current timestamp
+      const updatedUsersResponse = await axios.get(`${Host}/users/getUsers?timestamp=${timestamp}`);
+      setUsers(updatedUsersResponse.data);
+      toast.success("  המשתמש הוסר בהצלחה!", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
@@ -31,6 +34,7 @@ const DeleteUserBtn = () => {
         progress: undefined,
         theme: "dark",
       });
+      onClose();
     } catch (err) {
       console.log(err);
       toast.error("לא ניתן למחוק את המשתמש", {
@@ -45,16 +49,15 @@ const DeleteUserBtn = () => {
       });
     }
   };
-  const handleConfirmDelete = () => {
-    deleteUser();
+  const handleConfirmDelete = async () => {
+    await deleteUser();
     setOpenDialog(false);
   };
-
   return (
     <div className="delete-user-btn">
-              <ToastContainer
+      <ToastContainer
         position="top-center"
-        autoClose={1200}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -66,7 +69,7 @@ const DeleteUserBtn = () => {
       />
       <ToastContainer
         position="top-center"
-        autoClose={1200}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -86,7 +89,7 @@ const DeleteUserBtn = () => {
           style={{ color: "black" }}
           className="ContractorNewRowCancelBtn-button__text"
         >
-           מחק משתמש
+          מחק משתמש
         </span>
         <span className="ContractorNewRowCancelBtn-button__icon">
           <svg
@@ -177,17 +180,34 @@ const DeleteUserBtn = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         id="dialog-container"
-        sx={{direction:'rtl'}}
+        sx={{ direction: "rtl" }}
       >
         <DialogTitle id="alert-dialog-title">מחיקת משתמש</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{color: "black"}}  id="alert-dialog-description">
+          <DialogContentText
+            sx={{ color: "black" }}
+            id="alert-dialog-description"
+          >
             האם אתה בטוח שאתה רוצה להסיר את המשתמש? לא תהיה דרך לשחזר אותו
           </DialogContentText>
         </DialogContent>
-        <DialogActions sx={{display:'flex', alignItems:'center', justifyContent:'center', gap:10}}>
-          <button className="dialog-btn" onClick={() => setOpenDialog(false)}>ביטול</button>
-          <button className="dialog-btn" id="dialog-approved-btn" onClick={handleConfirmDelete} autoFocus>
+        <DialogActions
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 10,
+          }}
+        >
+          <button className="dialog-btn" onClick={() => setOpenDialog(false)}>
+            ביטול
+          </button>
+          <button
+            className="dialog-btn"
+            id="dialog-approved-btn"
+            onClick={handleConfirmDelete}
+            autoFocus
+          >
             אישור
           </button>
         </DialogActions>
