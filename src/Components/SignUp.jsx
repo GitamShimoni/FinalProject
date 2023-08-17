@@ -6,7 +6,7 @@ import "./SignUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignUp = ({onClose}) => {
+const SignUp = ({onClose, onUserCreated}) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +46,7 @@ const SignUp = ({onClose}) => {
         progress: undefined,
         theme: "dark",
       });
+      onUserCreated();
       onClose();
     } catch (error) {
       console.error("Registration failed:", error.message);
@@ -62,7 +63,7 @@ const SignUp = ({onClose}) => {
     <div className="create-user-modal">
       <ToastContainer
         position="top-center"
-        autoClose={1200}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -70,7 +71,7 @@ const SignUp = ({onClose}) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="dark"
       />
       <div className="create-user-modal-content">
         <span className="create-user-modal-close-button" onClick={handleClose}>

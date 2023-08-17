@@ -1,27 +1,47 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
-
+import Loader from "./Loader";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import Loader from "./Loader";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
   const [filledContractors, setFilledContractors] = useState([]);
   const [allMaterials, setAllMaterials] = useState([]);
+  const [loading, setLoading] = useState(true)
 
-  async function handleSubmitEndDay() {
-    const summary = {
-      contractorsArr: contractors,
-      allMaterialsUsed: allMaterials,
-    };
+
+  // async function handleSubmitEndDay() {
+  //   const summary = {
+  //     contractorsArr: contractors,
+  //     allMaterialsUsed: allMaterials,
+  //   };
+  //   try {
+  //     const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
+  //       summary: summary,
+  //       projectId: localStorage.getItem("selectedProjectId"),
+  //     });
+  //     console.log("Got into IF");
+  //     handleRemoveItems();
+  //     console.log(newSummary, "THIS IS THE NEW SUMMARY");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  async function handleRemoveItems() {
     try {
-      const newSummary = await axios.post(`${Host}/endDay/createEndDay`, {
-        summary: summary,
-        projectId: localStorage.getItem("selectedProjectId"),
-      });
-      console.log(newSummary, "THIS IS THE NEW SUMMARY");
+      const newInventory = await axios.post(
+        `${Host}/endDay/removeLastDayMaterials`,
+        {
+          projectId: localStorage.getItem("selectedProjectId"),
+          inventoryId: localStorage.getItem("inventoryId"),
+        }
+      );
+      console.log(newInventory, "This is the updated inventory");
     } catch (err) {
       console.log(err);
     }
@@ -39,6 +59,10 @@ const EndDay = () => {
       .then(({ data }) => {
         setContractors(data.contractors);
         console.log(data.contractors, "This is the contractors");
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
+
       })
       .catch((err) => console.log(err));
   }, []);
@@ -53,6 +77,7 @@ const EndDay = () => {
         summary: summary,
         projectId: localStorage.getItem("selectedProjectId"),
       });
+      handleRemoveItems();
       console.log(newSummary, "THIS IS THE NEW SUMMARY");
     } catch (err) {
       console.log(err);
@@ -60,6 +85,9 @@ const EndDay = () => {
   }
   console.log(filledContractors, "THIS IS THE FIELD CONTRACTORS");
   console.log(allMaterials, "THIS IS THE ALL MATERIALS");
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="end-day-container">
       {contractors?.map((contractor, index) => (

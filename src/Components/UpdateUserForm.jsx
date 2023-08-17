@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./UpdateUserForm.css";
 import DeleteUserBtn from "./DeleteUserBtn";
 
-const UpdateUserForm = ({ token, onClose, users, setUsers }) => {
+const UpdateUserForm = ({ token, userId, onClose, users, setUsers }) => {
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -19,12 +19,15 @@ const UpdateUserForm = ({ token, onClose, users, setUsers }) => {
     try {
       const response = await axios.post(`${Host}/users/updateUsers`, {
         token: localStorage.getItem("token"),
+        userId: userId,
         userName: userName || undefined,
         phone: phone || undefined,
         password: password || undefined,
         email: email || undefined,
       });
-      setUsers(response.data);
+      const updatedUsersResponse = await axios.get(`${Host}/users/getUsers`);
+      setUsers(updatedUsersResponse.data);
+
       if (response.status === 200) {
         toast.success("המשתמש עודכן בהצלחה!", {
           position: "top-center",
@@ -51,9 +54,8 @@ const UpdateUserForm = ({ token, onClose, users, setUsers }) => {
       });
     }
   };
-  const handleClose = () => {
-    onClose();
-  };
+  const handleClose = onClose;
+  
 
   return (
     <div className="update-user-modal">
@@ -122,7 +124,7 @@ const UpdateUserForm = ({ token, onClose, users, setUsers }) => {
           >
             שמור
           </button>
-          <DeleteUserBtn />
+          <DeleteUserBtn realId={userId} setUsers={setUsers} onClose={onClose}/>
         </form>
         {message && <p>{message}</p>}
       </div>

@@ -18,7 +18,11 @@ function EndDayMaterialTable({ contractor }) {
             </div>
           </div>
           {contractor.materialsUsed.map((product, index) => (
-            <EndDayMaterialTableRow key={index} index={index} product={product} />
+            <EndDayMaterialTableRow
+              key={index}
+              index={index}
+              product={product}
+            />
           ))}
         </div>
       </div>
