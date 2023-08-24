@@ -8,12 +8,27 @@ const EndDayPerContractor = ({
   setAllMaterials,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+const handleOpenForm = () => {
+  setIsOpen(!isSubmitted)
+}
+  const handleCloseForm = () => {
+    setIsOpen(false);
+  };
+
+  const handleFormSubmit = () => {
+    setIsSubmitted(true); // Set the submitted state to true
+    handleCloseForm();
+  };
+
   return (
     <div className="end-day-perContractor-page">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleOpenForm}
         className="open-form-button"
         type="button"
+        disabled={isSubmitted}
       >
         <span className="button__text">{contractor.name}</span>
         <span className="button__icon">
@@ -29,7 +44,7 @@ const EndDayPerContractor = ({
             width="24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {isOpen == false && <line x1="12" x2="12" y1="5" y2="19"></line>}
+            {isOpen == true && <line x1="12" x2="12" y1="5" y2="19"></line>}
             <line x1="5" x2="19" y1="12" y2="12"></line>
           </svg>
         </span>
@@ -41,6 +56,7 @@ const EndDayPerContractor = ({
           setFilledContractors={setFilledContractors}
           allMaterials={allMaterials}
           setAllMaterials={setAllMaterials}
+          handleCloseForm={handleFormSubmit}
         />
       )}
     </div>

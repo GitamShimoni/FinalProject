@@ -5,7 +5,7 @@ import Loader from "./Loader";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
-import Loader from "./Loader";
+import { useNavigate } from "react-router";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
@@ -13,7 +13,7 @@ const EndDay = () => {
   const [allMaterials, setAllMaterials] = useState([]);
   const [loading, setLoading] = useState(true)
 
-
+const navigate = useNavigate()
   // async function handleSubmitEndDay() {
   //   const summary = {
   //     contractorsArr: contractors,
@@ -78,6 +78,7 @@ const EndDay = () => {
         projectId: localStorage.getItem("selectedProjectId"),
       });
       handleRemoveItems();
+      navigate("/endDayTable")
       console.log(newSummary, "THIS IS THE NEW SUMMARY");
     } catch (err) {
       console.log(err);

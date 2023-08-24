@@ -10,6 +10,7 @@ const EndDayForm = ({
   setFilledContractors,
   allMaterials,
   setAllMaterials,
+  handleCloseForm,
 }) => {
   const [servicesArr, setServicesArr] = useState([...contractor.services]);
 
@@ -61,8 +62,10 @@ const EndDayForm = ({
     setFilledContractors(newContractors);
     console.log(allMaterials, "LINE 61");
     setAllMaterials(...allMaterials, contractor.materialsUsed);
+    handleCloseForm();
   };
   console.log(contractor);
+  
   return (
       <form className="end-day-form" onSubmit={handleSubmit}>
         <div className="form-group">
