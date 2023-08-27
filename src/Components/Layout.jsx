@@ -3,20 +3,29 @@ import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import { useState } from "react";
-// import "animate.css";
+import React, {useContext} from "react";
+import { ProjectContext } from "../Contexts/ProjectContext";
 
 const Layout = () => {
-  const [endDayClicked, setEndDayClicked] = useState(false);
+  const { tools } = useContext(ProjectContext);
   const navigate = useNavigate();
+  const [endDayClicked, setEndDayClicked] = useState(false); 
+
+  const setEndDayClickedHandler = () => {
+    const toolsNotReturned = tools.some((tool) => tool?.takenBy !== undefined);
+
+    if (toolsNotReturned) {
+      alert("נראה שיש כלים שלא הוחזרו. וודא שהכלים חזרו לפני שאתה מסיים את היום");
+    } else {
+      navigate("/endDay");
+    }
+  };
 
   return (
     <div className="Layout-container">
       <Navbar />
       <Outlet />
-      <div
-        className="Layout-EndDay-btn"
-        onClick={() => setEndDayClicked(!endDayClicked)}
-      >
+      <div className="Layout-EndDay-btn" onClick={() => setEndDayClicked(true)}> 
         סוף יום
         {endDayClicked && (
           <div className="Layout-endDayOptions-section ">
@@ -28,13 +37,10 @@ const Layout = () => {
               }}
             >
               יום קודם
-            </div>{" "}
+            </div>
             <div
               className="Layout-endDayOptions animate_animated animate_zoomIn "
-              onClick={() => {
-                navigate("/endDay");
-                setEndDayClicked(false);
-              }}
+              onClick={() => setEndDayClickedHandler()} 
             >
               הגש סוף יום
             </div>
