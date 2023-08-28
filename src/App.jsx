@@ -38,7 +38,7 @@ function App() {
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/constructors" element={<ContractorPage />} />
             <Route path="/endDayTable" element={<LastDaySummary />} />
-            <Route path="/cashFlow" element={<CashflowPage />} />
+            {/* <Route path="/cashFlow" element={<CashflowPage />} /> */}
             <Route
               path="/updateContractor"
               element={<UpdateContractorForm />}

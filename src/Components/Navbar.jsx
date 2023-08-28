@@ -34,9 +34,9 @@ const Navbar = () => {
       <Link className="navbar-link" to={"/constructors"}>
         <h2 className="navbar-header">קבלנים</h2>
       </Link>
-      <Link className="navbar-link" to={"/cashFlow"}>
+      {/* <Link className="navbar-link" to={"/cashFlow"}>
         <h2 className="navbar-header">תזרים</h2>
-      </Link>
+      </Link> */}
       <Link className="navbar-link" to={"/projects"}>
         <img
           id="navbar-logo"
