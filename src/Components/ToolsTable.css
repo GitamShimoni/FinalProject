@@ -32,3 +32,11 @@
 .project-toprow-tr {
   width: 23%;
 }
+.ToolsTable {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+.tool-to-excel-button {
+  margin-top: 15px;
+}

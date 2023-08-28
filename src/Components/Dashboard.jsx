@@ -5,9 +5,14 @@ import axios from "axios";
 import Host from "../utils/routes";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+import { tokens } from "../Theme";
+import { useTheme } from "@mui/material";
 import Loader from "./Loader";
 
 const Dashboard = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const { inventoryId, setInventoryId, project, setProject } =
     useContext(ProjectContext);
   const [contractorsArray, setContractorsArray] = useState([]);
@@ -15,7 +20,7 @@ const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [service, setService] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedDonutChartOption, setselectedDonutChartOption] =
+  const [selectedDonutChartOption, setSelectedDonutChartOption] =
     useState("כמות מוצר");
   const [selectedLineChartOption, setSelectedLineChartOption] =
     useState("כמות שירותים לקבלן");
@@ -24,9 +29,10 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (project && localStorage.getItem("selectedProjectId") != undefined) {
-      console.log(localStorage.getItem("selectedProjectId"), "GOT INTO THE IF");
-      console.log(project, "Thats a project inside of the if");
+    if (
+      project &&
+      localStorage.getItem("selectedProjectId") !== undefined
+    ) {
       axios
         .post(
           `${Host}/project/get`,
@@ -36,7 +42,6 @@ const Dashboard = () => {
           }
         )
         .then(({ data }) => {
-          console.log(data, "Thats a log");
           setProject(data);
           setInventoryId(data.inventory[0]);
           setProducts(data.inventory[0].products);
@@ -49,66 +54,38 @@ const Dashboard = () => {
         .catch((err) => console.log(err));
     }
   }, []);
-  console.log(project, "This is the current project");
-  console.log(inventoryId, "INVENTORY ID");
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.post(`${Host}/product/getAll`, {
-  //         inventoryId,
-  //       });
-  //       setProducts(response.data);
-  //     } catch (error) {
-  //       console.log("Error fetching products:", error);
-  //     }
-  //   };
-  //   if (inventoryId) {
-  //     fetchProducts();
-  //   }
-  // }, [inventoryId]);
-
-  // console.log(products, "this is products");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        //     const contractorsResponse = await axios.post(
-        //       `${Host}/contractor/getAllContractor`,
-        //       {},
-        //       {
-        //         headers: { projectId: localStorage.getItem("selectedProjectId") },
-        //       }
-        //     );
-        //     setContractorsArray(contractorsResponse.data.contractors);
+    if (inventoryId) {
+      const fetchData = async () => {
+        try {
+          const serviceResponse = await axios.post(
+            `${Host}/contractor/getAllServices`,
+            {
+              contractorId: contractorsArray.map((order) => order._id),
+            }
+          );
+          setService(serviceResponse.data);
 
-        const serviceResponse = await axios.post(
-          `${Host}/contractor/getAllServices`,
-          {
-            contractorId: contractorsArray.map((order) => order._id),
-          }
-        );
-        setService(serviceResponse.data);
-        console.log(service, "this is the servicesss");
+          const ordersResponse = await axios.post(
+            `${Host}/productOrder/getAllProductOrders`,
+            {
+              ordersId: "64c6496edd068b2c46962f28",
+            }
+          );
+          setOrders([ordersResponse.data]);
 
-        const ordersResponse = await axios.post(
-          `${Host}/productOrder/getAllProductOrders`,
-          {
-            ordersId: "64c6496edd068b2c46962f28",
-          }
-        );
-        setOrders([ordersResponse.data]);
+          const toolsResponse = await axios.post(`${Host}/tools/getAllTools`, {
+            inventoryId: inventoryId,
+          });
+          setTools(toolsResponse.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
 
-        const toolsResponse = await axios.post(`${Host}/tools/getAllTools`, {
-          inventoryId: inventoryId,
-        });
-        setTools(toolsResponse.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    console.log(service, "THIS IS THE SERVICE@$!@$@!#!@#");
-    if (localStorage.getItem("inventoryId", inventoryId)) fetchData();
+      fetchData();
+    }
   }, [inventoryId]);
 
 

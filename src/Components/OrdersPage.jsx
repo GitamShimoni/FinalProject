@@ -4,7 +4,7 @@ import IronOrdersTable from "./IronOrdersTable";
 import ProductOrderForm from "./ProductOrderForm";
 import "./OrdersPage.css";
 import IronOrderForm from "./IronOrderForm";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Loader from "./Loader";
 
 const OrdersPage = () => {
@@ -24,6 +24,7 @@ const OrdersPage = () => {
   const createIronOrder = () => {
     setIsIronModalOpen(true);
   };
+  const tableRef = useRef(null)
   return (
     <div id="orders-page-container">
       {loading ? (
