@@ -144,7 +144,7 @@ const ProjectPage = () => {
             >
               <img
                 className="user-image"
-                src="https://i.ibb.co/QNnfszM/1463111-removebg-preview.png"
+                src="https://thumbs.dreamstime.com/b/construction-worker-icon-vector-illustration-188332906.jpg"
                 alt=""
               />
               <h2 className="user-name">{user.fullName}</h2>
