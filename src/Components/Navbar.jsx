@@ -1,6 +1,16 @@
+import { useContext } from "react";
+import { ColorModeContext, tokens } from "../Theme"
+import { IconButton, useTheme } from "@mui/material";
+import { DarkModeOutlined } from "@mui/icons-material";
+import { LightModeOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+
+
 const Navbar = () => {
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
+  // const colorMode = useContext(ColorModeContext);
   const deleteLocalStoarge = () => {
     localStorage.clear();
   };
@@ -19,6 +29,13 @@ const Navbar = () => {
           <div className="logout-text">התנתק</div>
         </button>
       </Link>
+      {/* <IconButton onClick={colorMode.toggleColorMode}>
+        {theme.palette.mode === "dark" ? (
+          <DarkModeOutlined />
+        ) : (
+          <LightModeOutlined />
+        )}
+      </IconButton> */}
       <Link className="navbar-link" to={"/dashboard"}>
         <h2 className="navbar-header">לוח בקרה</h2>
       </Link>
