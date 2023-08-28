@@ -42,12 +42,11 @@ const ProductOrdersTable = () => {
   return (
     <div style={{display: "flex", flexDirection: "column-reverse" }}>
       <button
-        className="ordesrs-to-excel-button"
-        id="createatool-button"
+        className="tool-to-excel-button"
         onClick={onDownload}
         style={{marginBottom: "15px"}}
       >
-        יצוא EXCELל
+       {`יצוא ל Excel`}
       </button>
       <div className="project-orders-table" ref={tableRef}>
         <div className="project-orders-tr">

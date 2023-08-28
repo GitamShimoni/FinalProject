@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Host from "../utils/routes";
+import Loader from "./Loader";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
