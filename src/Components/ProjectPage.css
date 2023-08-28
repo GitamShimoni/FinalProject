@@ -3,10 +3,16 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background-image: url("https://e0.pxfuel.com/wallpapers/176/352/desktop-wallpaper-ask-re-max-re-max%E2%84%A2-of-southern-africa-real-estate-agent.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 115vh;
 }
 
 .projectPage-headline {
   margin: 30px;
+  color: snow;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .project-container {
@@ -32,7 +38,7 @@
   font-size: x-large;
   text-shadow: 2px 2px 4px #000000;
   color: rgb(15, 2, 2);
-  background-image: url("https://cdn2.iconfinder.com/data/icons/whcompare-isometric-web-hosting-servers/50/website-under-construction-512.png");
+  background-image: url("https://img.freepik.com/premium-photo/blueprint-designs-home-model-construction-project-background-real-estate-housing-project-building-engineering-design-plans-residential-construction-generative-ai_225446-5227.jpg?w=2000");
   background-size: 100% 100%;
   cursor: pointer;
 }
@@ -53,9 +59,12 @@
   scale: 1.2;
 }
 .project-info {
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px 0;
   text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+  color: snow;
+  backdrop-filter: brightness(97%);
 }
 .user-container {
   display: flex;
@@ -83,10 +92,13 @@
   cursor: pointer;
 }
 .user-image {
-  width: 100%;
-  height: 100%;
   object-fit: contain;
   border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 .user-square:hover {
   transform: scale(1.1);
@@ -104,9 +116,11 @@
   scale: 1.2;
 }
 .user-info {
-  font-size: 18px;
+  font-size: 20px;
   margin: 20px 0;
   text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+  color: snow;
 }
 .add-user-button {
   --main-focus: #2d8cf0;
@@ -185,4 +199,22 @@
 .add-user-header {
   margin-top: 60px;
   margin-bottom: 40px;
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 3px 60px rgba(0, 0, 0, 0.1);
+  font-size: 28px;
+  text-shadow: 2px 2px 4px #000000;
 }
+
+.project-square,
+.user-square {
+  backdrop-filter: brightness(60%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
+
