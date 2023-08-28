@@ -41,6 +41,23 @@ const ProductOrder = ({ order, index }) => {
       console.log(err);
     }
   };
+  // const handleChangeCashFlow = async () => {
+  //   try {
+  //     await axios
+  //       .post(`${Host}/cashFlow/createOrderCost`, {
+  //         projectId: localStorage.getItem("projectId"),
+  //         productName: order.productName,
+  //         quantity: order.quantity,
+  //         supplier : order.supplier
+  //       })
+  //       .then(({ data }) => {
+  //         //   setOrderStatus(changeStatus);
+  //         console.log("Success!", data);
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleUpdateOrderStatus = async () => {
     if (changeStatus == "arrived") {
