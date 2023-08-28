@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Dashboard from "./Components/Dashboard";
 import ToolsPage from "./Components/ToolsPage";
+import CashflowPage from "./Components/CashflowPage";
 import InventoryTable from "./Components/InventoryTable";
 import ProductOrdersTable from "./Components/ProductOrdersTable";
 import Login from "./Components/Login";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/constructors" element={<ContractorPage />} />
             <Route path="/endDayTable" element={<LastDaySummary />} />
+            <Route path="/cashFlow" element={<CashflowPage />} />
             <Route
               path="/updateContractor"
               element={<UpdateContractorForm />}

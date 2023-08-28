@@ -5,8 +5,6 @@ import "./ProductOrdersTable.css";
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import Host from "../utils/routes";
-import Loader from "./Loader";
-import ProductOrderForm from "./ProductOrderForm";
 const ProductOrdersTable = () => {
   const { productOrders, setProductOrders, orders, setOrders } =
     useContext(ProjectContext);

@@ -1,5 +1,9 @@
 .project-ironOrders-toprow-tr {
-  width: 15%;
+  width: 17%;
+}
+
+#project-ironOrders-date-colum{
+  width: 30%;
 }
 .project-ironOrders-table {
   width: 80vw;

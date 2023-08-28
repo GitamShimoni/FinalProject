@@ -1,17 +1,12 @@
-
 .Layout-container {
   position: relative;
 }
 
 .Layout-EndDay-btn {
   position: fixed;
-  bottom: 80px;
+  bottom: 50px;
   left: 50px;
-  background: radial-gradient(
-    circle,
-    rgba(133, 232, 74, 1) 0%,
-    rgba(56, 144, 20, 1) 100%
-  );
+  background-color: #25d366;
   width: 60px;
   height: 60px;
   border-radius: 100%;
@@ -19,7 +14,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: 2px solid black;
+  border: 2px solid rgb(239, 239, 255);
   color: rgb(0, 0, 0);
   transition: 0.6s;
 }
@@ -31,24 +26,21 @@
 .Layout-endDayOptions-section {
   position: absolute;
   left: 80px;
-  height: 150px;
+  height: 138px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: fit-content;
   transition: 2s;
+  cursor: default;
 }
 
 .Layout-endDayOptions {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   text-align: center;
-  background: radial-gradient(
-    circle,
-    rgba(106, 116, 247, 1) 0%,
-    rgba(37, 16, 131, 1) 100%
-  );
+  background-color: #128c7e;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -58,10 +50,10 @@
   border: 2px solid rgb(239, 239, 255);
   padding: 5px;
   color: white;
+  cursor: pointer;
 }
 .Layout-endDayOptions:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   color: rgb(209, 172, 6);
   border: 3px solid rgb(239, 239, 255);
 }
-

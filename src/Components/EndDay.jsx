@@ -5,7 +5,6 @@ import Loader from "./Loader";
 import "./EndDay.css";
 import EndDayPerContractor from "./EndDayPerContractor";
 import { ProjectContext } from "../Contexts/ProjectContext";
-import Loader from "./Loader";
 
 const EndDay = () => {
   const [contractors, setContractors] = useState([]);
