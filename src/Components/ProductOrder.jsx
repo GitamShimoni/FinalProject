@@ -248,11 +248,12 @@ export default ProductOrder;
 
 function formatDate(dateString) {
   const dateObj = new Date(dateString);
-  const datePart = dateObj.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "2-digit",
+  const datePart = dateObj.toLocaleDateString("en-GB", {
     day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
+  
   const timePart = dateObj.toLocaleTimeString(undefined, {
     hour: "2-digit",
     minute: "2-digit",

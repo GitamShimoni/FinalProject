@@ -4,6 +4,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import "animate.css";
 import { useState } from "react";
+import PreviewOutlinedIcon from '@mui/icons-material/PreviewOutlined';
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
+import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
 import React, { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 
@@ -28,24 +31,33 @@ const Layout = () => {
     <div className="Layout-container">
       <Navbar />
       <Outlet />
-      <div className="Layout-EndDay-btn" onClick={() => setEndDayClicked(true)}>
-        סוף יום
+
+      <div
+        className="Layout-EndDay-btn"
+        onClick={() => setEndDayClicked(!endDayClicked)}
+      >
+        <TodayOutlinedIcon fontSize="large" />
+
         {endDayClicked && (
-          <div className="Layout-endDayOptions-section ">
+          <div className="Layout-endDayOptions-section animate_animated animate__backInLeft ">
             <div
-              className="Layout-endDayOptions animate_animated animate_zoomIn "
+              className="Layout-endDayOptions"
               onClick={() => {
                 navigate("/endDayTable");
                 setEndDayClicked(false);
               }}
             >
-              יום קודם
-            </div>
+              <PreviewOutlinedIcon fontSize="large" color="action"/>
+            </div>{" "}
             <div
-              className="Layout-endDayOptions animate_animated animate_zoomIn "
-              onClick={() => setEndDayClickedHandler()}
+              className="Layout-endDayOptions"
+              onClick={() => {
+                navigate("/endDay");
+                setEndDayClicked(false);
+              }}
+
             >
-              הגש סוף יום
+              <NoteAddOutlinedIcon fontSize="large" color="action"/>
             </div>
           </div>
         )}
