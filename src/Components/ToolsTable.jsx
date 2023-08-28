@@ -32,7 +32,7 @@ const ToolsTable = () => {
 
   return (
     <div className="ToolsTable">
-      <button className="tool-to-excel-button" id="createatool-button" onClick={onDownload}>יצוא EXCELל</button>
+      <button className="tool-to-excel-button" onClick={onDownload}>{`יצוא ל Excel`}</button>
       <div className="project-table" ref={tableRef}>
         <div className="project-tr">
           <div
