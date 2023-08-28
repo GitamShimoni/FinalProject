@@ -41,6 +41,23 @@ const ProductOrder = ({ order, index }) => {
       console.log(err);
     }
   };
+  // const handleChangeCashFlow = async () => {
+  //   try {
+  //     await axios
+  //       .post(`${Host}/cashFlow/createOrderCost`, {
+  //         projectId: localStorage.getItem("projectId"),
+  //         productName: order.productName,
+  //         quantity: order.quantity,
+  //         supplier : order.supplier
+  //       })
+  //       .then(({ data }) => {
+  //         //   setOrderStatus(changeStatus);
+  //         console.log("Success!", data);
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleUpdateOrderStatus = async () => {
     if (changeStatus == "arrived") {
@@ -231,11 +248,12 @@ export default ProductOrder;
 
 function formatDate(dateString) {
   const dateObj = new Date(dateString);
-  const datePart = dateObj.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "2-digit",
+  const datePart = dateObj.toLocaleDateString("en-GB", {
     day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
+  
   const timePart = dateObj.toLocaleTimeString(undefined, {
     hour: "2-digit",
     minute: "2-digit",

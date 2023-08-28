@@ -34,7 +34,7 @@ const IronOrdersTable = () => {
           className="project-ironOrders-toprow-tr"
           id="project-ironOrders-topleft-td"
         >{`סטאטוס`}</div>
-        <div className="project-ironOrders-toprow-tr">
+        <div id="project-ironOrders-date-colum" className="project-ironOrders-toprow-tr">
           <h3>תאריך</h3>
         </div>
         <div className="project-ironOrders-toprow-tr">

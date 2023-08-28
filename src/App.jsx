@@ -4,6 +4,7 @@ import { ColorModeContext, useMode } from "./Theme";
 import Layout from "./Components/Layout";
 import Dashboard from "./Components/Dashboard";
 import ToolsPage from "./Components/ToolsPage";
+import CashflowPage from "./Components/CashflowPage";
 import InventoryTable from "./Components/InventoryTable";
 import ProductOrdersTable from "./Components/ProductOrdersTable";
 import Login from "./Components/Login";
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/endoftheday" element={<Layout />} />
               </Route>
               <Route path="/projects" element={<ProjectPage />} />
+
 
               <Route path="/updateUser" element={<UpdateUserForm />} />
             </Routes>
